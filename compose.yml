@@ -1,0 +1,24 @@
+# TODO: Quizá es posible configurar cada microservicio por separado
+#       e importar cada configuración aquí.
+services:
+  auth-db:
+    container_name: microservices-auth-db
+    image: postgres:16.0
+    ports:
+      - "5431:5432"
+    env_file:
+      - ./auth/.env.dev
+
+  auth:
+    container_name: microservice-auth
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+
+  gateway:
+    container_name: microservice-api-gateway
+    image: nginx:1.27.2
+    volumes:
+      - ./gateway/config/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
