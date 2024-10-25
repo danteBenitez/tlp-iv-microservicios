@@ -30,6 +30,7 @@ export class Server {
     }
 
     protected routes() {
+        this.app.get('/health-check', (_, res) => res.status(200).send("[AUTH] Servidor funcionando correctamente"));
     }
 
     protected addParsers() {
