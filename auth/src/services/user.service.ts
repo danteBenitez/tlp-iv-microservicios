@@ -141,6 +141,7 @@ export class UsersService {
             username: userData.username,
             password: password
         })
+        delete (user as SafeUser).password;
 
         if (!user) {
             throw new UserNotFoundError("Usuario no encontrado");
@@ -175,6 +176,8 @@ export class UsersService {
         if (userData.roles && userData.roles.length !== 0) {
             await this.userRepository.overwriteAllRoles(signedUp, userData.roles);
         }
+
+        delete (signedUp as SafeUser).password;
 
         return {
             user: signedUp,
