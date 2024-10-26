@@ -82,6 +82,9 @@ export class AuthController {
                 message: "No estás autenticado"
             });
         }
+        // Colocar header con ID de usuario para utilizarlo en
+        // otros microservicios
+        res.header('X-Authentication-Id', req.user.userId);
         res.status(200).json(req.user);
     }
 
