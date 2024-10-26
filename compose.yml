@@ -7,20 +7,20 @@ services:
     ports:
       - "5431:5432"
     env_file:
-      - ./auth/.env.dev
+      - ./auth/.env.prod
 
   auth:
     container_name: microservice-auth
     build:
       context: ./auth
       dockerfile: Dockerfile
-  
+
   products:
     container_name: microservice-products
     build:
       context: ./products
       dockerfile: Dockerfile
-  
+
   products-db:
     container_name: microservice-products-db
     image: mongodb/mongodb-community-server:6.0.1-ubi8
