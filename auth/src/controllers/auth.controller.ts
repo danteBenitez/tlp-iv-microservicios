@@ -1,17 +1,17 @@
 import { type Request, type Response } from "express";
 
+import { AuthService } from "../services/auth.service.js";
 import {
     ConflictingUserError,
     InvalidRoleError,
-    InvalidSignInError,
-    UsersService
+    InvalidSignInError
 } from "../services/user.service.js";
 import { validateRequestBody } from "../utils/validate-schema.js";
 import { createUserSchema, signInSchema } from "../validations/user.schema.js";
 
 export class AuthController {
     constructor(
-        private userService: UsersService
+        private authService: AuthService
     ) { }
 
 
@@ -21,7 +21,7 @@ export class AuthController {
             return res.status(400).json(error);
         }
         try {
-            const { user, token } = await this.userService.signIn({
+            const { user, token } = await this.authService.signIn({
                 username: data.username,
                 password: data.password,
             });
@@ -50,12 +50,10 @@ export class AuthController {
             return res.status(400).json(error);
         }
         try {
-            const { user, token } = await this.userService.signUp(data);
-
-            const { password: _, ...withoutPassword } = user.toJSON();
+            const { user, token } = await this.authService.signUp(data);
 
             res.status(200).json({
-                user: withoutPassword,
+                user,
                 token,
                 message: "Registrado correctamente",
             });
