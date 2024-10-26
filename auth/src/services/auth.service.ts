@@ -1,7 +1,9 @@
+import * as jwt from "jsonwebtoken";
+import { config } from "../config/config.service";
 import { IUser } from "../interfaces/user.interface";
 import { CreateUserData, SignInData } from "../validations/user.schema";
 import { EncryptionService } from "./encryption.service";
-import { ConflictingUserError, InvalidSignInError, SafeUser, UsersService } from "./userservice";
+import { ConflictingUserError, InvalidSignInError, SafeUser, UsersService } from "./user.service";
 
 export class AuthService {
 
@@ -35,8 +37,10 @@ export class AuthService {
     }
 
     createTokenFor(user: IUser) {
-        return
+        return jwt.sign({ userId: user.userId }, config.getSecret());
     }
+
+
 
     /**
      * Inicia sesión a un usuario existente
