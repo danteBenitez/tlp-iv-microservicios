@@ -33,6 +33,7 @@ export class SequelizeDatabase implements Database {
     }
 
     async setup(): Promise<void> {
+        await this.sync({ force: false });
         await this.seedDatabase();
         await this.checkConnection();
     }
