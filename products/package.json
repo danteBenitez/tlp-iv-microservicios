@@ -1,0 +1,32 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "npm run build && node --env-file .env.prod ./dist/index.js",
+    "database:sync": "npm run build && node --env-file .env.dev ./dist/scripts/sync-database.js",
+    "database:sync-prod": "npm run build && node --env-file .env.prod ./dist/scripts/sync-database.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.5.4",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "helmet": "^7.1.0",
+    "mongoose": "^8.7.3",
+    "morgan": "^1.10.0",
+    "zod": "^3.23.8"
+  }
+}
