@@ -2,12 +2,15 @@ import * as jwt from "jsonwebtoken";
 import { config } from "../config/config.service";
 import { IUser } from "../interfaces/user.interface";
 import { CreateUserData, SignInData } from "../validations/user.schema";
-import { EncryptionService } from "./encryption.service";
-import { ConflictingUserError, InvalidSignInError, SafeUser, UsersService } from "./user.service";
+import { EncryptionService, encryptionService as encryptionService_ } from "./encryption.service";
+import { ConflictingUserError, InvalidSignInError, SafeUser, usersService, UsersService } from "./user.service";
 
 export class AuthService {
 
-    constructor(private userService: UsersService, private encryptionService: EncryptionService) { }
+    constructor(
+        private userService: UsersService = usersService,
+        private encryptionService: EncryptionService = encryptionService_
+    ) { }
 
     /**
      * Regístra un usuario con un rol de usuario 
@@ -31,7 +34,7 @@ export class AuthService {
         );
 
         return {
-            user: signedUp,
+            user: signedUp.user,
             token: await this.createTokenFor(signedUp.user),
         };
     }
@@ -39,8 +42,6 @@ export class AuthService {
     createTokenFor(user: IUser) {
         return jwt.sign({ userId: user.userId }, config.getSecret());
     }
-
-
 
     /**
      * Inicia sesión a un usuario existente
@@ -66,10 +67,13 @@ export class AuthService {
             throw new InvalidSignInError("Usuario o contraseña no válida");
         }
 
-        delete (found as SafeUser).password;
+        (found as SafeUser).password = undefined;
+
         return {
             user: found,
             token: await this.createTokenFor(found)
         };
     }
 }
+
+export const authService = new AuthService();

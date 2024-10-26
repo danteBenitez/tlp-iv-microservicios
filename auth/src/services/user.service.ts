@@ -4,9 +4,9 @@ import { config } from "../config/config.service.js";
 import { RoleName } from "../constants/roles.constant.js";
 import { IUser } from "../interfaces/user.interface.js";
 import User from "../models/user.model.js";
-import { IUserRepository } from "../repositories/user.repository.js";
+import { IUserRepository, userRepository as userRepository_ } from "../repositories/user.repository.js";
 import { CreateUserByAdmin, UpdateUserByAdmin, UpdateUserData } from "../validations/user.schema.js";
-import { EncryptionService } from "./encryption.service.js";
+import { EncryptionService, encryptionService as encryptionService_ } from "./encryption.service.js";
 
 export class ConflictingUserError extends Error { }
 export class UserNotFoundError extends Error { }
@@ -18,8 +18,8 @@ export type SafeUser = Omit<IUser, "password"> & { password?: string };
 
 export class UsersService {
     constructor(
-        private userRepository: IUserRepository = userRepository,
-        private encryptionService: EncryptionService = encryptionService,
+        private userRepository: IUserRepository = userRepository_,
+        private encryptionService: EncryptionService = encryptionService_,
     ) { }
 
     /**
@@ -176,7 +176,7 @@ export class UsersService {
             await this.userRepository.overwriteAllRoles(signedUp, userData.roles);
         }
 
-        delete (signedUp as SafeUser).password;
+        (signedUp as SafeUser).password = undefined;
 
         return {
             user: signedUp,
