@@ -1,4 +1,4 @@
-import { ROLES } from "../../constants/roles.contanst";
+import { ROLES } from "../../constants/roles.constant";
 import Role from "../../models/role.model";
 
 const ROLES_TO_INSERT = [
