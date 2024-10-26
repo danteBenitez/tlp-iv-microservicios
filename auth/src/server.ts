@@ -3,6 +3,9 @@ import express, { NextFunction, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+
 type Callback = () => Promise<void>;
 
 export class Server {
@@ -31,6 +34,8 @@ export class Server {
 
     protected routes() {
         this.app.get('/health-check', (_, res) => res.status(200).send("[AUTH] Servidor funcionando correctamente"));
+        this.app.use(authRoutes);
+        this.app.use(userRoutes);
     }
 
     protected addParsers() {
