@@ -58,8 +58,7 @@ export class UsersService {
                 return null;
             }
             delete (user as SafeUser).password;
-            const { password, ...userData } = user;
-            return userData;
+            return user;
         } catch (err) {
             if (err instanceof JsonWebTokenError) {
                 console.error("Error al verificar JWT: ", err);
