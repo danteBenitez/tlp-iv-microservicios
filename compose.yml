@@ -10,12 +10,16 @@ services:
       - ./auth/.env.prod
 
   auth:
+    depends_on:
+      - auth-db
     container_name: microservice-auth
     build:
       context: ./auth
       dockerfile: Dockerfile
 
   products:
+    depends_on:
+      - products-db
     container_name: microservice-products
     build:
       context: ./products
