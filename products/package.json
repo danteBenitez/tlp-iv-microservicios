@@ -1,11 +1,11 @@
 {
-  "name": "template",
+  "name": "products",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "npm run build && node --env-file .env.prod ./dist/index.js",
+    "start": "node --env-file .env.prod ./dist/index.js",
     "database:sync": "npm run build && node --env-file .env.dev ./dist/scripts/sync-database.js",
     "database:sync-prod": "npm run build && node --env-file .env.prod ./dist/scripts/sync-database.js",
     "test": "echo \"Error: no test specified\" && exit 1"
