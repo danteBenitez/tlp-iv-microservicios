@@ -56,7 +56,7 @@ services:
     build:
       context: ./purchases
       dockerfile: Dockerfile
-  
+
   sales:
     depends_on:
       - virtual-store-db
@@ -64,15 +64,15 @@ services:
     build:
       context: ./sales
       dockerfile: Dockerfile
-  
-  shopping-cart:
+
+  shopping-carts:
     depends_on:
       - virtual-store-db
     container_name: microservice-shopping-carts
     build:
       context: ./shopping_carts
       dockerfile: Dockerfile
-    
+
   shipments:
     depends_on:
       - virtual-store-db
