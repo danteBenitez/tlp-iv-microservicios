@@ -47,7 +47,6 @@ const CarritoCompras: React.FC = () => {
             <button onClick={() => actualizarCantidad(producto.id, -1)} className="boton-cantidad-menos">-</button>
             <input type="text" value={producto.cantidad} readOnly className="input-cantidad" />
             <button onClick={() => actualizarCantidad(producto.id, 1)} className="boton-cantidad-mas">+</button>
-            {/* <button onClick={() => eliminarProducto(producto.id)} className="boton-eliminar">🗑️</button> */}
             <Trash2 onClick={() => eliminarProducto(producto.id)} size={40} className="boton-eliminar"/>
           </div>
         ))}

@@ -1,0 +1,52 @@
+.estado-envio-containerr {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se acomoden en filas */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre elementos */
+    padding: 20px;
+  }
+
+  .estado-envio {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 220px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+  
+  .estado-envio-titulo {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .estado-envio-subtitulo {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .estado-envio-icono {
+    margin-bottom: 15px;
+  }
+  
+  .estado-envio-boton {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    cursor: default;
+  }
+  
+  .estado-envio-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9em;
+  }
+  

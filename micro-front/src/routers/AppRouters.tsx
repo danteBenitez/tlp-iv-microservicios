@@ -5,7 +5,7 @@ import { ComponentType, Key } from 'react';
 import MainLayout from '../pages/components/MainLayout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-// import EstadoEnvio from '../pages/estadoEnvio';
+import EstadoEnvio from '../pages/estadoEnvio';
 import CarritoCompras from '../pages/carritoCompras';
 
 export default function AppRouters() {
@@ -13,7 +13,7 @@ export default function AppRouters() {
     <Router>
       <Routes>
         <Route path='/' element={<MainLayout />} />
-        {/* <Route path='/estado' element={<EstadoEnvio />} /> */}
+        <Route path='/estado' element={<EstadoEnvio />} />
         <Route path='/carrito' element={<CarritoCompras />} />
         <Route path='/auth/login' element={<Login />} />
         <Route path='/auth/register' element={<Register />} />
