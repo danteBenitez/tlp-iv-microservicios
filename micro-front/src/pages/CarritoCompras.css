@@ -31,22 +31,51 @@
     flex: 1;
   }
   
-  .boton-cantidad {
-    padding: 5px 10px;
+  .boton-cantidad-menos {
+    padding: 5px; /* Ajuste para que ambos botones tengan el mismo tamaño */
     font-size: 16px;
     cursor: pointer;
+    width: 50px;
+    text-align: center;
+    color: #fefefe;
+    background-color: red;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   }
   
-  .input-cantidad {
-    width: 30px;
+  .boton-cantidad-menos:hover{
+    transform: scale(1.1); 
+  }
+
+  .boton-cantidad-mas{
+    padding: 5px; /* Ajuste para que ambos botones tengan el mismo tamaño */
+    font-size: 16px;
+    cursor: pointer;
+    width: 50px;
     text-align: center;
-    margin: 0 5px;
+    color: #ffffff;
+    background-color: green;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+
+  .boton-cantidad-mas:hover{
+    transform: scale(1.1); 
+  }
+
+  .input-cantidad {
+    padding: 5px;
+    font-size: 16px;
+    width: 50px;
+    text-align: center;
+    margin: 0px 7px;
+    border: 1px solid black;
   }
   
   .boton-eliminar {
     background-color: red;
     color: white;
     border: none;
+    width: 50px;
+    font-size: 16px;
     padding: 5px;
     margin-left: 5px;
     cursor: pointer;
@@ -58,13 +87,18 @@
   }
   
   .boton-comprar {
-    background-color: black;
-    color: white;
+    background-color: rgb(14, 192, 127);
+    color: rgb(0, 0, 0);
     border: none;
     padding: 10px;
     width: 100%;
     cursor: pointer;
     border-radius: 4px;
     margin-top: 10px;
+  }
+  
+  .boton-comprar:hover {
+    background-color: rgb(0, 0, 0);
+    color: rgb(14, 192, 127);
   }
   

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Trash2 } from 'lucide-react'
 import './CarritoCompras.css';
+
 
 interface Producto {
   id: number;
@@ -42,10 +44,11 @@ const CarritoCompras: React.FC = () => {
         {productos.map(producto => (
           <div key={producto.id} className="producto">
             <span className="producto-nombre">{producto.nombre} ${producto.precio}</span>
-            <button onClick={() => actualizarCantidad(producto.id, -1)} className="boton-cantidad">-</button>
+            <button onClick={() => actualizarCantidad(producto.id, -1)} className="boton-cantidad-menos">-</button>
             <input type="text" value={producto.cantidad} readOnly className="input-cantidad" />
-            <button onClick={() => actualizarCantidad(producto.id, 1)} className="boton-cantidad">+</button>
-            <button onClick={() => eliminarProducto(producto.id)} className="boton-eliminar">🗑️</button>
+            <button onClick={() => actualizarCantidad(producto.id, 1)} className="boton-cantidad-mas">+</button>
+            {/* <button onClick={() => eliminarProducto(producto.id)} className="boton-eliminar">🗑️</button> */}
+            <Trash2 onClick={() => eliminarProducto(producto.id)} size={40} className="boton-eliminar"/>
           </div>
         ))}
         <h3 className="total">Total: ${total}</h3>
