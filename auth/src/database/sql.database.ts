@@ -3,6 +3,7 @@ import { Dialect } from "sequelize";
 import { Sequelize } from "sequelize-typescript";
 import { Database } from ".";
 import { config as configService } from "../config/config.service.js";
+import { seedAdmin } from "./seed/admin.seeder";
 import { seedRoles } from "./seed/roles.seeder";
 
 export class SequelizeDatabase implements Database {
@@ -40,6 +41,7 @@ export class SequelizeDatabase implements Database {
 
     private async seedDatabase(): Promise<void> {
         await seedRoles();
+        await seedAdmin();
     }
 
     async close(): Promise<void> {

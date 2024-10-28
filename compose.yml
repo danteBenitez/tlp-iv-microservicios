@@ -1,5 +1,5 @@
 # TODO: Quizá es posible configurar cada microservicio por separado
-#       e importar cada configuración aquí.
+# e importar cada configuración aquí.
 services:
   auth-db:
     container_name: microservice-auth-db
@@ -7,12 +7,78 @@ services:
     ports:
       - "5431:5432"
     env_file:
-      - ./auth/.env.dev
+      - ./auth/.env.prod
 
   auth:
+    depends_on:
+      - auth-db
     container_name: microservice-auth
     build:
       context: ./auth
+      dockerfile: Dockerfile
+
+  products:
+    depends_on:
+      - products-db
+    container_name: microservice-products
+    build:
+      context: ./products
+      dockerfile: Dockerfile
+
+  products-db:
+    container_name: microservice-products-db
+    image: mongodb/mongodb-community-server:6.0.1-ubi8
+    ports:
+      - "27017:27017"
+    env_file:
+      - ./products/.env.prod
+
+  virtual-store-db:
+    container_name: microservice-virtual-store-db
+    image: postgres:16.0
+    ports:
+      - "5430:5432"
+    env_file:
+      - ./suppliers/.env.prod
+
+  suppliers:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-suppliers
+    build:
+      context: ./suppliers
+      dockerfile: Dockerfile
+
+  purchases:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-purchases
+    build:
+      context: ./purchases
+      dockerfile: Dockerfile
+
+  sales:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-sales
+    build:
+      context: ./sales
+      dockerfile: Dockerfile
+
+  shopping-carts:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-shopping-carts
+    build:
+      context: ./shopping_carts
+      dockerfile: Dockerfile
+
+  shipments:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-shipments
+    build:
+      context: ./shipments
       dockerfile: Dockerfile
 
   gateway:
