@@ -1,9 +1,9 @@
+import { FaHtml5, FaKey, FaUser, FaUserCircle } from 'react-icons/fa';
+import Home from '../Home';
 import Login from '../Login';
 import Register from '../Register';
-import Users from '../users/user';
-import Home from '../Home';
 import Profile from '../users/profile';
-import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
+import Users from '../users/user';
 
 const routes = [
   {
