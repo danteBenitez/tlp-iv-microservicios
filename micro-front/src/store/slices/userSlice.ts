@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../store";
 import axiosInstance, { setAuthToken } from "../actionAxios";
 import { ReactNode } from "react";
@@ -31,21 +31,6 @@ const initialState: UsersState = {
     loading: false,
     error: null,
 };
-
-export const fetchEmployeesByNameOrDni = createAsyncThunk(
-    'users/fetchEmployeesByNameOrDni',
-    async (searchTerm: string, { getState }) => {
-        const state = getState() as { auth: { token: string } };
-        try {
-            const response = await axiosInstance.get(`/users/search?namesOrDnis=${searchTerm}`, {
-                headers: { Authorization: `Bearer ${state.auth.token}` },
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching employees:', error);
-            throw error;
-        }
-    })
 
 const usersSlice = createSlice({
     name: 'users',

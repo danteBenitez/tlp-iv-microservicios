@@ -1,65 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { fetchUsers, IUser } from '../../store/slices/userSlice';
-import { fetchEmployeesByNameOrDni } from '../../store/slices/userSlice';
 import axiosInstance from '../../store/actionAxios';
 import { showNotification } from '../../store/slices/notificationSlice';
-import { Button, Col, Container } from 'react-bootstrap';
-import Select, { SingleValue } from 'react-select';
-import { debounce } from 'lodash';
-import { Form } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
+import { Button, Col, Container, Form } from 'react-bootstrap';
 
 const Users = () => {
     const dispatch: AppDispatch = useDispatch();
     const { users, loading, error } = useSelector((state: RootState) => state.users);
     const currentUser = useSelector((state: RootState) => state.auth.user);
     const currentUserAutorizete = currentUser?.rol === 'admin' || currentUser?.rol === 'superAdmin';
-
     const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
     const [isEditing, setIsEditing] = useState(false);
-
-    const [search, setSearch] = useState(false);
-    const [selectedEmployee, setSelectedEmployee] = useState<IUser | null>(null);
-    const [options, setOptions] = useState<IUser[]>([]);
 
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
 
-    const searchEmployee = useCallback(debounce(async (inputValue: string, setSearchResults: React.Dispatch<React.SetStateAction<IUser[]>>) => {
-        if (typeof inputValue !== 'string') {
-            dispatch(showNotification({ message: 'Valor de búsqueda inválido', type: 'error' }));
-            return;
-        }
-        try {
-            const response = await dispatch(fetchEmployeesByNameOrDni(inputValue)).unwrap();
-            setSearchResults(response.slice(0, 10));
-        } catch (error: any) {
-            dispatch(showNotification({ message: `Error al buscar el empleado: ${error.message}`, type: 'error' }));
-        }
-    }, 500), [dispatch]);
-
-    const handleSearchChange = (inputValue: string) => {
-        if (inputValue.length < 3) return;
-        searchEmployee(inputValue, setOptions);
-    }
-
-    const handleSelectChange = (selectedOption: SingleValue<{ value: string | undefined, label: string }>) => {
-        const selectedUser = options.find(option => option._id === selectedOption?.value) || null;
-        setSelectedEmployee(selectedUser);
-        setOptions([]);
-    }
-    const handleInsertClick = () => {
-        if (selectedEmployee) {
-            const confirm = window.confirm(`Do you want to insert ${selectedEmployee.name} in the user list?`);
-            if (confirm) {
-                setSelectedUser(selectedEmployee);
-                setSearch(false);
-            }
-        }
-    }
 
     const handleCreateOrUpdateUser = async (user: IUser) => {
         try {
@@ -163,14 +121,8 @@ const Users = () => {
                             }}>
                                 <div className='d-flex justify-content-between'>
                                     <h2>{isEditing ? 'Edit User' : 'Create User'}</h2>
-                                    <div className='d-flex align-items-end'>
-                                        {!isEditing &&
-                                            <Button size='sm' variant="outline-secondary" onClick={() => setSearch(!search)}>
-                                                <FaSearch />
-                                            </Button>
-                                        }
-                                    </div>
-                                </div>                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                </div>                            
+                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control type="text" placeholder="Enter name" name="name" value={selectedUser?.name || ''} onChange={handleInputChange} required />
                                 </Form.Group>
@@ -213,25 +165,6 @@ const Users = () => {
                                     Cancel
                                 </Button>
                             </Form>
-                        </Col>
-                        <Col md={7}>
-                            {search &&
-                                <div className='col'>
-                                    <Select
-                                        placeholder='Search employee'
-                                        defaultValue={null}
-                                        onInputChange={(inputValue) => {
-                                            if (typeof inputValue === 'string') {
-                                                handleSearchChange(inputValue);
-                                            }
-                                        }}
-                                        onChange={handleSelectChange}
-                                        options={options.map(employee => ({ value: employee._id, label: `${employee.lastName} ${employee.name} - ${(employee as any).cuil}` }))}
-                                        noOptionsMessage={() => 'No employees found'}
-                                    ></Select>
-                                    <Button className='mt-3' onClick={handleInsertClick}>Insertar</Button>
-                                </div>
-                            }
                         </Col>
                     </>
                 }
