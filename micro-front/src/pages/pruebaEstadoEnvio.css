@@ -4,40 +4,39 @@
     justify-content: center;
     gap: 20px; /* Espacio entre los elementos */
     padding: 20px;
-    max-height: 1100px; /* Establece una altura máxima */
+    max-height: 500px; /* Establece una altura máxima */
     overflow-y: auto;  /* Permite el desplazamiento vertical */
     border: 1px solid #ccc; /* Opcional: borde para visualizar el contenedor */
 }
 
 .estado-envio {
     border: 1px solid #ddd;
-    padding: 90px;
+    padding: 20px; /* Reduce el padding para un mejor ajuste */
     font-size: larger;
-    height: 370px;
+    height: 370px; /* Altura fija para cada tarjeta */
     width: 350px; /* Ancho fijo para cada tarjeta */
     border-radius: 8px;
     text-align: center;
     font-family: Arial, sans-serif;
 }
 
-  
-  .estado-envio-titulo {
+.estado-envio-titulo {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 5px;
-  }
-  
-  .estado-envio-subtitulo {
+}
+
+.estado-envio-subtitulo {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 15px;
-  }
-  
-  .estado-envio-icono {
+}
+
+.estado-envio-icono {
     margin-bottom: 15px;
-  }
-  
-  .estado-envio-boton {
+}
+
+.estado-envio-boton {
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 20px;
@@ -45,13 +44,12 @@
     font-weight: bold;
     margin-bottom: 15px;
     cursor: default;
-  }
-  
-  .estado-envio-select {
+}
+
+.estado-envio-select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 0.9em;
-  }
-  
+}
