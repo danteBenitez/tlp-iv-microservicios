@@ -1,6 +1,6 @@
 import { Optional } from "sequelize";
 import { Column, ForeignKey, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
-import { ISaleDetail } from "../interfaces/sale-detail.interface..js";
+import { ISaleDetail } from "../interfaces/sale-detail.interface.js";
 import Sale from "./sale.model.js";
 
 interface SaleDetailCreationAttributes extends Optional<ISaleDetail, 'saleDetailId'> { }

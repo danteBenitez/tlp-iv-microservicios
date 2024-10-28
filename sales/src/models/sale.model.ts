@@ -21,10 +21,10 @@ export default class Sale extends Model<ISale, SaleCreationAttribute> {
     declare saleId: string;
 
     @Column
-    declare date_sale: Date;
+    declare dateSale: Date;
 
     @Column
-    declare user_id: string;
+    declare userId: string;
 
     @HasMany(() => SaleDetail)
     declare details: SaleDetail[]
