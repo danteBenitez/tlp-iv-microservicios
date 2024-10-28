@@ -111,7 +111,8 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                         Another notification
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown>}
+                            </Dropdown>
+                        }
                         <Nav.Item>
                             <Nav.Link
                                 href="/"
@@ -122,8 +123,6 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                 <span className="d-lg-block ms-1">Search</span>
                             </Nav.Link>
                         </Nav.Item>
-                        {/* </Nav>
-                    <Nav className="ml-auto" navbar> */}
                         <Nav.Item>
                             <Nav.Link
                                 as={Link}

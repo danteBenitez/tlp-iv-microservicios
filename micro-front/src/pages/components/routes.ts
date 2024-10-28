@@ -3,6 +3,9 @@ import Register from '../Register';
 import Users from '../users/user';
 import Home from '../Home';
 import Profile from '../users/profile';
+import Productos from '../productos/Productos';
+import Producto from '../productos/Producto';
+import Categoria from '../categoria/Categoria';
 import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
 
 const routes = [
@@ -27,6 +30,30 @@ const routes = [
     layout: "/admin",
     // isPrivate: true,
     icon: FaKey,
+  },
+  {
+    path: "/productos",
+    name: "Productos",
+    component: Productos,
+    layout: "/admin",
+    isPrivate: false,
+    icon: FaList,
+  },
+  {
+    path: "/categoria/:categoriaId",
+    name: "Categoria",
+    component: Categoria,
+    layout: "/admin",
+    isPrivate: false,
+    icon: FaGlobe,
+  },
+  {
+    path: "/productos/:productoId",
+    name: "Producto",
+    component: Producto,
+    layout: "/admin",
+    isPrivate: false,
+    icon: FaEdit,
   },
   {
     path: "/user",
