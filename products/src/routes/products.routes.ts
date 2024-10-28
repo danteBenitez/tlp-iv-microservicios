@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ProductController } from "../controllers/product.controller";
+import { roleMiddleware } from "../middleware/role.middleware";
 import { productService } from "../services/product.service";
 
 const controller = new ProductController(productService);
@@ -9,6 +10,8 @@ const router: Router = Router();
 router.get('/', (req, res) => controller.findAll(req, res));
 
 router.get('/:productId', (req, res) => controller.findById(req, res));
+
+router.use(roleMiddleware("admin"));
 
 router.post('/', (req, res) => controller.create(req, res));
 
