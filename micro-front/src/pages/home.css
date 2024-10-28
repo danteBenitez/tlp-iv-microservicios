@@ -1,0 +1,28 @@
+.home-container {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.home-container h1 {
+  color: #343a40;
+}
+
+.home-container .card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-container .card-title {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.home-container .card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.home-container .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
