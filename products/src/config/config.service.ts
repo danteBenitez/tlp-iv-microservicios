@@ -21,6 +21,11 @@ type ApplicationConfig = {
         NAME: string;
     },
     PORT: string,
+    USER_SERVICE: {
+        URL: string,
+        USERNAME: string,
+        PASSWORD: string
+    }
     SALT_ROUNDS: number,
 }
 
@@ -37,6 +42,11 @@ class ConfigService {
                 USER: getEnvOrFail("DB_USER"),
                 PASSWORD: getEnvOrFail("DB_PASSWORD"),
                 NAME: getEnvOrFail("DB_NAME"),
+            },
+            USER_SERVICE: {
+                URL: getEnvOrFail("USER_SERVICE_URL"),
+                USERNAME: getEnvOrFail("USER_SERVICE_USERNAME"),
+                PASSWORD: getEnvOrFail("USER_SERVICE_PASSWORD")
             },
             PORT: getEnvOrFail("PORT"),
             SALT_ROUNDS: parseInt(getEnvOrFail("SALT_ROUNDS")),
@@ -55,6 +65,15 @@ class ConfigService {
 
     getServerPort() {
         return parseInt(this.config["PORT"]);
+    }
+
+    getUserServiceUrl() {
+        return this.config.USER_SERVICE.URL;
+    }
+
+    getUserServiceCredentials() {
+        const { USERNAME: username, PASSWORD: password } = this.config.USER_SERVICE;
+        return { username, password };
     }
 }
 
