@@ -68,9 +68,9 @@ services:
   shopping-cart:
     depends_on:
       - virtual-store-db
-    container_name: microservice-shopping-cart
+    container_name: microservice-shopping-carts
     build:
-      context: ./shopping-cart
+      context: ./shopping_carts
       dockerfile: Dockerfile
     
   shipments:
