@@ -1,7 +1,11 @@
 import { z } from "zod";
 
 export const cartItemsSchema = z.object({
-    cartId: z.string().optional(),
+    cartId: z.string({
+        message: "El ID de ítem de carrito debe ser un UUID válido"
+    }).uuid({
+        message: "El ID de ítem de carrito debe ser un UUID válido"
+    }).optional(),
     delete: z.boolean().optional(),
     quantity: z.number({
         message: "La cantidad de producto debe ser un número"
