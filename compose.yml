@@ -16,6 +16,8 @@ services:
     build:
       context: ./auth
       dockerfile: Dockerfile
+    volumes:
+      - ./auth/dist:/app/dist
 
   products:
     depends_on:
