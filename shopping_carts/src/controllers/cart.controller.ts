@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CartNotFoundError, CartService, cartService as cartService_, ProductNotFoundError } from "../services/cart.service";
+import { CartNotFoundError, CartService, cartService as cartService_, CouldNotBuyError, ProductNotFoundError } from "../services/cart.service";
 import { validateRequestBody } from "../utils/validate-schema";
 import { cartItemsSchema } from "../validations/cart.schema";
 
@@ -48,6 +48,31 @@ export class CartController {
                     message: err.message
                 });
             }
+            throw err;
+        }
+    }
+
+    async buyAllCart(req: Request, res: Response) {
+        const bearerToken = req.headers.authorization;
+        if (!req.user || !bearerToken) {
+            console.warn("No se encontró token en la petición");
+            return res.status(401).json({
+                message: "No estás autenticado"
+            });
+        }
+
+        try {
+            const carts = await this.cartService.buyAllCart(req.user.userId.toString());
+
+            return res.status(200).json(carts);
+
+        } catch (err) {
+            if (err instanceof CouldNotBuyError) {
+                return res.status(404).json({
+                    message: err.message
+                });
+            }
+            throw err;
         }
     }
 }

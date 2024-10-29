@@ -2,6 +2,9 @@ import cors from "cors";
 import express, { NextFunction, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { ValidationError } from "./utils/validate-schema.js";
+
+import cartRouter from "./routes/cart.routes.js";
 
 type Callback = () => Promise<void>;
 
@@ -31,6 +34,7 @@ export class Server {
 
     protected routes() {
         this.app.get('/health-check', (_, res) => res.status(200).send("[SHOPPING CART] Servidor funcionando correctamente"));
+        this.app.use(cartRouter);
     }
 
     protected addParsers() {
@@ -39,6 +43,11 @@ export class Server {
     }
 
     globalErrorHandler(err: unknown, req: Request, res: Response, next: NextFunction) {
+        if (err instanceof ValidationError) {
+            return res.status(400).json(err.issues());
+        }
+
+
         console.error(err);
         res.status(500).json({
             message: "Error interno del servidor"

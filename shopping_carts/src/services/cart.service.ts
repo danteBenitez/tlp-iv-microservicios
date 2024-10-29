@@ -1,14 +1,20 @@
 import { ICart } from "../interfaces/cart.interface";
 import { cartRepository, ICartRepository } from "../repository/cart.repository";
 import { ProductService, productService as productService_ } from "./product.service";
+import { SaleService, saleService as saleService_ } from "./sale.service";
 
 export type CartItem = { cartId?: string, productId: string, quantity: number, delete?: boolean };
 
 export class CartNotFoundError extends Error { }
 export class ProductNotFoundError extends Error { }
+export class CouldNotBuyError extends Error { }
 
 export class CartService {
-    constructor(private repository: ICartRepository = cartRepository, private productService: ProductService = productService_) { }
+    constructor(
+        private repository: ICartRepository = cartRepository,
+        private productService: ProductService = productService_,
+        private saleService: SaleService = saleService_
+    ) { }
 
     async findAllForUser(userId: string) {
         const found = await this.repository.findAllForUser(userId);
@@ -41,6 +47,13 @@ export class CartService {
         }));
 
         return products;
+    }
+
+    async buyAllCart(userId: string) {
+        const cart = await this.repository.findAllForUser(userId);
+        const response = await this.saleService.sell(userId, cart);
+        if (!response) throw new CouldNotBuyError("No fue posible realizar la compra");
+        return response;
     }
 }
 

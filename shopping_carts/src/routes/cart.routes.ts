@@ -12,4 +12,6 @@ router.get('/', (req, res) => controller.findForUser(req, res));
 
 router.post('/', (req, res) => controller.addToCartOf(req, res));
 
+router.post('/buy', (req, res) => controller.buyAllCart(req, res));
+
 export default router;

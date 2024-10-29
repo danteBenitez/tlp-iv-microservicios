@@ -27,7 +27,10 @@ type ApplicationConfig = {
         USERNAME: string,
         PASSWORD: string
     },
-    PRODUCT_SERVICE: { URL: string }
+    SALE_SERVICE: {
+        URL: string
+    },
+    PRODUCT_SERVICE: { URL: string },
     PORT: string,
     SALT_ROUNDS: number,
     SECRET: string
@@ -54,6 +57,7 @@ class ConfigService {
                 USERNAME: getEnvOrFail("USER_SERVICE_USERNAME"),
                 PASSWORD: getEnvOrFail("USER_SERVICE_PASSWORD")
             },
+            SALE_SERVICE: { URL: getEnvOrFail("SALE_SERVICE_URL") },
             PRODUCT_SERVICE: { URL: getEnvOrFail("PRODUCT_SERVICE_URL") },
             PORT: getEnvOrFail("PORT"),
             SALT_ROUNDS: parseInt(getEnvOrFail("SALT_ROUNDS")),
@@ -91,6 +95,10 @@ class ConfigService {
 
     getProductServiceUrl() {
         return this.config.PRODUCT_SERVICE.URL;
+    }
+
+    getSaleServiceUrl() {
+        return this.config.SALE_SERVICE.URL;
     }
 }
 
