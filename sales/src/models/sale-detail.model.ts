@@ -27,7 +27,7 @@ export default class SaleDetail extends Model<ISaleDetail, SaleDetailCreationAtt
     @Column
     declare sellPrice: number
 
-    @Column
+    @Column(DataType.UUID)
     @ForeignKey(() => Sale)
     declare saleId: string
 

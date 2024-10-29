@@ -102,6 +102,15 @@ services:
       dockerfile: Dockerfile
 
   gateway:
+    depends_on:
+      - auth
+      - products
+      - shipments
+      - shopping-carts
+      - sales
+      - purchases
+      - suppliers
+      - frontend
     container_name: microservice-api-gateway
     restart: always
     image: nginx:1.27.2
