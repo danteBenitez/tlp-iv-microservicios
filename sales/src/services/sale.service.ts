@@ -1,20 +1,23 @@
 import { ISaleDetail } from "../interfaces/sale-detail.interface";
 import { ISale } from "../interfaces/sale.interface";
 import { IUser } from "../interfaces/user.interface";
-import { ISaleRepository } from "../repositories/sale.repository";
-import { ProductService } from "./product.service";
+import { ISaleRepository, saleRepository as saleRepository_ } from "../repositories/sale.repository";
+import { ProductService, productService as productService_ } from "./product.service";
+import { UsersService, usersService as usersService_ } from "./user.service";
 
 export class SaleNotFoundError extends Error { }
 export class ProductNotFoundError extends Error { }
 export class ProductOutOfStockError extends Error { }
+export class UserNotFoundError extends Error { }
 
 type SaleDetailItem = Omit<ISaleDetail, "sellPrice" | "saleDetailId" | "saleId">;
 
 export class SaleService {
 
     constructor(
-        private saleRepository: ISaleRepository = saleRepository,
-        private productService: ProductService = productService
+        private saleRepository: ISaleRepository = saleRepository_,
+        private productService: ProductService = productService_,
+        private userService: UsersService = usersService_
     ) { }
 
     async findById(saleId: string) {
@@ -38,6 +41,8 @@ export class SaleService {
     }
 
     async sell(items: SaleDetailItem[], user: IUser): Promise<{ sale: ISale, total: number }> {
+        // NOTE: En casos más precisos sería necesario un Mutex aquí, para evitar que
+        //       se den condiciones de carrera.
         const details = await Promise.all(items.map(async saleItem => {
             const product = await this.productService.findById(saleItem.productId);
             if (!product) {
@@ -48,13 +53,27 @@ export class SaleService {
                 throw new ProductOutOfStockError(`Stock insuficiente para producto: ${product.name}`);
             }
 
-            await this.productService.update(product.id, { stock: product.stock - saleItem.quantity });
-
             return {
                 ...saleItem,
+                product,
                 sellPrice: product.price,
             }
         }));
+
+        // Para evitar tener que hacer un rollback, sólo restamos el stock de productos
+        // cuando verificamos que el stock es suficiente para todos los productos.
+        for (const item of details) {
+            const result = await this.productService.update(item.productId, { stock: item.product.stock - item.quantity });
+            if (!result) {
+                throw new Error(`No fue posible actualizar el producto: ${result}`);
+            }
+        }
+
+        const found = await this.userService.findById(user.userId);
+
+        if (!found) {
+            throw new UserNotFoundError("Usuario no encontrado");
+        }
 
         const sale = await this.create({
             dateSale: new Date(),
@@ -69,8 +88,10 @@ export class SaleService {
     private async create(saleData: Omit<ISale, "saleId">, detailsData: Omit<ISaleDetail, "saleDetailId" | "saleId">[]): Promise<ISale> {
         const sale = await this.saleRepository.create(saleData);
 
-        const details = await this.saleRepository.createDetails(sale.saleId, detailsData);
+        await this.saleRepository.createDetails(sale.saleId, detailsData);
 
         return this.findById(sale.saleId);
     }
 }
+
+export const saleService = new SaleService();
