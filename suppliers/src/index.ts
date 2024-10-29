@@ -14,5 +14,5 @@ server
         await database.setup()
             .then(() => console.log(`Conexión exitosa a base de datos: ${config.getDatabaseOptions().DIALECT}`))
     })
-
+    
 server.start(PORT);
