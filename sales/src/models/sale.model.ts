@@ -1,5 +1,5 @@
 import { Optional } from "sequelize";
-import { Column, HasMany, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { Column, DataType, Default, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
 import { ISale } from "../interfaces/sale.interface.js";
 import SaleDetail from "./sale-detail.model.js";
 
@@ -13,9 +13,10 @@ interface SaleCreationAttribute extends Optional<ISale, 'saleId'> { }
 })
 export default class Sale extends Model<ISale, SaleCreationAttribute> {
 
-    @IsUUID("4")
     @PrimaryKey
+    @Default(DataType.UUIDV4)
     @Column({
+        type: DataType.UUID,
         field: "sale_id"
     })
     declare saleId: string;
