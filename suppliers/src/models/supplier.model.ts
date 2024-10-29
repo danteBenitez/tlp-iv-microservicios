@@ -1,5 +1,5 @@
 import { Optional } from "sequelize";
-import { AutoIncrement, BelongsToMany, Column, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { AutoIncrement, BelongsToMany, Column, DataType, Default, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
 import { ISupplier } from "../interfaces/supplier.interface";
 
 
@@ -13,10 +13,11 @@ interface SupplierCreationAttributes extends Optional<ISupplier, 'supplierId'> {
 })
 export default class Supplier extends Model<ISupplier, SupplierCreationAttributes> {
 
-    @IsUUID(4)
     @PrimaryKey
+    @Default(DataType.UUIDV4)
     @Column({
-        field: "supplier_id"
+        type: DataType.UUID,
+        field: "sale_id"
     })
     declare supplierId: string;
     
