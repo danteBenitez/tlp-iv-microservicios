@@ -22,6 +22,12 @@ type ApplicationConfig = {
         DIALECT: string;
         SHOULD_FORCE: boolean;
     },
+    USER_SERVICE: {
+        URL: string,
+        USERNAME: string,
+        PASSWORD: string
+    },
+    PRODUCT_SERVICE: { URL: string }
     PORT: string,
     SALT_ROUNDS: number,
     SECRET: string
@@ -43,6 +49,12 @@ class ConfigService {
                 DIALECT: getEnvOrFail("DB_DIALECT"),
                 SHOULD_FORCE: process.env.NODE_ENV !== "production" && process.argv[2] == "force"
             },
+            USER_SERVICE: {
+                URL: getEnvOrFail("USER_SERVICE_URL"),
+                USERNAME: getEnvOrFail("USER_SERVICE_USERNAME"),
+                PASSWORD: getEnvOrFail("USER_SERVICE_PASSWORD")
+            },
+            PRODUCT_SERVICE: { URL: getEnvOrFail("PRODUCT_SERVICE_URL") },
             PORT: getEnvOrFail("PORT"),
             SALT_ROUNDS: parseInt(getEnvOrFail("SALT_ROUNDS")),
             SECRET: getEnvOrFail("JWT_SECRET")
@@ -66,6 +78,19 @@ class ConfigService {
 
     getServerPort() {
         return parseInt(this.config["PORT"]);
+    }
+
+    getUserServiceUrl() {
+        return this.config.USER_SERVICE.URL;
+    }
+
+    getUserServiceCredentials() {
+        const { USERNAME: username, PASSWORD: password } = this.config.USER_SERVICE;
+        return { username, password };
+    }
+
+    getProductServiceUrl() {
+        return this.config.PRODUCT_SERVICE.URL;
     }
 }
 
