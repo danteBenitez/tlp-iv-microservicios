@@ -3,6 +3,7 @@ import { validateRequest } from "../utils/validate-schema";
 import {
   ConflictingSupplierError,
   InvalidDataError,
+  SupplierNotFoundError,
   SuppliersService,
 } from "../services/supplier.service";
 import {
@@ -13,7 +14,7 @@ import {
 
 export class SupplierController {
   constructor(private supplierService: SuppliersService) {}
-
+ 
   async findAllSuppliers(req: Request, res: Response) {
     const user = req.user;
     if (!user) {
@@ -43,7 +44,7 @@ export class SupplierController {
 
     if (!supplier) {
       return res.status(404).json({
-        message: "Usuario no encontrado",
+        message: "Proveedor no encontrado",
       });
     }
 
@@ -58,17 +59,36 @@ export class SupplierController {
     if (!success) {
       return res.status(400).json(error);
     }
-    const deleted = await this.supplierService.delete(data.params.supplierId);
 
-    if (!deleted) {
-      return res.status(404).json({
-        message: "Usuario no encontrado",
+    try {
+      const deleted = await this.supplierService.delete(data.params.supplierId);
+
+      if (!deleted) {
+        return res.status(404).json({
+          message: "Proveedor no encontrado",
+        });
+      }
+
+      return res.status(200).json({
+        message: "Proveedor eliminado exitosamente",
+      });
+    } catch (err) {
+      if (err instanceof ConflictingSupplierError) {
+        return res.status(409).json({
+          message: err.message,
+        });
+      }
+
+      if (err instanceof SupplierNotFoundError) {
+        return res.status(404).json({
+          message: err.message,
+        });
+      }
+      
+      return res.status(500).json({
+        message: "Error interno del servidor",
       });
     }
-
-    return res.status(200).json({
-      message: "Usuario eliminado exitosamente",
-    });
   }
 
   async create(req: Request, res: Response) {
@@ -91,8 +111,8 @@ export class SupplierController {
         });
       }
 
-      console.error("Error al crear usuario: ", err);
-      res.status(500).json({
+      console.error("Error al crear proveedor: ", err);
+      return res.status(500).json({
         message: "Error interno del servidor",
       });
     }
@@ -108,7 +128,7 @@ export class SupplierController {
     }
 
     if (!data.body) {
-        throw new InvalidDataError("No se proporcionaron datos para actualizar");
+      throw new InvalidDataError("No se proporcionaron datos para actualizar");
     }
 
     const updated = await this.supplierService.update(

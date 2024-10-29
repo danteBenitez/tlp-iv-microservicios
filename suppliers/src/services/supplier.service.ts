@@ -74,9 +74,8 @@ export class SuppliersService {
     const supplier = await this.supplierRepository.findById(supplierId);
 
     if (!supplier) {
-      throw new SupplierNotFoundError("Proveedor no encontrado");
+      throw new SupplierNotFoundError("Proveedor no encontrado.");
     }
-
     return this.supplierRepository.delete(supplierId);
   }
 }
