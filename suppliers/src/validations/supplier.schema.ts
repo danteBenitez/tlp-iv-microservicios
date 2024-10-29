@@ -74,8 +74,8 @@ export const createUserByAdminSchema = z.object({
 });
 
 export const updateSupplierSchema = z.object({
-  body: createSupplierSchema.partial(),
-});
+  body: createSupplierSchema.partial(),  
+}).and(SupplierIdSchema);
 
 export type UpdateSupplierData = z.infer<typeof updateSupplierSchema>["body"];
 
