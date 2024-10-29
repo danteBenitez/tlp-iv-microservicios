@@ -2,7 +2,7 @@ import { config } from "../config/config.service";
 import { IUser } from "../interfaces/user.interface";
 
 export class UsersService {
-    private token: string | null = null
+    token: string | null = null
 
     constructor(
         private serviceUrl = config.getUserServiceUrl(),
@@ -28,9 +28,12 @@ export class UsersService {
         }
 
         return response.json()
-            .then(({ token }) => token)
-            .catch(() => {
-                throw new Error("Error al autenticar con servicio de usuarios" + response)
+            .then(({ token }) => {
+                console.log("Getting token...");
+                return token;
+            })
+            .catch(async () => {
+                throw new Error("Error al autenticar con servicio de usuarios" + await response.json())
             })
     }
 
@@ -42,10 +45,6 @@ export class UsersService {
     }
 
     private async requestWithAuth(url: string, options?: RequestInit): Promise<Response> {
-        if (!this.token) {
-            this.token = await this.getToken();
-        }
-
         const fullUrl = new URL(url, this.serviceUrl);
         const response = await fetch(fullUrl, {
             ...options,
@@ -57,6 +56,7 @@ export class UsersService {
 
         if (response.status == 401) {
             this.token = null;
+            this.token = await this.getToken();
             return this.requestWithAuth(url, options);
         }
 
@@ -65,7 +65,7 @@ export class UsersService {
 
     async findById(userId: number): Promise<IUser | null> {
         const response = await this.requestWithAuth(`/users/${userId}`);
-        if (response.status == 404) {
+        if (response.status != 200) {
             return null;
         }
         return (await response.json()).user as IUser;
