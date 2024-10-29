@@ -5,12 +5,18 @@ import { ComponentType, Key } from 'react';
 import MainLayout from '../pages/components/MainLayout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import EstadoEnvio from '../pages/estadoEnvio';
+import CarritoCompras from '../pages/carritoCompras';
+import All_list_products from '../pages/all_list_product';
 
 export default function AppRouters() {
   return (
     <Router>
       <Routes>
         <Route path='/' element={<MainLayout />} />
+        <Route path='/estado' element={<EstadoEnvio />} />
+        <Route path='/carrito' element={<CarritoCompras />} />
+        <Route path='/all_list_products' element={<All_list_products />} />
         <Route path='/auth/login' element={<Login />} />
         <Route path='/auth/register' element={<Register />} />
         <Route path='/admin/*' element={<MainLayout />}>

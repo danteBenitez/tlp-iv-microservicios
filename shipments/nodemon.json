@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": ".js,.ts",
+  "exec": "npm run build && node --env-file .env.dev dist/index.js"
+}

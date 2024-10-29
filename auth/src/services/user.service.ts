@@ -57,7 +57,7 @@ export class UsersService {
             if (!user) {
                 return null;
             }
-            delete (user as SafeUser).password;
+            (user as SafeUser).password = undefined;
             return user;
         } catch (err) {
             if (err instanceof JsonWebTokenError) {
@@ -139,8 +139,9 @@ export class UsersService {
             email: userData.email,
             username: userData.username,
             password: password
-        })
-        delete (user as SafeUser).password;
+        });
+
+        (user as SafeUser).password = undefined;
 
         if (!user) {
             throw new UserNotFoundError("Usuario no encontrado");
