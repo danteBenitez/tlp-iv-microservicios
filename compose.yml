@@ -56,6 +56,8 @@ services:
     build:
       context: ./suppliers
       dockerfile: Dockerfile
+    volumes:
+      - ./suppliers/dist:/app/dist
 
   purchases:
     depends_on:
