@@ -82,11 +82,11 @@ services:
       context: ./shopping_carts
       dockerfile: Dockerfile
 
-  frontend:
-    container_name: micro-front
-    build:
-      context: ./micro-front
-      dockerfile: Dockerfile
+  # frontend:
+  #   container_name: micro-front
+  #   build:
+  #     context: ./micro-front
+  #     dockerfile: Dockerfile
 
   shipments:
     depends_on:
