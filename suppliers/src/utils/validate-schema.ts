@@ -1,17 +1,17 @@
 import { Request } from "express";
 import { Schema, z, ZodError } from "zod";
 
-export class ValidationError extends Error {
-    constructor(private zod: ZodError) {
+class ValidationError extends Error {
+    constructor(zod: ZodError) {
         super(zod.message);
-    }
-
-    issues() {
-        return this.zod.issues;
     }
 }
 
 type ValidationResult<TSchema extends Schema> = {
+    data: undefined,
+    success: false,
+    error: ValidationError
+} | {
     data: z.infer<TSchema>,
     success: true,
     error: undefined
@@ -26,7 +26,11 @@ export class ValidationAdapter implements RequestValidator {
     async validateRequest<TSchema extends Schema>(req: Request, schema: TSchema): Promise<ValidationResult<TSchema>> {
         const { data, success, error } = await schema.safeParseAsync(req);
         if (!success) {
-            throw new ValidationError(error);
+            return {
+                data,
+                success,
+                error: error as ZodError
+            };
         }
 
         return {
