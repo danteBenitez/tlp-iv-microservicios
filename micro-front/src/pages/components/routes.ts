@@ -2,6 +2,7 @@ import Home from '../Home';
 import Login from '../Login';
 import Register from '../Register';
 import Profile from '../users/profile';
+import Users from '../users/user';
 import Productos from '../productos/Productos';
 import Producto from '../productos/Producto';
 import Categoria from '../categoria/Categoria';
