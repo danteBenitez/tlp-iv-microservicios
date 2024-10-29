@@ -47,32 +47,36 @@ export const SupplierIdSchema = z.object({
 });
 
 export const createSupplierSchema = z.object({
-  body: z.object({
-    companyName: z.string().min(1, {
-      message: "El nombre de la empresa es requerido",
-    }),
-    cuit: z.string().min(1, {
-      message: "El CUIT es requerido",
-    }),
-    phoneNumber: z.string().min(1, {
-      message: "El número de teléfono es requerido",
-    }),
-    address: z.string().min(1, {
-      message: "La dirección es requerida",
-    }),
-    email: z
-      .string()
-      .min(1, {
-        message: "El correo electrónico es requerido",
-      })
-      .email({
-        message: "Correo electrónico no es válido",
-      }),
+  companyName: z.string().min(1, {
+    message: "El nombre de la empresa es requerido",
   }),
+  cuit: z.string().min(1, {
+    message: "El CUIT es requerido",
+  }),
+  phoneNumber: z.string().min(1, {
+    message: "El número de teléfono es requerido",
+  }),
+  address: z.string().min(1, {
+    message: "La dirección es requerida",
+  }),
+  email: z
+    .string()
+    .min(1, {
+      message: "El correo electrónico es requerido",
+    })
+    .email({
+      message: "Correo electrónico no es válido",
+    }),
 });
 
-export const updateSupplierSchema = createSupplierSchema.partial().and(SupplierIdSchema);
+export const createUserByAdminSchema = z.object({
+  body: createSupplierSchema,
+});
+
+export const updateSupplierSchema = z.object({
+  body: createSupplierSchema.partial(),
+});
 
 export type UpdateSupplierData = z.infer<typeof updateSupplierSchema>["body"];
 
-export type CreateSupplierData = z.infer<typeof createSupplierSchema>;
+export type CreateSupplierData = z.infer<typeof createUserByAdminSchema>["body"];

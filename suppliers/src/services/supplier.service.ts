@@ -35,7 +35,7 @@ export class SuppliersService {
 
   async create(supplierData: CreateSupplierData) {
     const supplier = await this.supplierRepository.findByName(
-      supplierData.body.companyName
+      supplierData.companyName
     );
 
     if (supplier) {
@@ -45,7 +45,7 @@ export class SuppliersService {
     }
 
     const newSupplier = await this.supplierRepository.create({
-      ...supplierData.body,
+      ...supplierData,
     });
 
     return newSupplier;
