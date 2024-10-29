@@ -57,9 +57,6 @@ export const createProductSchema = z.object({
     }).min(0, {
         message: "El stock no puede ser menor a 0"
     }),
-    providerId: z.number({
-        message: "Valor de ID de proveedor inválido"
-    })
 });
 
 export const updateProductSchema = z.object({

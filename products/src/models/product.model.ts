@@ -8,7 +8,6 @@ export const ProductModel = mongoose.model<IProduct>('Product', new Schema({
     brand: String,
     stock: Number,
     tags: [String],
-    providerId: Number
 }, {
     id: true,
     autoCreate: true,

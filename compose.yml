@@ -18,6 +18,8 @@ services:
     build:
       context: ./auth
       dockerfile: Dockerfile
+    volumes:
+      - ./auth/dist:/app/dist
 
   products:
     depends_on:
@@ -54,6 +56,8 @@ services:
     build:
       context: ./suppliers
       dockerfile: Dockerfile
+    volumes:
+      - ./suppliers/dist:/app/dist
 
   purchases:
     depends_on:
@@ -82,11 +86,11 @@ services:
       context: ./shopping_carts
       dockerfile: Dockerfile
 
-  # frontend:
-  #   container_name: micro-front
-  #   build:
-  #     context: ./micro-front
-  #     dockerfile: Dockerfile
+  frontend:
+    container_name: micro-front
+    build:
+      context: ./micro-front
+      dockerfile: Dockerfile
 
   shipments:
     depends_on:
@@ -98,6 +102,15 @@ services:
       dockerfile: Dockerfile
 
   gateway:
+    depends_on:
+      - auth
+      - products
+      - shipments
+      - shopping-carts
+      - sales
+      - purchases
+      - suppliers
+      - frontend
     container_name: microservice-api-gateway
     restart: always
     image: nginx:1.27.2
