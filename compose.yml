@@ -1,22 +1,105 @@
 # TODO: Quizá es posible configurar cada microservicio por separado
-#       e importar cada configuración aquí.
+# e importar cada configuración aquí.
 services:
   auth-db:
     container_name: microservice-auth-db
+    restart: always
     image: postgres:16.0
     ports:
       - "5431:5432"
     env_file:
-      - ./auth/.env.dev
+      - ./auth/.env.prod
 
   auth:
+    depends_on:
+      - auth-db
     container_name: microservice-auth
+    restart: always
     build:
       context: ./auth
       dockerfile: Dockerfile
 
+  products:
+    depends_on:
+      - products-db
+    container_name: microservice-products
+    restart: always
+    build:
+      context: ./products
+      dockerfile: Dockerfile
+
+  products-db:
+    container_name: microservice-products-db
+    restart: always
+    image: mongodb/mongodb-community-server:6.0.1-ubi8
+    ports:
+      - "27017:27017"
+    env_file:
+      - ./products/.env.prod
+
+  virtual-store-db:
+    container_name: microservice-virtual-store-db
+    restart: always
+    image: postgres:16.0
+    ports:
+      - "5430:5432"
+    env_file:
+      - ./suppliers/.env.prod
+
+  suppliers:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-suppliers
+    restart: always
+    build:
+      context: ./suppliers
+      dockerfile: Dockerfile
+
+  purchases:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-purchases
+    restart: always
+    build:
+      context: ./purchases
+      dockerfile: Dockerfile
+
+  sales:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-sales
+    restart: always
+    build:
+      context: ./sales
+      dockerfile: Dockerfile
+
+  shopping-carts:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-shopping-carts
+    restart: always
+    build:
+      context: ./shopping_carts
+      dockerfile: Dockerfile
+
+  # frontend:
+  #   container_name: micro-front
+  #   build:
+  #     context: ./micro-front
+  #     dockerfile: Dockerfile
+
+  shipments:
+    depends_on:
+      - virtual-store-db
+    container_name: microservice-shipments
+    restart: always
+    build:
+      context: ./shipments
+      dockerfile: Dockerfile
+
   gateway:
     container_name: microservice-api-gateway
+    restart: always
     image: nginx:1.27.2
     volumes:
       - ./gateway/config/nginx.conf:/etc/nginx/nginx.conf
