@@ -99,6 +99,8 @@ services:
     build:
       context: ./micro-front
       dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
     volumes:
       - ./micro-front:/app
       - /app/node_modules
