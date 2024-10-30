@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createProduct, deleteProduct, fetchProductById, fetchProducts, updateProduct } from '../services/productService';
 import { AppThunk } from '../store';
 import { showNotification } from './notificationSlice';
-import { fetchProducts, fetchProductById, createProduct, updateProduct, deleteProduct } from '../services/productService';
 
 export interface IProduct {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     price: string;
     brand: string;
-    images: string[];
+    images: { _id: string }[];
     tags: string[];
     stock: number;
 }
