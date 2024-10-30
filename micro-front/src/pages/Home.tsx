@@ -1,13 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button, NavLink } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../store/store';
 import './home.css';
 import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
-  console.log('user', user);
+  // const user = useSelector((state: RootState) => state.auth.user);
 
   const productos = [
     { id: 1, nombre: 'Producto 1', descripcion: 'Descripción del producto 1', categoria: 'electronica', imagen: 'ruta/a/imagen1.jpg', top: 8 },
@@ -25,7 +24,7 @@ const Home: React.FC = () => {
     <Container>
     <Row className="justify-content-center text-center my-5">
       <Col md={8}>
-        <h1 className="display-4">Bienvenido a Nuestra Tienda</h1>
+        <h1 className="display-4">Bienvenido a Nuestra Tienda <span className='text-success'>TeLoCompro</span></h1>
         <p className="lead">Encuentra los mejores productos al mejor precio.</p>
       </Col>
     </Row>

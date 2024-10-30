@@ -34,7 +34,7 @@ const MainLayout = () => {
         routes={routes}
       />
       <NavigationBar mobileSidebarToggle={handleSidebarToggle} />
-      <div style={{ overflowY: 'auto', width: 'auto', height: '100vh', minHeight: '50vh' }}>
+      <div className='m-5' style={{ overflowY: 'auto', width: 'auto', height: '100vh', minHeight: '50vh' }}>
         <Outlet />
       </div>
       <Footer />

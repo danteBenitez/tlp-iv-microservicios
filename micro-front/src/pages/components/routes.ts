@@ -56,7 +56,7 @@ const routes = [
     icon: FaEdit,
   },
   {
-    path: "/user",
+    path: "/users",
     name: "Users",
     component: Users,
     layout: "/admin",

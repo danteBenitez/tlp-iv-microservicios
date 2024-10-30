@@ -26,12 +26,12 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const { user } = useSelector((state: RootState) => state.auth);
+  // const { user } = useSelector((state: RootState) => state.auth);
 
   const filteredRoutes = routes.filter(route => {
-    if (user?.rol !== 'simpleUser' && route.name === "Users") return false;
-    if (!user && route.path === '/profile') return false;
-    if (route.isPrivate === true) return false;
+    // if (user?.rol !== 'simpleUser' && route.name === "Users") return false;
+    // if (!user && route.path === '/profile') return false;
+    // if (route.isPrivate === true) return false;
     if (route.path === '/register') return false;
     if (route.name === 'Categoria') return false;
     if (route.name === 'Producto') return
@@ -45,7 +45,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
         <Offcanvas.Title>
           <Navbar.Brand href="/admin" className="d-flex align-items-center">
             <Image src={logo} roundedCircle className="me-2" style={{ width: 'auto', height: '40px' }} />
-            <span>Las mejores opciones a tu alcance</span>
+            <span>TeLoCompro</span>
           </Navbar.Brand>
         </Offcanvas.Title>
       </Offcanvas.Header>

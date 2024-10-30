@@ -3,24 +3,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface NotificationState {
     message: string;
     type: 'success' | 'error' | 'warning' | 'info';
+    id: number;
 }
 
-const initialState: NotificationState = {
-    message: '',
-    type: 'info',
-};
+const initialState: NotificationState[] = [];
 
 const notificationSlice = createSlice({
     name: 'notification',
     initialState,
     reducers: {
-        showNotification(state, action: PayloadAction<NotificationState>) {
-            state.message = action.payload.message;
-            state.type = action.payload.type;
+        showNotification(state, action: PayloadAction<Omit<NotificationState, 'id'>>) {
+            const id = new Date().getTime();
+            state.push({ ...action.payload, id})
         },
-        clearNotification(state) {
-            state.message = '';
-            state.type = 'info';
+        clearNotification(state, action: PayloadAction<number>) {
+            return state.filter(notification => notification.id !== action.payload);
         },
     },
 });
