@@ -1,15 +1,15 @@
+import { ComponentType } from 'react';
+import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
+import { IconType } from 'react-icons/lib';
+import Categoria from '../categoria/Categoria';
 import Home from '../Home';
 import Login from '../Login';
+import Producto from '../productos/Producto';
+import Productos from '../productos/Productos';
+import ProveedoresIndex from '../proveedores/Index';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
-import Productos from '../productos/Productos';
-import Producto from '../productos/Producto';
-import Categoria from '../categoria/Categoria';
-import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
-import { IconType } from 'react-icons/lib';
-import ProveedoresIndex from '../proveedores/Index';
-import { ComponentType } from 'react';
 
 export type TRoute = {
   path: string;

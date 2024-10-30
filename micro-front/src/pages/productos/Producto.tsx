@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { fetchProductById } from '../../store/services/productService';
-import { IProduct } from '../../store/slices/productSlice';
+import React, { useEffect, useState } from "react";
+import { Button, Card, CardImg, Col, Container, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { fetchProductById } from "../../store/services/productService";
+import { IProduct } from "../../store/slices/productSlice";
+import { resolveImageUrl } from "../../utils/resolve-image-url";
 
 const Producto: React.FC = () => {
   const { productoId } = useParams<{ productoId: string }>();
@@ -15,11 +16,11 @@ const Producto: React.FC = () => {
         const data = await fetchProductById(productoId);
         setProducto(data);
       } catch (error) {
-        console.error('Error fetching product by ID: ', error);
+        console.error("Error fetching product by ID: ", error);
       }
-    }
+    };
     getProduct();
-  }, [productoId])
+  }, [productoId]);
 
   if (!producto) {
     return <div>Loading...</div>;
@@ -27,6 +28,9 @@ const Producto: React.FC = () => {
 
   return (
     <Container className="my-5">
+      {producto.images[0] && (
+        <CardImg src={resolveImageUrl(producto.images[0]._id)}></CardImg>
+      )}
       <Row>
         <Col>
           <h1>Producto: {producto.name}</h1>
@@ -39,7 +43,7 @@ const Producto: React.FC = () => {
               <Card.Title>{producto.name}</Card.Title>
               <Card.Text>{producto.description}</Card.Text>
               <Card.Text>Marca: {producto.brand}</Card.Text>
-              <Card.Text>Tags: {producto.tags.join(', ')}</Card.Text>
+              <Card.Text>Tags: {producto.tags.join(", ")}</Card.Text>
               <Button variant="primary">Comprar</Button>
             </Card.Body>
           </Card>
