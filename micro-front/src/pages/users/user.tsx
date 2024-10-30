@@ -10,7 +10,7 @@ const Users = () => {
     const dispatch: AppDispatch = useDispatch();
     const { users, loading, error } = useSelector((state: RootState) => state.users);
     const currentUser = useSelector((state: RootState) => state.auth.user);
-    const currentUserAutorizete = currentUser?.rol === 'admin' || currentUser?.rol === 'superAdmin';
+    const currentUserAutorizete = currentUser?.roles && currentUser?.roles.some((role: { name: string }) => role.name === 'admin');
     const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -20,25 +20,34 @@ const Users = () => {
 
 
     const handleCreateOrUpdateUser = async (user: IUser) => {
+        console.log('user', user)
         try {
-            if (isEditing && user._id) {
-                await axiosInstance.put(`/users/${user._id}`, user);
+            const userData = {
+                ...user,
+                roles: user.roles ? user.roles.split(',').map((role: string) => role.trim()) : []
+            };
+            if (isEditing && user.userId) {
+                await axiosInstance.patch(`/auth/users/${user.userId}`, userData);
                 dispatch(showNotification({ message: 'User updated successfully', type: 'success' }));
             } else {
-                await axiosInstance.post('/users', user);
+                await axiosInstance.post('/auth/users', userData);
                 dispatch(showNotification({ message: 'User created successfully', type: 'success' }));
             }
             dispatch(fetchUsers());
             handleCancel();
         } catch (error: any) {
             console.error('Error saving user:', error);
+            if (error.message) {
+                dispatch(showNotification({ message: error.message, type: 'error' }));
+            } else {
             dispatch(showNotification({ message: error.response.data.message, type: 'error' }));
+        }
         }
     };
 
     const handleDeleteUser = async (id: string) => {
         try {
-            await axiosInstance.delete(`/users/${id}`);
+            await axiosInstance.delete(`/auth/users/${id}`);
             dispatch(showNotification({ message: 'User deleted successfully', type: 'success' }));
             dispatch(fetchUsers());
         } catch (error: any) {
@@ -81,29 +90,21 @@ const Users = () => {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>DNI</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
-                                        <th>City</th>
+                                        <th>Role</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users && users.map(user => (
-                                        <tr key={user._id}>
-                                            <td>{`${user.lastName}, ${user.name}`}</td>
+                                        <tr key={user.userId}>
                                             <td>{user.username}</td>
                                             <td>{user.email}</td>
-                                            <td>{user.dni}</td>
-                                            <td>{user.phone}</td>
-                                            <td>{user.address}</td>
-                                            <td>{user.city}</td>
+                                            <td>{user.roles && user.roles.length > 0 ? user.roles[0].name : ''}</td>
                                             <td>
                                                 <button className="btn btn-warning me-2" onClick={() => handleEditUser(user)} disabled={!currentUserAutorizete} >Edit</button>
-                                                <button className="btn btn-danger" onClick={() => handleDeleteUser(user._id!)}>Delete</button>
+                                                <button className="btn btn-danger" onClick={() => handleDeleteUser(user.userId!)}>Delete</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -112,7 +113,7 @@ const Users = () => {
                         </div>
                     </div>
                 </Col>
-                {currentUser && currentUser.rol === 'admin' || currentUser && currentUser.rol === 'superAdmin' &&
+                {currentUser && currentUserAutorizete &&
                     <>
                         <Col md={5}>
                             <Form onSubmit={(e) => {
@@ -122,14 +123,6 @@ const Users = () => {
                                 <div className='d-flex justify-content-between'>
                                     <h2>{isEditing ? 'Edit User' : 'Create User'}</h2>
                                 </div>                            
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter name" name="name" value={selectedUser?.name || ''} onChange={handleInputChange} required />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter last name" name="lastName" value={selectedUser?.lastName || ''} onChange={handleInputChange} required />
-                                </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control type="text" placeholder="Enter username" name="username" value={selectedUser?.username || ''} onChange={handleInputChange} required />
@@ -143,20 +136,8 @@ const Users = () => {
                                     <Form.Control type="email" placeholder="Enter email" name="email" value={selectedUser?.email || ''} onChange={handleInputChange} required />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>DNI</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter dni" name="dni" value={selectedUser?.dni || ''} onChange={handleInputChange} required />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>Phone</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter phone" name="phone" value={selectedUser?.phone || ''} onChange={handleInputChange} required />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>Address</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter address" name="address" value={selectedUser?.address || ''} onChange={handleInputChange} required />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter city" name="city" value={selectedUser?.city || ''} onChange={handleInputChange} required />
+                                    <Form.Label>Role</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter role" name="roles" defaultValue={selectedUser?.roles && selectedUser.roles.length > 0 ? selectedUser?.roles[0].name : ''} onChange={handleInputChange} required />
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     {isEditing ? 'Update' : 'Create'}

@@ -18,8 +18,7 @@ export default function Login() {
         setIsSubmitting(true);
         try {
             const response = await axiosInstance.post('/auth/login', formData);
-            console.log(response)
-            dispatch(login({ user: response.data.user, token: response.data.access_token }));
+            dispatch(login({ user: response.data.user, token: response.data.token }));
             dispatch(showNotification({ message: 'Login successful', type: 'success' }));
             navigate('/admin/home');
         } catch (error: any) {

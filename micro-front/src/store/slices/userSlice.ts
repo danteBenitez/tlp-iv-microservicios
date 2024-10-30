@@ -1,23 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../store";
 import axiosInstance, { setAuthToken } from "../actionAxios";
-import { ReactNode } from "react";
 import { showNotification } from "./notificationSlice";
 
 export interface IUser {
-    createdAt?: ReactNode;
-    _id?: string;
-    name: string;
-    lastName?: string;
+    roles: any;
+    userId: string;
     username: string;
-    cuil?: string;
     password: string;
     email: string;
-    dni: string;
-    phone: string;
-    address: string;
-    city: string;
-    rol: string;
+    createdAt: string;
 }
 
 export interface UsersState {
@@ -58,8 +50,8 @@ export const fetchUsers = (): AppThunk => async (dispatch, getState) => {
     try {
         const token = getState().auth.token;
         setAuthToken(token);
-        const response = await axiosInstance.get('/users');
-        dispatch(fetchUsersSuccess(response.data));
+        const response = await axiosInstance.get('/auth/users');
+        dispatch(fetchUsersSuccess(response.data.users));
     } catch (error: any) {
         dispatch(fetchUsersFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));

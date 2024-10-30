@@ -3,16 +3,19 @@ import { RootState, AppDispatch } from '../../store/store';
 import { Container, Row, Col, Card, ListGroup, Button } from 'react-bootstrap';
 import { showNotification } from '../../store/slices/notificationSlice';
 import { useEffect } from 'react';
+import { getProfile } from '../../store/slices/authSlice';
 
 const Profile: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const userProfile = useSelector((state: RootState) => state.auth.user);
-
+    console.log('userProfile', userProfile);
+    
     useEffect(() => {
+        dispatch(getProfile());
         if (userProfile) {
           dispatch(showNotification({ message: 'User profile loaded successfully', type: 'success' }));
         }
-      }, [userProfile, dispatch]);
+      }, [dispatch]);
 
     if (!userProfile) {
         return null;
@@ -38,16 +41,17 @@ const Profile: React.FC = () => {
                                 alt="Avatar"
                                 className="profile-avatar"
                             />
-                            <Card.Title>{userProfile?.name} {userProfile?.lastName}</Card.Title>
+                            <Card.Title>{userProfile?.username}</Card.Title>
                             <Card.Subtitle className="m-2 text-muted">{userProfile?.username}</Card.Subtitle>
                             <Button variant="primary" className="mb-3">Editar Perfil</Button>
                             <ListGroup variant="flush">
                                 <ListGroup.Item className="profile-list-group-item"><strong>Email:</strong> {userProfile?.email}</ListGroup.Item>
-                                <ListGroup.Item className="profile-list-group-item"><strong>DNI:</strong> {userProfile?.dni}</ListGroup.Item>
+                                {/* <ListGroup.Item className="profile-list-group-item"><strong>DNI:</strong> {userProfile?.dni}</ListGroup.Item>
                                 <ListGroup.Item className="profile-list-group-item"><strong>Teléfono:</strong> {userProfile?.phone}</ListGroup.Item>
                                 <ListGroup.Item className="profile-list-group-item"><strong>Dirección:</strong> {userProfile?.address}</ListGroup.Item>
                                 <ListGroup.Item className="profile-list-group-item"><strong>Ciudad:</strong> {userProfile?.city}</ListGroup.Item>
-                                <ListGroup.Item className="profile-list-group-item"><strong>Rol:</strong> {userProfile?.rol}</ListGroup.Item>
+                                */}
+                                <ListGroup.Item className="profile-list-group-item"><strong>Rol:</strong> {userProfile?.roles && userProfile.roles.length > 0 && userProfile.roles[0].name}</ListGroup.Item> 
                             </ListGroup>
                         </Card.Body>
                     </Card>

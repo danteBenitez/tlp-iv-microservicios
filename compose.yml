@@ -99,6 +99,8 @@ services:
     build:
       context: ./micro-front
       dockerfile: Dockerfile
+    volumes:
+      - ./micro-front/dist:/app/dist
 
   shipments:
     depends_on:
