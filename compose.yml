@@ -68,7 +68,7 @@ services:
       context: ./purchases
       dockerfile: Dockerfile
     volumes:
-      - ./purchases/dist:/app/dist
+      - ./purchases:/app
 
   sales:
     depends_on:
