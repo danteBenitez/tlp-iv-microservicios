@@ -121,7 +121,12 @@ html, body {
 
 }
 
-.product-owner {
+.product-user {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.product-qty {
   margin: 5px 0;
   font-weight: bold;
 }

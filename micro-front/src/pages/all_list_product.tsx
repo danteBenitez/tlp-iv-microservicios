@@ -6,21 +6,22 @@ import './all_list_products.css';
 type Product = {
   id: number;
   name: string;
+  qty: number;
   price: number;
-  owner: string;
+  user: string;
   imageUrl: string;
 };
 
 const products: Product[] = [
-  { id: 1, name: 'Camiseta', price: 19.99, owner: 'Juan', imageUrl: '../../src/assets/img/reactlogo.png' },
-  { id: 2, name: 'Pantalón', price: 39.99, owner: 'María', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 3, name: 'Zapatilla', price: 99.99, owner: 'Jesus', imageUrl: 'https://via.placeholder.com/150' },
+  { id: 1, name: 'Camiseta', qty: 4, price: 19.99, user: 'Juan', imageUrl: '../../src/assets/img/reactlogo.png' },
+  { id: 2, name: 'Pantalón', qty: 5, price: 39.99, user: 'María', imageUrl: 'https://via.placeholder.com/150' },
+  { id: 3, name: 'Zapatilla', qty: 3, price: 99.99, user: 'Jesus', imageUrl: 'https://via.placeholder.com/150' },
 ];
 
 const AllListProducts: React.FC = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [productList, setProductList] = useState<Product[]>(products);
-  const [showModal, setShowModal] = useState(false); // Estado para el modal
+  const [showModal, setShowModal] = useState(false);
 
   const handleCheckboxChange = (productId: number) => {
     setSelectedProducts((prevSelected) => {
@@ -46,8 +47,16 @@ const AllListProducts: React.FC = () => {
   };
 
   const handlePurchase = () => {
-    setShowModal(true); // Mostrar el modal
+    if (selectedProducts.length === 0) {
+      alert('Debe seleccionar al menos un producto.');
+    } else {
+      setShowModal(true);
+    }
   };
+
+  const selectedProductDetails = productList.filter((product) =>
+    selectedProducts.includes(product.id)
+  );
 
   return (
     <div className="all_products_carrito_container">
@@ -71,7 +80,8 @@ const AllListProducts: React.FC = () => {
               <img src={product.imageUrl} alt={product.name} className="product-image" />
               <h3 className="product-name">{product.name}</h3>
               <p className="product-price">${product.price.toFixed(2)}</p>
-              <p className="product-owner">Vendedor: {product.owner}</p>
+              <p className="product-qty">Cantidad: {product.qty}</p>
+              <p className="product-user">Usuario: {product.user}</p>
               <div className="product-actions">
                 <label className="checkbox-label">
                   Seleccionar
@@ -92,11 +102,12 @@ const AllListProducts: React.FC = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <CarritoCompras onClose={() => setShowModal(false)} /> 
+            <CarritoCompras onClose={() => setShowModal(false)} productos={selectedProductDetails} />
           </div>
         </div>
       )}
     </div>
-  );};
+  );
+};
 
 export default AllListProducts;
