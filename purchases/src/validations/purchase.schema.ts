@@ -34,11 +34,9 @@ export const purchaseIdSchema = z.object({
 })
 
 export const purchaseSchema = z.object({
-    datePurchase: z.string({
-        message: "La fecha de compra es requerida"
-    }),
     supplierId: z.string({
         message: "El ID de proveedor es requerido"
-    }),
+    }).uuid(),
     details: purchaseDetailSchema
 })
+
