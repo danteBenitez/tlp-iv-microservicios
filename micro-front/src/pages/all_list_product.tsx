@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Check, Trash2 } from 'lucide-react';
+import CarritoCompras from './carritoCompras';
 import './all_list_products.css';
 
 type Product = {
@@ -13,16 +14,13 @@ type Product = {
 const products: Product[] = [
   { id: 1, name: 'Camiseta', price: 19.99, owner: 'Juan', imageUrl: '../../src/assets/img/reactlogo.png' },
   { id: 2, name: 'Pantalón', price: 39.99, owner: 'María', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 3, name: 'Zapatos', price: 59.99, owner: 'Carlos', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 4, name: 'Pantalón', price: 39.99, owner: 'María', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 5, name: 'Zapatos', price: 59.99, owner: 'Carlos', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 6, name: 'Pantalón', price: 39.99, owner: 'María', imageUrl: 'https://via.placeholder.com/150' },
-  { id: 7, name: 'Zapatos', price: 59.99, owner: 'Carlos', imageUrl: 'https://via.placeholder.com/150' },
+  { id: 3, name: 'Zapatilla', price: 99.99, owner: 'Jesus', imageUrl: 'https://via.placeholder.com/150' },
 ];
 
 const AllListProducts: React.FC = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
-  const [productList, setProductList] = useState<Product[]>(products); // Estado para la lista de productos
+  const [productList, setProductList] = useState<Product[]>(products);
+  const [showModal, setShowModal] = useState(false); // Estado para el modal
 
   const handleCheckboxChange = (productId: number) => {
     setSelectedProducts((prevSelected) => {
@@ -42,30 +40,19 @@ const AllListProducts: React.FC = () => {
   const handleDeleteProduct = (productId: number) => {
     const confirmDelete = window.confirm('¿Estás seguro que quieres eliminar este producto?');
     if (confirmDelete) {
-      // Filtrar el producto eliminado y actualizar la lista
       setProductList((prevList) => prevList.filter((product) => product.id !== productId));
-      // Si el producto eliminado estaba seleccionado, eliminarlo de selectedProducts
       setSelectedProducts((prevSelected) => prevSelected.filter((id) => id !== productId));
     }
+  };
+
+  const handlePurchase = () => {
+    setShowModal(true); // Mostrar el modal
   };
 
   return (
     <div className="all_products_carrito_container">
       <div className="product-page">
         <h1 className="title">Mi Tienda de Productos</h1>
-        <div className="filter">
-          <select className="filter-select">
-            <option className="opciones_productos" value="">
-              Ordenar por
-            </option>
-            <option className="opciones_productos" value="price">
-              Mayor precio
-            </option>
-            <option className="opciones_productos" value="name">
-              Menor precio
-            </option>
-          </select>
-        </div>
 
         <div className="cart">
           <h2 className="cart-title">
@@ -73,7 +60,7 @@ const AllListProducts: React.FC = () => {
           </h2>
           <p>Productos en el carrito: {selectedProducts.length}</p>
           <p>Total seleccionado: ${totalPrice.toFixed(2)}</p>
-          <button className="purchase-button">
+          <button className="purchase-button" onClick={handlePurchase}>
             <Check className="check-icon" size={20} /> Comprar seleccionados
           </button>
         </div>
@@ -101,8 +88,15 @@ const AllListProducts: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <CarritoCompras onClose={() => setShowModal(false)} /> 
+          </div>
+        </div>
+      )}
     </div>
-  );
-};
+  );};
 
 export default AllListProducts;

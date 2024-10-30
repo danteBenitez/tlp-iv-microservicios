@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Trash2 } from 'lucide-react'
+import { Trash2, X } from 'lucide-react';
 import './CarritoCompras.css';
-
 
 interface Producto {
   id: number;
@@ -10,12 +9,16 @@ interface Producto {
   cantidad: number;
 }
 
-const CarritoCompras: React.FC = () => {
+interface CarritoComprasProps {
+  onClose: () => void; // Prop para cerrar el modal
+}
+
+const CarritoCompras: React.FC<CarritoComprasProps> = ({ onClose }) => {
   const [productos, setProductos] = useState<Producto[]>([
     { id: 1, nombre: 'Camiseta', precio: 20, cantidad: 6 },
     { id: 2, nombre: 'Pantalón', precio: 30, cantidad: 2 },
     { id: 3, nombre: 'Zapatilla', precio: 100, cantidad: 2 },
-    { id: 4, nombre: 'ojota', precio: 50, cantidad: 2 },
+    { id: 4, nombre: 'Ojota', precio: 50, cantidad: 2 },
   ]);
 
   const actualizarCantidad = (id: number, incremento: number) => {
@@ -37,19 +40,25 @@ const CarritoCompras: React.FC = () => {
   return (
     <div className="carrito-container">
       <div className="carrito-compras">
+        <button className="close-button" onClick={onClose}>
+          <X size={20} />
+        </button>
+
         <h2 className="carrito-titulo">
           <span role="img" aria-label="shopping-cart" className="icono-carrito">🛒</span> 
           Carrito de Compras
         </h2>
+        
         {productos.map(producto => (
           <div key={producto.id} className="producto">
             <span className="producto-nombre">{producto.nombre} ${producto.precio}</span>
             <button onClick={() => actualizarCantidad(producto.id, -1)} className="boton-cantidad-menos">-</button>
             <input type="text" value={producto.cantidad} readOnly className="input-cantidad" />
             <button onClick={() => actualizarCantidad(producto.id, 1)} className="boton-cantidad-mas">+</button>
-            <Trash2 onClick={() => eliminarProducto(producto.id)} size={40} className="boton-eliminar"/>
+            <Trash2 onClick={() => eliminarProducto(producto.id)} size={40} className="boton-eliminar" />
           </div>
         ))}
+        
         <h3 className="total">Total: ${total}</h3>
         <button className="boton-comprar">Comprar Todo</button>
       </div>

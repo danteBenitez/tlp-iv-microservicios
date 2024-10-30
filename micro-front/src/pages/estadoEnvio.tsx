@@ -14,7 +14,12 @@ const productos = [
   { id: 9, nombre: 'Producto E', estado: 'En tránsito' },
   { id: 10, nombre: 'Producto F', estado: 'Pendiente' },
   { id: 11, nombre: 'Producto I', estado: 'Pendiente' },
-  { id: 12, nombre: 'Producto H', estado: 'Pendiente' }
+  { id: 12, nombre: 'Producto H', estado: 'Pendiente' },
+  { id: 13, nombre: 'Producto H', estado: 'Pendiente' },
+  { id: 14, nombre: 'Producto E', estado: 'En tránsito' },
+  { id: 15, nombre: 'Producto F', estado: 'Pendiente' },
+  { id: 16, nombre: 'Producto I', estado: 'Pendiente' },
+  { id: 17, nombre: 'Producto H', estado: 'Pendiente' }
 ];
 
 const EstadoEnvio: React.FC = () => {
