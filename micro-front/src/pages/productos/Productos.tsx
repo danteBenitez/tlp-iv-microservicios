@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { Button, Card, Col, Container, NavLink, Row } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Card,
+  Col,
+  Container,
+  NavLink,
+  Row,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAllProducts } from "../../store/slices/productSlice";
@@ -41,17 +49,29 @@ const Productos: React.FC = () => {
                   src={resolveImageUrl(producto.images[0]._id)}
                 ></Card.Img>
               ) : null}
-              <Card.Body>
-                <Card.Title>{producto.name}</Card.Title>
+              <Card.Body className="fs-5">
+                <div className="d-flex align-items-center gap-2">
+                  <Card.Title className="fw-bold fs-1">
+                    {producto.name}
+                  </Card.Title>
+                  <Card.Text className="fs-3">
+                    <Badge className="bg-success">${producto.price}</Badge>
+                  </Card.Text>
+                </div>
                 <Card.Text>{producto.description}</Card.Text>
-                <Card.Text>${producto.price}</Card.Text>
                 <Card.Text>{producto.brand}</Card.Text>
-                <Card.Text>Tags: {producto.tags.join(", ")}</Card.Text>
-                <Card.Text>Imagenes: {producto.images.length}</Card.Text>
+                <Card.Text>
+                  Tags:{" "}
+                  {producto.tags.map((tag) => (
+                    <Badge>{tag}</Badge>
+                  ))}
+                </Card.Text>
                 <Card.Text>Stock: {producto.stock}</Card.Text>
                 <Card.Text>Id: {producto._id}</Card.Text>
-                <NavLink as={Link} to={`${producto._id}`}>
-                  <Button variant="primary">Ver Producto</Button>
+                <NavLink as={Link} to={`${producto._id}`} className="w-full">
+                  <Button variant="primary" className="w-full">
+                    Ver Producto
+                  </Button>
                 </NavLink>
               </Card.Body>
             </Card>
