@@ -26,9 +26,11 @@ export class ProductController {
             options["perPage"] = data.query.perPage;
         }
 
+        const tags = typeof data?.query?.tags == "string" ? [data.query.tags] : data?.query?.tags;
+
         const found = await this.productService.findAll({
             ...options,
-            filter: data?.query,
+            filter: {...data?.query, tags},
         });
 
         res.status(200).json(found);

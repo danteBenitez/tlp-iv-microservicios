@@ -7,18 +7,18 @@ import {
   purchaseService,
   SupplierNotFoundError,
 } from "../services/purchase.service";
-import { validateRequest, validateRequestBody } from "../utils/validate-schema";
+import { validateRequest, validateRequestBody, ValidationError } from "../utils/validate-schema";
 import {
   purchaseDetailSchema,
   purchaseIdSchema,
   purchaseSchema,
 } from "../validations/purchase.schema";
-import { ValidationError } from "sequelize";
 
 export class PurchasesController {
-  constructor(private purchasesService: PurchaseService = purchaseService) {}
+  constructor(private purchasesService: PurchaseService) {}
 
   async buy(req: Request, res: Response) {
+    
     try {
       const { data } = await validateRequestBody(req, purchaseSchema);
       if (!data?.details || data.details.length < 1) {
@@ -45,11 +45,10 @@ export class PurchasesController {
       }
 
       if (err instanceof ValidationError) {
-        console.log("ACA ESTOY", err.errors);
-        return res.status(400).json({
-          errors: err.errors,
-        });
+        return res.status(400).json(err.issues());
       }
+
+      throw err;
     }
   }
 
@@ -92,8 +91,8 @@ export class PurchasesController {
 
   async findAll(req: Request, res: Response) {
     try {
-      const sales = await this.purchasesService.findAll();
-      return res.status(200).json(sales);
+      const purchases = await this.purchasesService.findAll();
+      return res.status(200).json({purchases});
     } catch (err) {
       if (err instanceof PurchaseNotFoundError) {
         return res.status(404).json({

@@ -3,10 +3,11 @@ import { ROLES } from "../constants/role.constant";
 import { PurchasesController } from "../controllers/purchases.controller";
 import { authMiddleware } from "../middleware/auth.middleware";
 import { roleMiddleware } from "../middleware/role.middleware";
+import { purchaseService } from "../services/purchase.service";
 
 const router = Router();
 
-const controller = new PurchasesController();
+const controller = new PurchasesController(purchaseService);
 
 router.use([authMiddleware]);
 
