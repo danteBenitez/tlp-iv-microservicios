@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardImg, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { fetchProductById } from "../../store/services/productService";
 import { IProduct } from "../../store/slices/productSlice";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
@@ -28,8 +29,14 @@ const Producto: React.FC = () => {
 
   return (
     <Container className="my-5">
-      {producto.images[0] && (
-        <CardImg src={resolveImageUrl(producto.images[0]._id)}></CardImg>
+      {producto.images[0] ? (
+        <CardImg
+          src={resolveImageUrl(
+            producto.images[0]._id ?? productImagePlaceholder
+          )}
+        ></CardImg>
+      ) : (
+        <CardImg src={productImagePlaceholder}></CardImg>
       )}
       <Row>
         <Col>
@@ -40,7 +47,7 @@ const Producto: React.FC = () => {
         <Col md={8}>
           <Card>
             <Card.Body>
-              <Card.Title>{producto.name}</Card.Title>
+              <Card.Title className="">{producto.name}</Card.Title>
               <Card.Text>{producto.description}</Card.Text>
               <Card.Text>Marca: {producto.brand}</Card.Text>
               <Card.Text>Tags: {producto.tags.join(", ")}</Card.Text>
