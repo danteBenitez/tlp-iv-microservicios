@@ -20,7 +20,7 @@ export class SequelizeDatabase implements Database {
                 host: config.HOST,
                 port: config.PORT,
                 database: config.NAME,
-                models: [path.resolve('dist/models/postgres/*.model.js')]
+                models: [path.resolve('dist/models/**/*.model.js')]
             });
             SequelizeDatabase.instance = new SequelizeDatabase(sequelize)
         }
@@ -32,6 +32,7 @@ export class SequelizeDatabase implements Database {
     }
 
     async setup(): Promise<void> {
+        await this.sync({ force: false });
         await this.seedDatabase();
     }
 
