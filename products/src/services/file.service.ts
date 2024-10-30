@@ -11,15 +11,16 @@ type UploadResult = {
     originalFilename: string
 }
 
+export class FileNotFoundError extends Error { }
+
 export class FilesService {
 
-    async uploadFile(file: Express.Multer.File, prefix: string = ""): Promise<UploadResult> {
+    async uploadFile(file: Express.Multer.File): Promise<UploadResult> {
         const filename = file.filename;
         const filePath = this.#resolveToTemp(filename);
-        const withPrefix = `${prefix}-${file.originalname}`;
-        await fs.rename(filePath, this.#resolveFile(withPrefix));
+        await fs.rename(filePath, this.#resolveFile(file.originalname));
         return {
-            filename: withPrefix,
+            filename: file.originalname,
             originalFilename: file.originalname,
         };
     }
@@ -31,7 +32,13 @@ export class FilesService {
 
 
     async readFile(filename: string) {
-        return fs.readFile(this.#resolveFile(filename));
+        try {
+            const file = await fs.readFile(this.#resolveFile(filename));
+            return file;
+        } catch (err) {
+            console.error(err);
+            throw new FileNotFoundError("Archivo no encontrado");
+        }
     }
 
     #resolveFile(filename: string) {
