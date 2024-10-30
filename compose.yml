@@ -100,7 +100,8 @@ services:
       context: ./micro-front
       dockerfile: Dockerfile
     volumes:
-      - ./micro-front/dist:/app/dist
+      - ./micro-front:/app
+      - /app/node_modules
 
   shipments:
     depends_on:
