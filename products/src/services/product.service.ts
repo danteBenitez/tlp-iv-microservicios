@@ -22,7 +22,6 @@ export class ProductService {
     }
 
     async create(product: Omit<IProduct, "id">): Promise<IProduct> {
-        // TODO: Chequear que existe el proveedor
         const existing = await this.productRepository.findAll({
             filter: {
                 name: product.name

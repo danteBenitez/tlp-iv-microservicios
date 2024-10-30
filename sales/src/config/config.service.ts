@@ -29,6 +29,11 @@ type ApplicationConfig = {
         USERNAME: string,
         PASSWORD: string
     },
+    MESSAGE_BROKER: {
+        URL: string,
+        USERNAME: string,
+        PASSWORD: string
+    },
     PORT: string,
     SALT_ROUNDS: number,
     SECRET: string
@@ -56,6 +61,11 @@ class ConfigService {
                 URL: getEnvOrFail("USER_SERVICE_URL"),
                 USERNAME: getEnvOrFail("USER_SERVICE_USERNAME"),
                 PASSWORD: getEnvOrFail("USER_SERVICE_PASSWORD"),
+            },
+            MESSAGE_BROKER: {
+                URL: getEnvOrFail("MESSAGE_BROKER_URL"),
+                USERNAME: getEnvOrFail("MESSAGE_BROKER_USERNAME"),
+                PASSWORD: getEnvOrFail("MESSAGE_BROKER_PASSWORD")
             },
             PORT: getEnvOrFail("PORT"),
             SALT_ROUNDS: parseInt(getEnvOrFail("SALT_ROUNDS")),
@@ -96,6 +106,10 @@ class ConfigService {
 
     getProductServiceUrl() {
         return this.config.PRODUCT_SERVICE.URL;
+    }
+
+    getMessageBrokerOptions() {
+        return this.config.MESSAGE_BROKER;
     }
 }
 

@@ -14,39 +14,41 @@ import { saleIdSchema, saleSchema } from "../validations/sale.schema";
 export class SalesController {
   constructor(private salesService: SaleService = saleService) {}
 
-  async sell(req: Request, res: Response) {
-    const { data } = await validateRequestBody(req, saleSchema);
-    const user = req.user;
 
-    if (!user) {
-      return res.status(400).json({
-        message: "Usuario inválido",
-      });
+    async sell(req: Request, res: Response) {
+        const { data } = await validateRequestBody(req, saleSchema);
+        const user = req.user;
+
+        if (!user) {
+            return res.status(400).json({
+                message: "Usuario inválido"
+            });
+        }
+
+        try {
+            const sale = await this.salesService.sell(data.items, user, data.address);
+
+            return res.status(200).json(sale);
+
+        } catch (err) {
+            if (
+                err instanceof ProductNotFoundError ||
+                err instanceof SaleNotFoundError ||
+                err instanceof UserNotFoundError
+            ) {
+                return res.status(404).json({
+                    message: err.message
+                });
+            }
+
+            if (err instanceof ProductOutOfStockError) {
+                return res.status(400).json({
+                    message: err.message
+                });
+            }
+            throw err;
+        }
     }
-
-    try {
-      const sale = await this.salesService.sell(data, user);
-
-      return res.status(200).json(sale);
-    } catch (err) {
-      if (
-        err instanceof ProductNotFoundError ||
-        err instanceof SaleNotFoundError ||
-        err instanceof UserNotFoundError
-      ) {
-        return res.status(404).json({
-          message: err.message,
-        });
-      }
-
-      if (err instanceof ProductOutOfStockError) {
-        return res.status(400).json({
-          message: err.message,
-        });
-      }
-      throw err;
-    }
-  }
 
   async findById(req: Request, res: Response) {
     const { data } = await validateRequest(req, saleIdSchema);

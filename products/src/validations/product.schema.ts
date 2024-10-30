@@ -3,12 +3,11 @@ import { z } from "zod";
 
 const queryProductSchema = z.object({
     name: z.string(),
-    price: z.number(),
+    price: z.number({ coerce: true }),
     brand: z.string(),
-    tags: z.string().array(),
+    tags: z.string().array().or(z.string()),
     description: z.string(),
-    stock: z.number(),
-    providerId: z.number()
+    stock: z.number({ coerce: true }),
 })
 
 const orderProductSchema = z.object({

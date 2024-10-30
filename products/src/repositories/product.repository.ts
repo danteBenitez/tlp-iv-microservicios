@@ -37,7 +37,14 @@ export class MongoProductRepository implements IProductRepository {
         const query = this.productModel.find();
 
         if (options.filter) {
-            query.where(options.filter);
+            const withWildcard: Record<string, unknown> = {}
+            for (const filter in options.filter) {
+                const value = options.filter[filter as keyof typeof options.filter];
+                if (typeof value === "string") {
+                    withWildcard[filter as keyof IProduct] = new RegExp(`^${value}`);
+                }
+            }
+            query.where(withWildcard);
         }
 
         if (options.order) {
