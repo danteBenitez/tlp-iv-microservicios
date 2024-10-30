@@ -28,7 +28,7 @@ export class ProductService {
 
     async findById(productId: string): Promise<IProduct | null> {
         const response = await this.requestWithAuth(`/api/products/${productId}`);
-        if (response.status == 404) {
+        if (response.status == 404 || response.status == 400) {
             return null;
         }
         return (await response.json()) as IProduct;

@@ -32,7 +32,10 @@ export class SupplierService {
         if (response.status == 404) {
             return null;
         }
-        return (await response.json()) as ISupplier;
+        const rp = (await response.json());       
+
+        return rp.supplier as ISupplier;
+
     }
 }
 
