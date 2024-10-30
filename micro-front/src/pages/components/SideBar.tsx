@@ -28,12 +28,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   // const { user } = useSelector((state: RootState) => state.auth);
 
-  const filteredRoutes = routes.filter(route => {
-    console.log(route);
-    
-    // if (user?.rol !== 'simpleUser' && route.name === "Users") return false;
-    // if (!user && route.path === '/profile') return false;
-    // if (route.isPrivate === true) return false;
+  const filteredRoutes = routes.filter(route => {    
     if (route.path === '/register') return false;
     if (route.path === '/proveedores' && !isAuthenticated) return false;
     if (route.path === '/users' && !isAuthenticated) return false;
