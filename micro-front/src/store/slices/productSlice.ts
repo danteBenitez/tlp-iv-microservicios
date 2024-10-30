@@ -46,13 +46,13 @@ const productsSlice = createSlice({
             state.products.push(action.payload);
         },
         updateProductSuccess(state, action: PayloadAction<IProduct>) {
-            const index = state.products.findIndex(product => product.id === action.payload.id);
+            const index = state.products.findIndex(product => product._id === action.payload._id);
             if (index !== -1) {
                 state.products[index] = action.payload;
             }
         },
         deleteProductSuccess(state, action: PayloadAction<string>) {
-            state.products = state.products.filter(product => product.id !== action.payload);
+            state.products = state.products.filter(product => product._id !== action.payload);
         },
     },
 });
