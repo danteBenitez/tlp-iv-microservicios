@@ -21,7 +21,7 @@ export class SalesController {
         }
 
         try {
-            const sale = await this.salesService.sell(data, user);
+            const sale = await this.salesService.sell(data.items, user, data.address);
 
             return res.status(200).json(sale);
 

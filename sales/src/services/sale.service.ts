@@ -1,3 +1,4 @@
+import { BrokerAdapter, messageBrokerAdapter } from "../adapter/broker.adapter";
 import { ISaleDetail } from "../interfaces/sale-detail.interface";
 import { ISale } from "../interfaces/sale.interface";
 import { IUser } from "../interfaces/user.interface";
@@ -15,9 +16,10 @@ type SaleDetailItem = Omit<ISaleDetail, "sellPrice" | "saleDetailId" | "saleId">
 export class SaleService {
 
     constructor(
+        private brokerAdapter: BrokerAdapter = messageBrokerAdapter,
         private saleRepository: ISaleRepository = saleRepository_,
         private productService: ProductService = productService_,
-        private userService: UsersService = usersService_
+        private userService: UsersService = usersService_,
     ) { }
 
     async findById(saleId: string) {
@@ -40,7 +42,7 @@ export class SaleService {
         return sales;
     }
 
-    async sell(items: SaleDetailItem[], user: IUser): Promise<{ sale: ISale, total: number }> {
+    async sell(items: SaleDetailItem[], user: IUser, address: string): Promise<{ sale: ISale, total: number }> {
         // NOTE: En casos más precisos sería necesario un Mutex aquí, para evitar que
         //       se den condiciones de carrera.
         const details = await Promise.all(items.map(async saleItem => {
@@ -81,6 +83,12 @@ export class SaleService {
         }, details);
 
         const total = details.reduce((acc, d) => acc + d.sellPrice * d.quantity, 0);
+
+        this.brokerAdapter.sendToQueue("sold-items", {
+            user,
+            sale,
+            address
+        });
 
         return { sale, total };
     }
