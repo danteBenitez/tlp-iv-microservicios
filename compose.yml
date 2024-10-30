@@ -101,6 +101,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./micro-front:/app
+      - /app/node_modules
 
   shipments:
     depends_on:
