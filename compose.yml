@@ -75,6 +75,12 @@ services:
       context: ./shopping_carts
       dockerfile: Dockerfile
 
+  rabbitmq:
+    container_name: microservice-rabbit-mq
+    image: rabbitmq:4.0.3
+    env_file:
+      - ./broker/config/.env.prod
+
   frontend:
     container_name: micro-front
     build:
