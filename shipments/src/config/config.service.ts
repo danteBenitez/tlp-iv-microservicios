@@ -22,6 +22,11 @@ type ApplicationConfig = {
         DIALECT: string;
         SHOULD_FORCE: boolean;
     },
+    MESSAGE_BROKER: {
+        URL: string,
+        USERNAME: string,
+        PASSWORD: string
+    },
     PORT: string,
     SALT_ROUNDS: number,
     SECRET: string
@@ -42,6 +47,11 @@ class ConfigService {
                 NAME: getEnvOrFail("DB_NAME"),
                 DIALECT: getEnvOrFail("DB_DIALECT"),
                 SHOULD_FORCE: process.env.NODE_ENV !== "production" && process.argv[2] == "force"
+            },
+            MESSAGE_BROKER: {
+                URL: getEnvOrFail("MESSAGE_BROKER_URL"),
+                USERNAME: getEnvOrFail("MESSAGE_BROKER_USERNAME"),
+                PASSWORD: getEnvOrFail("MESSAGE_BROKER_PASSWORD")
             },
             PORT: getEnvOrFail("PORT"),
             SALT_ROUNDS: parseInt(getEnvOrFail("SALT_ROUNDS")),
@@ -66,6 +76,10 @@ class ConfigService {
 
     getServerPort() {
         return parseInt(this.config["PORT"]);
+    }
+
+    getMessageBrokerOptions() {
+        return this.config.MESSAGE_BROKER;
     }
 }
 
