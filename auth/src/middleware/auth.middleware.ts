@@ -8,7 +8,9 @@ export class AuthMiddleware {
     ) { }
 
     async execute(req: Request, res: Response, next: NextFunction) {
+        console.log("Middleware de autenticación", req.headers);
         const token = this.parseTokenFromHeader(req.headers.authorization ?? "");
+        console.log('token', token);
         if (!token) {
             return res.status(401).json({
                 message: "Token inválido",
@@ -26,6 +28,7 @@ export class AuthMiddleware {
     }
 
     private parseTokenFromHeader(header: string) {
+        console.log('header', header);
         const matches = /Bearer (.+)/.exec(header);
         if (!matches) {
             return null;

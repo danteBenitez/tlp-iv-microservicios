@@ -146,9 +146,19 @@ export class PostgresRepository implements IUserRepository {
         return found;
     }
 
-    async update(userId: number, user: Partial<IUser>): Promise<IUser | null> {
-        const found = await this.userModel.findByPk(userId);
-        await found?.update(user);
+    async update(userId: number, user: Partial<IUser>): Promise<IUser | null> {        
+        const found = await this.userModel.findByPk(userId, {
+            include: [this.roleModel]
+        });
+        if (!found) return null;
+
+        if (user.roles) {
+            const roles = await this.roleModel.findAll({
+                where: { name: { [Op.or]: user.roles.map(role => role.name )}},
+            });
+            await found.$set('roles', roles);
+        }
+        await found.update(user);
         return this.findById(userId);
     }
 }
