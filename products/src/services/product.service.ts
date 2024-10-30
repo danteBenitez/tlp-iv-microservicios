@@ -1,12 +1,19 @@
-import { IProduct } from "../interfaces/product.interface";
+import { IProduct, IProductImage } from "../interfaces/product.interface";
 import { FindProductOptions, IProductRepository, productRepository } from "../repositories/product.repository";
+import { fileService, FilesService } from "./file.service";
 
 export class ProductNotFoundError extends Error { }
 export class ExistingProductError extends Error { }
+export class ImageNotFoundError extends Error { }
+
+export type ProductWithDeletedImages = Omit<IProduct, "images"> & {
+    images: { id: string, delete: boolean }[]
+}
 
 export class ProductService {
     constructor(
-        private productRepository: IProductRepository
+        private productRepository: IProductRepository,
+        private fileService: FilesService
     ) { }
 
     async findAll(options: FindProductOptions): Promise<IProduct[]> {
@@ -21,7 +28,15 @@ export class ProductService {
         return product;
     }
 
-    async create(product: Omit<IProduct, "id">): Promise<IProduct> {
+    async getImageForProduct(imageId: string) {
+        const productImage = await this.productRepository.findProductImage(imageId);
+        if (!productImage) {
+            throw new ImageNotFoundError("Imagen no encontrada");
+        }
+        return productImage;
+    }
+
+    async create(product: Omit<IProduct, "id" | "images">, files: Express.Multer.File[]): Promise<IProduct> {
         const existing = await this.productRepository.findAll({
             filter: {
                 name: product.name
@@ -32,7 +47,21 @@ export class ProductService {
             throw new ExistingProductError("Existe un producto con el mismo nombre");
         }
 
-        const created = await this.productRepository.create(product);
+        let images: Omit<IProductImage, "productId">[] = [];
+        if (files && files.length !== 0) {
+            for (const file of files) {
+                const { originalFilename } = await this.fileService.uploadFile(file);
+                images.push({
+                    path: originalFilename,
+                    type: file.mimetype,
+                });
+            }
+        }
+
+        const created = await this.productRepository.create({
+            ...product,
+            images
+        });
 
         if (!created) {
             throw new Error("No fue posible crear el producto");
@@ -41,8 +70,7 @@ export class ProductService {
         return created;
     }
 
-    async update(productId: string, product: Partial<IProduct>) {
-        // TODO: Chequear que existe el proveedor
+    async update(productId: string, product: Partial<ProductWithDeletedImages>, files: Express.Multer.File[]) {
         if (product.name) {
             const existing = await this.productRepository.findExcluding(product.name, productId);
 
@@ -51,11 +79,34 @@ export class ProductService {
             }
         }
 
-        const updated = await this.productRepository.update(productId, product);
+        const found = await this.productRepository.findById(productId);
 
-        if (!updated) {
+        if (!found) {
             throw new ProductNotFoundError("Producto no encontrado");
         }
+
+        const imagesToDelete = product.images?.filter(i => i.delete).map(i => i.id);
+        if (imagesToDelete && imagesToDelete.length !== 0) {
+            await this.productRepository.deleteImagesFor(productId, imagesToDelete);
+        }
+
+        let images: IProductImage[] = found?.images ?? [];
+
+        if (files && files.length !== 0) {
+            for (const file of files) {
+                const { filename } = await this.fileService.uploadFile(file);
+                images.push({
+                    path: filename,
+                    type: file.mimetype,
+                    productId: found.id
+                });
+            }
+        }
+
+        const updated = await this.productRepository.update(productId, {
+            ...product,
+            images
+        });
 
         return updated;
     }
@@ -69,4 +120,4 @@ export class ProductService {
     }
 }
 
-export const productService = new ProductService(productRepository);
+export const productService = new ProductService(productRepository, fileService);

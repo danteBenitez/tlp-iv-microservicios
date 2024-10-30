@@ -1,6 +1,6 @@
 import { Model, SortOrder } from "mongoose";
-import { IProduct } from "../interfaces/product.interface";
-import { ProductModel } from "../models/product.model";
+import { IProduct, IProductImage } from "../interfaces/product.interface";
+import { Image, ProductModel } from "../models/product.model";
 
 type PaginateQuery = { page: number, perPage: number };
 
@@ -17,24 +17,35 @@ export interface IProductRepository {
     /** Encuentra un producto por nombre, excluyendo un producto con productId */
     findExcluding(productName: string, productId: string): Promise<IProduct | null>
     findAll(options: FindProductOptions): Promise<IProduct[]>;
-    create(product: Omit<IProduct, "id">): Promise<IProduct | null>;
+    findProductImage(imageId: string): Promise<IProductImage | null>
+    create(product: ProductCreationAttributes): Promise<IProduct | null>;
     update(productId: string, product: Partial<IProduct>): Promise<IProduct | null>;
     delete(productId: string): Promise<IProduct | null>;
+    deleteImagesFor(productId: string, imagesIds: string[]): Promise<IProduct | null>
+}
+
+type ProductCreationAttributes = Omit<IProduct, "images" | "id"> & {
+    images: Omit<IProductImage, "productId">[]
 }
 
 export class MongoProductRepository implements IProductRepository {
 
     constructor(
-        private productModel: Model<IProduct> = ProductModel
+        private productModel: Model<IProduct> = ProductModel,
+        private imageModel: Model<IProductImage> = Image
     ) { }
 
     async findById(productId: string): Promise<IProduct | null> {
-        const created = await this.productModel.findById(productId);
+        const created = await this.productModel.findById(productId).populate('images');
         return created;
     }
 
+    findProductImage(imageId: string): Promise<IProductImage | null> {
+        return this.imageModel.findById(imageId);
+    }
+
     async findAll(options: FindProductOptions): Promise<IProduct[]> {
-        const query = this.productModel.find();
+        const query = this.productModel.find().populate('images');
 
         if (options.filter) {
             const withWildcard: Record<string, unknown> = {}
@@ -72,8 +83,14 @@ export class MongoProductRepository implements IProductRepository {
         return result;
     }
 
-    async create(product: Omit<IProduct, "id">): Promise<IProduct | null> {
-        const created = await this.productModel.create(product);
+    async create(product: ProductCreationAttributes): Promise<IProduct | null> {
+        const { images, ...rest } = product;
+        const created = await this.productModel.create(rest);
+        const resultImages = await this.imageModel.insertMany(images.map(i => ({
+            ...i,
+            productId: created._id
+        })));
+        await created.updateOne({ images: resultImages.map(i => i._id) });
         return created;
     }
 
@@ -95,6 +112,14 @@ export class MongoProductRepository implements IProductRepository {
         await found.deleteOne();
 
         return found;
+    }
+
+    async deleteImagesFor(productId: string, imageIds: string[]): Promise<IProduct | null> {
+        const updated = await this.imageModel.deleteMany({
+            _id: { $in: imageIds },
+            productId
+        });
+        return this.findById(productId);
     }
 }
 
