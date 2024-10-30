@@ -7,8 +7,20 @@ import Productos from '../productos/Productos';
 import Producto from '../productos/Producto';
 import Categoria from '../categoria/Categoria';
 import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
+import { IconType } from 'react-icons/lib';
+import ProveedoresIndex from '../proveedores/Index';
+import { ComponentType } from 'react';
 
-const routes = [
+export type TRoute = {
+  path: string;
+  name: string;
+  component: ComponentType;
+  layout: string;
+  isPrivate?: boolean;
+  icon: IconType;
+}
+
+const routes: TRoute[] = [
   {
     path: "/login",
     name: "Login",
@@ -71,6 +83,14 @@ const routes = [
     isPrivate: true,
     icon: FaUserCircle,
   },
+  {
+    path: "/proveedores",
+    name: "Proveedores",
+    component: ProveedoresIndex,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaUserCircle,
+  }
 ];
 
 export default routes;
