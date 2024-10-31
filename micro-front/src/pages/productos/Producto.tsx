@@ -9,15 +9,20 @@ import {
   Row,
 } from "react-bootstrap";
 import { FaPencilAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { fetchProductById } from "../../store/services/productService";
 import { IProduct } from "../../store/slices/productSlice";
+import { RootState } from "../../store/store";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
 
 const Producto: React.FC = () => {
   const { productoId } = useParams<{ productoId: string }>();
   const [producto, setProducto] = useState<IProduct>();
+  const isAdmin = useSelector((state: RootState) =>
+    state.auth?.user?.roles?.find((r) => r.name == "admin")
+  );
 
   useEffect(() => {
     const getProduct = async () => {
@@ -53,17 +58,19 @@ const Producto: React.FC = () => {
         <Col md={10}>
           <h1 className="fs-1 fw-bolder">Producto: {producto.name}</h1>
         </Col>
-        <Col md={1}>
-          <Link to={`/admin/productos/${productoId}/editar`}>
-            <Button
-              variant="primary"
-              className="d-flex justify-content-center align-items-center fs-5 gap-2"
-            >
-              <FaPencilAlt></FaPencilAlt>
-              Editar
-            </Button>
-          </Link>
-        </Col>
+        {isAdmin ? (
+          <Col md={1}>
+            <Link to={`/admin/productos/${productoId}/editar`}>
+              <Button
+                variant="primary"
+                className="d-flex justify-content-center align-items-center fs-5 gap-2"
+              >
+                <FaPencilAlt></FaPencilAlt>
+                Editar
+              </Button>
+            </Link>
+          </Col>
+        ) : null}
       </Row>
       <Row className="p-2">
         <Col md={8}>
