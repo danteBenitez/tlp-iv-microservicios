@@ -8,13 +8,13 @@ import {
   Container,
   Row,
 } from "react-bootstrap";
-import { FaPencilAlt } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { fetchProductById } from "../../store/services/productService";
-import { IProduct } from "../../store/slices/productSlice";
-import { RootState } from "../../store/store";
+import { IProduct, removeProduct } from "../../store/slices/productSlice";
+import { AppDispatch, RootState } from "../../store/store";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
 
 const Producto: React.FC = () => {
@@ -23,6 +23,8 @@ const Producto: React.FC = () => {
   const isAdmin = useSelector((state: RootState) =>
     state.auth?.user?.roles?.find((r) => r.name == "admin")
   );
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -55,11 +57,22 @@ const Producto: React.FC = () => {
         ></CardImg>
       )}
       <Row className="p-4">
-        <Col md={10}>
+        <Col md={9}>
           <h1 className="fs-1 fw-bolder">Producto: {producto.name}</h1>
         </Col>
         {isAdmin ? (
-          <Col md={1}>
+          <Col md={3} className="d-flex align-items-center gap-2">
+            <Button
+              variant="danger"
+              className="d-flex justify-content-center align-items-center fs-5 gap-2"
+              onClick={async () => {
+                dispatch(removeProduct(producto._id));
+                navigate("/admin/productos/");
+              }}
+            >
+              <FaTrash></FaTrash>
+              Eliminar
+            </Button>
             <Link to={`/admin/productos/${productoId}/editar`}>
               <Button
                 variant="primary"
