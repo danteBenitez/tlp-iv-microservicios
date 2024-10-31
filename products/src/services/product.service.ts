@@ -7,7 +7,7 @@ export class ExistingProductError extends Error { }
 export class ImageNotFoundError extends Error { }
 
 export type ProductWithDeletedImages = Omit<IProduct, "images"> & {
-    images: { id: string, delete: boolean }[]
+    images: string[]
 }
 
 export class ProductService {
@@ -85,23 +85,24 @@ export class ProductService {
             throw new ProductNotFoundError("Producto no encontrado");
         }
 
-        const imagesToDelete = product.images?.filter(i => i.delete).map(i => i.id);
-        if (imagesToDelete && imagesToDelete.length !== 0) {
-            await this.productRepository.deleteImagesFor(productId, imagesToDelete);
+        if (product.images && product.images.length !== 0) {
+            await this.productRepository.deleteImagesFor(productId, product.images ?? []);
         }
 
-        let images: IProductImage[] = found?.images ?? [];
+        let images: IProductImage[] = [];
 
         if (files && files.length !== 0) {
             for (const file of files) {
-                const { filename } = await this.fileService.uploadFile(file);
+                console.log({ file });
+                const { originalFilename } = await this.fileService.uploadFile(file);
                 images.push({
-                    path: filename,
+                    path: originalFilename,
                     type: file.mimetype,
                     productId: found.id
                 });
             }
         }
+        console.log({ images });
 
         const updated = await this.productRepository.update(productId, {
             ...product,
