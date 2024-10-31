@@ -8,7 +8,6 @@ import { getProfile } from '../../store/slices/authSlice';
 const Profile: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const userProfile = useSelector((state: RootState) => state.auth.user);
-    console.log('userProfile', userProfile);
     
     useEffect(() => {
         dispatch(getProfile());
