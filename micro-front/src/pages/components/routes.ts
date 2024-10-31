@@ -11,6 +11,7 @@ import ProveedoresIndex from '../proveedores/Proveedores';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
+import ProveedoresCreate from '../proveedores/ProveedoresCreate';
 
 export type TRoute = {
   path: string;
@@ -101,7 +102,16 @@ const routes: TRoute[] = [
     layout: "/admin",
     isPrivate: true,
     icon: FaUserCircle,
-  }
+  },
+  {
+    path: "/proveedores/crear",
+    name: "Proveedor",
+    showInSidebar: false,
+    component: ProveedoresCreate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
 ];
 
 export default routes;
