@@ -6,11 +6,13 @@ import { IUser } from './userSlice';
 
 export interface AuthState {
   isAuthenticated: boolean;
+  loadingAuthentication: boolean;
   user: IUser | null;
   token: string | null;
   error?: string | null;
 }
 const initialState: AuthState = {
+  loadingAuthentication: true,
   isAuthenticated: false,
   user: null,
   token: null,
@@ -23,6 +25,7 @@ const authSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<{ user: IUser; token: string }>) {
       state.isAuthenticated = true;
+      state.loadingAuthentication = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
       setAuthToken(state.token);
@@ -38,6 +41,7 @@ const authSlice = createSlice({
     },
     registerSuccess(state, action: PayloadAction<{ user: IUser; token: string }>) {
       state.isAuthenticated = true;
+      state.loadingAuthentication = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
       localStorage.setItem('user', JSON.stringify(action.payload.user));
