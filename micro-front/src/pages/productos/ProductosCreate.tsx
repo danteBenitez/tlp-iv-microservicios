@@ -90,6 +90,11 @@ export function ProductosCreate() {
       });
       if (data) {
         const formData = formDataFromObject(data);
+        if (files) {
+          for (const file of files) {
+            formData.set("productImage", file);
+          }
+        }
         dispatch(addProduct(formData));
       }
       if (!success && error?.formErrors) {
