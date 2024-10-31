@@ -41,7 +41,7 @@ export type TSupplierCreateData = {
 
 export const createSupplier = async (supplierData: TSupplierCreateData) => {
   try {
-    const response = await axiosInstance.post("/suppliers", supplierData);
+    const response = await axiosInstance.post("/suppliers/", supplierData);
     console.log("createSupplier", response.data);
 
     return response.data;

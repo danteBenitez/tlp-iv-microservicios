@@ -26,10 +26,15 @@ export default function ProveedoresCard({
               <Badge className="bg-success">${producto.price}</Badge>
             </Card.Text> */}
           </div>
-          <Card.Text>{supplier.address}</Card.Text>
-          <Card.Text>{supplier.cuit}</Card.Text>
+
           <Card.Text>
-            <span>Correo electrónico:</span>
+            <span>Dirección:</span> {supplier.address}
+          </Card.Text>
+          <Card.Text>
+            <span>Cuit:</span> {supplier.cuit}
+          </Card.Text>
+          <Card.Text>
+            <span>Correo electrónico: </span>
             <a target="_blank" href={`mailto:supplier.email`}>
               {supplier.email}
             </a>
