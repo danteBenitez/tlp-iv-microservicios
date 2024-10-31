@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "../store";
 import axiosInstance, { setAuthToken } from "../actionAxios";
+import { AppThunk } from "../store";
 import { showNotification } from "./notificationSlice";
 
 export interface IUser {
-    roles: any;
+    roles: {
+        name: string
+    }[];
     userId: string;
     username: string;
     password: string;

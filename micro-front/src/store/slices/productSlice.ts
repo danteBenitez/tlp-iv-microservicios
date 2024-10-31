@@ -81,31 +81,36 @@ export const fetchProduct = (productId: string): AppThunk => async dispatch => {
     try {
         const product = await fetchProductById(productId);
         dispatch(updateProductSuccess(product));
+        return true;
     } catch (error: any) {
         dispatch(fetchProductsFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));
     }
 };
 
-export const addProduct = (productData: FormData): AppThunk => async dispatch => {
+export const addProduct = (productData: FormData): AppThunk<Promise<boolean>> => async dispatch => {
     try {
         const product = await createProduct(productData);
         dispatch(createProductSuccess(product));
         dispatch(showNotification({ message: 'Product created successfully', type: 'success' }));
+        return true;
     } catch (error: any) {
         dispatch(fetchProductsFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));
+        return false;
     }
 };
 
-export const editProduct = (productId: string, productData: FormData): AppThunk => async dispatch => {
+export const editProduct = (productId: string, productData: FormData): AppThunk<Promise<boolean>> => async dispatch => {
     try {
         const product = await updateProduct(productId, productData);
         dispatch(updateProductSuccess(product));
         dispatch(showNotification({ message: 'Product updated successfully', type: 'success' }));
+        return true;
     } catch (error: any) {
         dispatch(fetchProductsFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));
+        return false;
     }
 };
 
@@ -114,6 +119,7 @@ export const removeProduct = (productId: string): AppThunk => async dispatch => 
         await deleteProduct(productId);
         dispatch(deleteProductSuccess(productId));
         dispatch(showNotification({ message: 'Product deleted successfully', type: 'success' }));
+        return true;
     } catch (error: any) {
         dispatch(fetchProductsFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));

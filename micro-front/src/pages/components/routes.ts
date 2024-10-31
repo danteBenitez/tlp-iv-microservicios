@@ -7,6 +7,7 @@ import Login from '../Login';
 import Producto from '../productos/Producto';
 import Productos from '../productos/Productos';
 import { ProductosCreate } from '../productos/ProductosCreate';
+import { ProductoUpdate } from '../productos/ProductoUpdate';
 import ProveedoresIndex from '../proveedores/Proveedores';
 import Register from '../Register';
 import Profile from '../users/profile';
@@ -59,6 +60,15 @@ const routes: TRoute[] = [
     name: "Productos",
     showInSidebar: false,
     component: ProductosCreate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
+  {
+    path: "/productos/:productoId/editar",
+    name: "Productos",
+    showInSidebar: false,
+    component: ProductoUpdate,
     layout: "/admin",
     isPrivate: true,
     icon: FaList,

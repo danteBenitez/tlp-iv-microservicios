@@ -11,11 +11,16 @@ export function ProductoCard({ producto }: { producto: IProduct }) {
         {producto.images.length > 0 ? (
           <Card.Img src={resolveImageUrl(producto.images[0]._id)}></Card.Img>
         ) : (
-          <Card.Img src={productImagePlaceholder} />
+          <Card.Img
+            src={productImagePlaceholder}
+            className="object-fit-cover"
+          />
         )}
         <Card.Body className="fs-5">
           <div className="d-flex align-items-center gap-2">
-            <Card.Title className="fw-bold fs-1">{producto.name}</Card.Title>
+            <Card.Title className="fw-bold fs-1">
+              {producto.name.slice(0, 10)}
+            </Card.Title>
             <Card.Text className="fs-3">
               <Badge className="bg-success">${producto.price}</Badge>
             </Card.Text>

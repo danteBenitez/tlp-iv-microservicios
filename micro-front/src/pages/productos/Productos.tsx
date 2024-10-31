@@ -12,6 +12,9 @@ const Productos: React.FC = () => {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
   );
+  const isAdmin = useSelector((state: RootState) =>
+    state.auth?.user?.roles?.find((r) => r.name == "admin")
+  );
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -31,17 +34,19 @@ const Productos: React.FC = () => {
         <Col md={9}>
           <h1>Todos los Productos</h1>
         </Col>
-        <Col md={3} className="d-flex justify-content-end">
-          <Link to="/admin/productos/crear">
-            <Button
-              variant="primary"
-              className="d-flex align-items-center justify-content-center gap-2 p-2 fs-5"
-            >
-              <FaPlus></FaPlus>
-              Agregar producto
-            </Button>
-          </Link>
-        </Col>
+        {isAdmin ? (
+          <Col md={3} className="d-flex justify-content-end">
+            <Link to="/admin/productos/crear">
+              <Button
+                variant="primary"
+                className="d-flex align-items-center justify-content-center gap-2 p-2 fs-5"
+              >
+                <FaPlus></FaPlus>
+                Agregar producto
+              </Button>
+            </Link>
+          </Col>
+        ) : null}
       </Row>
       {products.length == 0 ? <p>No hay productos registrados</p> : null}
       <Row>
