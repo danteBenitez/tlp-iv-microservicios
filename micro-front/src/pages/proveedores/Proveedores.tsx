@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchAllSuppliers } from "../../store/slices/supplierSlice";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import ProveedoresCard from "./ProveedoresCard";
 
-export default function ProveedoresIndex() {
+const ProveedoresIndex: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { suppliers, loading, error } = useSelector(
     (state: RootState) => state.suppliers
@@ -53,3 +53,5 @@ export default function ProveedoresIndex() {
     </Container>
   );
 }
+
+export default ProveedoresIndex
