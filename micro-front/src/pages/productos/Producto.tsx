@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import {
   Badge,
   Button,
+  ButtonGroup,
   Card,
   CardImg,
   Col,
   Container,
   Row,
 } from "react-bootstrap";
-import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import {
+  FaMoneyBill,
+  FaPencilAlt,
+  FaShoppingCart,
+  FaTrash,
+} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { fetchProductById } from "../../store/services/productService";
 import { IProduct, removeProduct } from "../../store/slices/productSlice";
+import { editShoppingCart } from "../../store/slices/shippingCartSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
 
@@ -24,6 +31,16 @@ const Producto: React.FC = () => {
     state.auth?.user?.roles?.find((r) => r.name == "admin")
   );
   const dispatch: AppDispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.shoppingCart.cart);
+  console.log(cart);
+  const inCart = cart.find((c) => c.productId == productoId);
+  const isLoading = useSelector(
+    (state: RootState) => state.shoppingCart.loading
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  const [quantity, setQuantity] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,9 +54,9 @@ const Producto: React.FC = () => {
       }
     };
     getProduct();
-  });
+  }, [productoId]);
 
-  if (!producto) {
+  if (!productoId || !producto) {
     return <div>Loading...</div>;
   }
 
@@ -99,9 +116,60 @@ const Producto: React.FC = () => {
                   <Badge>{t}</Badge>
                 ))}
               </Card.Text>
-              <Button variant="primary" size="lg">
-                Comprar
-              </Button>
+              <div className="w-full d-flex gap-3">
+                <Button
+                  variant="success"
+                  size="lg"
+                  className="d-flex align-items-center gap-2"
+                >
+                  <FaMoneyBill />
+                  Comprar
+                </Button>
+                {isAuthenticated && (
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="d-flex align-items-center gap-2"
+                    disabled={!inCart || quantity > 0}
+                    onClick={() => {
+                      if (inCart) {
+                        dispatch(
+                          editShoppingCart([
+                            { productId: productoId, quantity, delete: true },
+                          ])
+                        );
+                      } else {
+                        dispatch(
+                          editShoppingCart([
+                            { productId: productoId, quantity },
+                          ])
+                        );
+                      }
+                    }}
+                  >
+                    <FaShoppingCart />
+                    {!isLoading && (inCart ? "Agregado" : "Agregar al carrito")}
+                    {isLoading && <p>Cargando...</p>}
+                  </Button>
+                )}
+                <ButtonGroup>
+                  <Button
+                    variant="bg-white text-black"
+                    onClick={() => setQuantity(quantity + 1)}
+                  >
+                    +
+                  </Button>
+                  <Button variant="bg-white text-black" disabled={true}>
+                    {quantity}
+                  </Button>
+                  <Button
+                    variant="bg-white text-black"
+                    onClick={() => setQuantity(quantity - 1)}
+                  >
+                    -
+                  </Button>
+                </ButtonGroup>
+              </div>
             </Card.Body>
           </Card>
         </Col>

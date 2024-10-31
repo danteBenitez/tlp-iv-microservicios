@@ -1,9 +1,10 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
-import usersReducer from './slices/userSlice';
 import productsReducer from './slices/productSlice';
+import shoppingCartReducer from "./slices/shippingCartSlice";
 import suppliersReducer from './slices/supplierSlice';
+import usersReducer from './slices/userSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     notifications: notificationReducer,
     products: productsReducer,
     suppliers: suppliersReducer,
+    shoppingCart: shoppingCartReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

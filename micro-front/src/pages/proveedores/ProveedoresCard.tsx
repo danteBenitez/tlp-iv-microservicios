@@ -12,6 +12,8 @@ export default function ProveedoresCard({
   onEdit,
   supplier,
 }: TProveedoresCard) {
+  void onDelete;
+  void onEdit;
   return (
     <Col md={4} key={supplier.supplierId}>
       <Card className="mb-4">
@@ -28,12 +30,19 @@ export default function ProveedoresCard({
           <Card.Text>{supplier.cuit}</Card.Text>
           <Card.Text>
             <span>Correo electrónico:</span>
-            <a target="_blank" href={`mailto:supplier.email`}>{supplier.email}</a>
+            <a target="_blank" href={`mailto:supplier.email`}>
+              {supplier.email}
+            </a>
           </Card.Text>
           <Card.Text>
             <span>Teléfono:</span>
-            <a target="_blank" href={`https://api.whatsapp.com/send?phone=${supplier.phoneNumber}`}>{supplier.phoneNumber}</a>
-          </Card.Text>         
+            <a
+              target="_blank"
+              href={`https://api.whatsapp.com/send?phone=${supplier.phoneNumber}`}
+            >
+              {supplier.phoneNumber}
+            </a>
+          </Card.Text>
         </Card.Body>
       </Card>
     </Col>
