@@ -7,10 +7,12 @@ import Login from '../Login';
 import Producto from '../productos/Producto';
 import Productos from '../productos/Productos';
 import { ProductosCreate } from '../productos/ProductosCreate';
+import { ProductoUpdate } from '../productos/ProductoUpdate';
 import ProveedoresIndex from '../proveedores/Proveedores';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
+import ProveedoresCreate from '../proveedores/ProveedoresCreate';
 
 export type TRoute = {
   path: string;
@@ -63,6 +65,15 @@ const routes: TRoute[] = [
     icon: FaList,
   },
   {
+    path: "/productos/:productoId/editar",
+    name: "Productos",
+    showInSidebar: false,
+    component: ProductoUpdate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
+  {
     path: "/categoria/:categoriaId",
     name: "Categoria",
     component: Categoria,
@@ -99,9 +110,18 @@ const routes: TRoute[] = [
     name: "Proveedores",
     component: ProveedoresIndex,
     layout: "/admin",
-    isPrivate: false,
+    isPrivate: true,
     icon: FaUserCircle,
-  }
+  },
+  {
+    path: "/proveedores/crear",
+    name: "Proveedor",
+    showInSidebar: false,
+    component: ProveedoresCreate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
 ];
 
 export default routes;

@@ -96,11 +96,19 @@ export class MongoProductRepository implements IProductRepository {
 
     async update(productId: string, product: Partial<IProduct>): Promise<IProduct | null> {
         const found = await this.productModel.findById(productId);
+        let { images, ...rest } = product;
         if (!found) return null;
         const updated = await this.productModel.findOneAndUpdate({
-            _id: found.id,
-        }, product, { new: true });
-        return updated;
+            _id: found._id,
+        }, rest, { new: true });
+        if (product.images) {
+            const withIds = await this.imageModel.insertMany(product.images.map(i => ({
+                ...i,
+                productId: productId
+            })));
+            await updated?.updateOne({ images: [...found.images, ...withIds.map(i => i._id)] })
+        }
+        return this.findById(productId);
     }
 
     async delete(productId: string): Promise<IProduct | null> {
