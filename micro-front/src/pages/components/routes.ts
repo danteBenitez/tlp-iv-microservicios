@@ -99,7 +99,7 @@ const routes: TRoute[] = [
     name: "Proveedores",
     component: ProveedoresIndex,
     layout: "/admin",
-    isPrivate: false,
+    isPrivate: true,
     icon: FaUserCircle,
   }
 ];
