@@ -5,16 +5,20 @@ import { fetchUsers, IUser } from '../../store/slices/userSlice';
 import axiosInstance from '../../store/actionAxios';
 import { showNotification } from '../../store/slices/notificationSlice';
 import { Button, Col, Container, Form } from 'react-bootstrap';
+import { getProfile } from '../../store/slices/authSlice';
 
 const Users = () => {
     const dispatch: AppDispatch = useDispatch();
     const { users, loading, error } = useSelector((state: RootState) => state.users);
     const currentUser = useSelector((state: RootState) => state.auth.user);
+    console.log('currentUser', currentUser);
     const currentUserAutorizete = currentUser?.roles && currentUser?.roles.some((role: { name: string }) => role.name === 'admin');
+    console.log('currentUserAutorizete', currentUserAutorizete);
     const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
+        dispatch(getProfile());
         dispatch(fetchUsers());
     }, [dispatch]);
 

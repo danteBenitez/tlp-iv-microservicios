@@ -8,7 +8,7 @@ export function ProductoCard({ producto }: { producto: IProduct }) {
   return (
     <Col md={4} key={producto._id}>
       <Card className="mb-4">
-        {producto.images.length > 0 ? (
+        {producto.images?.length > 0 ? (
           <Card.Img src={resolveImageUrl(producto.images[0]._id)}></Card.Img>
         ) : (
           <Card.Img src={productImagePlaceholder} />
