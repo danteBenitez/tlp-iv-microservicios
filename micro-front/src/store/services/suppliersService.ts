@@ -5,7 +5,7 @@ export const getSuppliers = async () => {
     const response = await axiosInstance.get("/suppliers");
     console.log("getSuppliers", response.data);
 
-    return response.data;
+    return response.data.suppliers;
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
