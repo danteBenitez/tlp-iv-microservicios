@@ -6,6 +6,7 @@ import Home from '../Home';
 import Login from '../Login';
 import Producto from '../productos/Producto';
 import Productos from '../productos/Productos';
+import { ProductosCreate } from '../productos/ProductosCreate';
 import ProveedoresIndex from '../proveedores/Index';
 import Register from '../Register';
 import Profile from '../users/profile';
@@ -16,6 +17,7 @@ export type TRoute = {
   name: string;
   component: ComponentType;
   layout: string;
+  showInSidebar?: boolean;
   isPrivate?: boolean;
   icon: IconType;
 }
@@ -49,6 +51,15 @@ const routes: TRoute[] = [
     component: Productos,
     layout: "/admin",
     isPrivate: false,
+    icon: FaList,
+  },
+  {
+    path: "/productos/crear",
+    name: "Productos",
+    showInSidebar: false,
+    component: ProductosCreate,
+    layout: "/admin",
+    isPrivate: true,
     icon: FaList,
   },
   {
