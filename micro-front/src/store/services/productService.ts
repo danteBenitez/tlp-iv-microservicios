@@ -35,6 +35,11 @@ export const createProduct = async (productData: FormData) => {
         });
         return response.data;
     } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.data) {
+                throw error.response.data
+            }
+        }
         console.error('Error creating product:', error);
         throw error;
     }
@@ -49,6 +54,11 @@ export const updateProduct = async (productId: string, productData: FormData) =>
         });
         return response.data;
     } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.data) {
+                throw error.response.data
+            }
+        }
         console.error('Error updating product:', error);
         throw error;
     }

@@ -131,11 +131,11 @@ export function ProductoForm({
           }
         }
         if (productId) {
-          dispatch(editProduct(productId, formData));
-          navigate(`/admin/productos/${productId}`);
+          if (await dispatch(editProduct(productId, formData)))
+            navigate(`/admin/productos/${productId}`);
         } else {
-          dispatch(addProduct(formData));
-          navigate(`/admin/productos/`);
+          if (await dispatch(addProduct(formData)))
+            navigate(`/admin/productos/`);
         }
       }
       if (!success && error?.formErrors) {
