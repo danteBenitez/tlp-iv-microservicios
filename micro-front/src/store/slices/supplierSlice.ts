@@ -112,10 +112,11 @@ export const fetchSupplier =
   };
 
 export const addSupplier =
-  (supplierData: ISupplier): AppThunk =>
+  (supplierData: Omit<ISupplier, 'supplierId'>): AppThunk<Promise<boolean>> =>
   async (dispatch) => {
-    try {
+    try {      
       const supplier = await createSupplier(supplierData);
+      
       dispatch(createSupplierSuccess(supplier));
       dispatch(
         showNotification({
@@ -123,6 +124,7 @@ export const addSupplier =
           type: "success",
         })
       );
+      return true;
     } catch (error) {
       if (error instanceof Error) {
         dispatch(fetchSuppliersFailure(error.message));
@@ -133,6 +135,7 @@ export const addSupplier =
           showNotification({ message: "An error occurred", type: "error" })
         );
       }
+      return false;
     }
   };
 
