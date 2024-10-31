@@ -30,7 +30,7 @@ const Producto: React.FC = () => {
       }
     };
     getProduct();
-  }, [productoId]);
+  });
 
   if (!producto) {
     return <div>Loading...</div>;
