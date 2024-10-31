@@ -11,7 +11,10 @@ export function ProductoCard({ producto }: { producto: IProduct }) {
         {producto.images.length > 0 ? (
           <Card.Img src={resolveImageUrl(producto.images[0]._id)}></Card.Img>
         ) : (
-          <Card.Img src={productImagePlaceholder} />
+          <Card.Img
+            src={productImagePlaceholder}
+            className="object-fit-cover"
+          />
         )}
         <Card.Body className="fs-5">
           <div className="d-flex align-items-center gap-2">
