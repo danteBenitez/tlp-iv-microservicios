@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from './userSlice';
+import axios from 'axios';
 import { Dispatch } from 'redux';
 import axiosInstance, { setAuthToken } from '../actionAxios';
-import axios from 'axios';
+import { IUser } from './userSlice';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -21,10 +21,11 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<{ user: IUser; token: string}>) {
+    login(state, action: PayloadAction<{ user: IUser; token: string }>) {
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      setAuthToken(state.token);
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       localStorage.setItem('token', action.payload.token);
     },
