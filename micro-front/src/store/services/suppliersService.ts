@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import axiosInstance from "../actionAxios";
 
 export const getSuppliers = async () => {
@@ -5,10 +6,15 @@ export const getSuppliers = async () => {
     const response = await axiosInstance.get("/suppliers");
     console.log("getSuppliers", response.data);
 
-    return response.data;
+    return response.data.suppliers;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw error;
+    if (error instanceof AxiosError) {
+      if (error.response?.status == 404) {
+          return [];
+      }
+  }
+  console.error('Error fetching products:', error);
+  throw error;
   }
 };
 
@@ -19,7 +25,7 @@ export const getSupplierById = async (supplierId: string) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error fetching product by ID:", error);
+    console.error("Error fetching supplier by ID:", error);
     throw error;
   }
 };
@@ -40,7 +46,7 @@ export const createSupplier = async (supplierData: TSupplierCreateData) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error creating product:", error);
+    console.error("Error creating supplier:", error);
     throw error;
   }
 };
@@ -60,7 +66,7 @@ export const updateSupplier = async (
 
     return response.data;
   } catch (error) {
-    console.error("Error updating product:", error);
+    console.error("Error updating supplier:", error);
     throw error;
   }
 };
@@ -71,7 +77,7 @@ export const deleteSupplier = async (supplierId: string) => {
         console.log("deleteSupplier", response.data);
         return response.data;
     }catch(error){
-        console.error("Error deleting product:", error);
+        console.error("Error deleting supplier:", error);
         throw error;
     }
 }

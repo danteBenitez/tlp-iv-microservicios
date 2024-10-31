@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
 import usersReducer from './slices/userSlice';
 import productsReducer from './slices/productSlice';
+import suppliersReducer from './slices/supplierSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     users: usersReducer,
     notifications: notificationReducer,
     products: productsReducer,
+    suppliers: suppliersReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,
