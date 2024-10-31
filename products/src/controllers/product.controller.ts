@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { FindProductOptions } from "../repositories/product.repository";
-import { ExistingProductError, ProductNotFoundError, ProductService } from "../services/product.service";
+import { FileNotFoundError, fileService as fileService_, FilesService } from "../services/file.service";
+import { ExistingProductError, ImageNotFoundError, ProductNotFoundError, ProductService } from "../services/product.service";
 import { validateRequest, validateRequestBody } from "../utils/validate-schema";
-import { createProductSchema, findProductSchema, productIdSchema, updateProductSchema } from "../validations/product.schema";
+import { createProductSchema, findProductSchema, imageIdSchema, productIdSchema, updateProductSchema } from "../validations/product.schema";
 
 export class ProductController {
 
     constructor(
-        private productService: ProductService
+        private productService: ProductService,
+        private fileService: FilesService = fileService_
     ) { }
 
     async findAll(req: Request, res: Response) {
@@ -26,9 +28,11 @@ export class ProductController {
             options["perPage"] = data.query.perPage;
         }
 
+        // Convertir "tag" a ["tag"] para normalizar lo recibido por el servicio
+        let tags = typeof data.query?.tags == "string" ? [data.query.tags] : data?.query?.tags;
         const found = await this.productService.findAll({
             ...options,
-            filter: data?.query,
+            filter: { ...data.query, tags }
         });
 
         res.status(200).json(found);
@@ -50,10 +54,27 @@ export class ProductController {
         }
     }
 
+    async getImageForProduct(req: Request, res: Response) {
+        const { data } = await validateRequest(req, imageIdSchema);
+        try {
+            const found = await this.productService.getImageForProduct(data.params.imageId);
+            res.header("Content-Type", found?.type);
+            return res.status(200).send(await this.fileService.readFile(found?.path));
+        } catch (err) {
+            if (err instanceof ImageNotFoundError || err instanceof FileNotFoundError) {
+                return res.status(404).json({
+                    message: err.message
+                });
+            }
+            throw err;
+        }
+    }
+
     async create(req: Request, res: Response) {
         const { data } = await validateRequestBody(req, createProductSchema);
         try {
-            const created = await this.productService.create(data);
+            console.log("Creating products...", req.files);
+            const created = await this.productService.create(data, req.files as Express.Multer.File[]);
             return res.status(201).json(created);
         } catch (err) {
             if (err instanceof ExistingProductError) {
@@ -61,13 +82,14 @@ export class ProductController {
                     message: err.message
                 });
             }
+            throw err;
         }
     }
 
     async update(req: Request, res: Response) {
         const { data } = await validateRequest(req, updateProductSchema);
         try {
-            const created = await this.productService.update(data.params.productId, data.body);
+            const created = await this.productService.update(data.params.productId, data.body, req.files as Express.Multer.File[]);
             return res.status(201).json(created);
 
         } catch (err) {
@@ -81,6 +103,7 @@ export class ProductController {
                     message: err.message
                 });
             }
+            throw err;
         }
     }
 

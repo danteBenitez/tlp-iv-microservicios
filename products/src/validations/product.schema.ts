@@ -3,12 +3,11 @@ import { z } from "zod";
 
 const queryProductSchema = z.object({
     name: z.string(),
-    price: z.number(),
+    price: z.number({ coerce: true }),
     brand: z.string(),
-    tags: z.string().array(),
+    tags: z.string().array().or(z.string()),
     description: z.string(),
-    stock: z.number(),
-    providerId: z.number()
+    stock: z.number({ coerce: true }),
 })
 
 const orderProductSchema = z.object({
@@ -36,30 +35,51 @@ export const productIdSchema = z.object({
     })
 })
 
+export const imageIdSchema = z.object({
+    params: z.object({
+        imageId: z.string().refine((data: string) => {
+            return isObjectIdOrHexString(data);
+        }, {
+            path: ["params"],
+            message: "ID de imagen inválido"
+        })
+    })
+})
+
 export const createProductSchema = z.object({
     name: z.string({
         message: "Un producto debe tener un nombre"
     }),
     price: z.number({
-        message: "Un producto debe tener un precio"
+        message: "Un producto debe tener un precio",
+        coerce: true
     }),
     brand: z.string({
         message: "Un producto debe tener una marca"
     }),
     tags: z.string({
         message: "Las etiquetas de un producto deben ser strings"
-    }).array(),
+    }).array().or(z.string()).transform(data => {
+        if (typeof data == "string") {
+            return [data];
+        }
+        return data;
+    }),
     description: z.string({
         message: "Un producto debe tener una descripción"
     }),
+    images: z.object({
+        id: z.string().refine(data => isObjectIdOrHexString(data), {
+            message: "ID de imagen inválido"
+        }),
+        delete: z.boolean()
+    }).array().optional(),
     stock: z.number({
-        message: "Un producto debe tener un stock"
+        message: "Un producto debe tener un stock",
+        coerce: true
     }).min(0, {
         message: "El stock no puede ser menor a 0"
     }),
-    providerId: z.number({
-        message: "Valor de ID de proveedor inválido"
-    })
 });
 
 export const updateProductSchema = z.object({

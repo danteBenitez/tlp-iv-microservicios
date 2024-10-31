@@ -8,14 +8,10 @@ import { showNotification } from "../store/slices/notificationSlice";
 
 export default function Register() {
     const [formData, setFormData] = useState({
-        name: '',
-        username: '',
-        password: '',
-        email: '',
-        dni: '',
-        phone: '',
-        address: '',
-        city: ''
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
     });
 
     const dispatch: AppDispatch = useDispatch();
@@ -48,79 +44,23 @@ export default function Register() {
             className="d-flex align-items-center justify-content-center min-vh-100"
             style={{ background: 'linear-gradient(to right, #6a11cb, #2575fc)' }}
         >
-            <Row className="w-100 justify-content-center">
+            <Row className="w-100 justify-content-center my-5">
+            <h1 className="text-center mb-4">Register New User</h1>
+            <p className="text-center mb-4">Please fill out the form below to register a new user</p>
                 <Col xs={12} md={8} lg={6}>
-                    <h1 className="mb-4">Register</h1>
                     <Form onSubmit={handleRegister} className="border border-success rounded p-5 bg-white opacity-75">
-                        <Row>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicName"
-                                >
-                                    <Form.Label>Name and Lastname</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter name"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicDni"
-                                >
-                                    <Form.Label>DNI</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter DNI"
-                                        name="dni"
-                                        value={formData.dni}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicUsername"
-                                >
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter username"
-                                        name="username"
-                                        value={formData.username}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicPassword"
-                                >
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="Enter password"
-                                        name="password"
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="formBasicEmail"
-                        >
-                            <Form.Label>Email address</Form.Label>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter username"
+                                name="username"
+                                value={formData.username}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Enter email"
@@ -132,42 +72,27 @@ export default function Register() {
                                 We'll never share your email with anyone else.
                             </Form.Text>
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Address</Form.Label>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Enter address"
-                                name="address"
-                                value={formData.address}
+                                type="password"
+                                placeholder="Enter password"
+                                name="password"
+                                value={formData.password}
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                        <Row>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group>
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter city"
-                                        name="city"
-                                        value={formData.city}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} md={6} lg={6}>
-                                <Form.Group>
-                                    <Form.Label>Phone</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter phone"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Confirm password"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+
                         <Row>
                             <Col className="col">
                                 <Form.Group className="mt-3" controlId="formBasicCheckbox">

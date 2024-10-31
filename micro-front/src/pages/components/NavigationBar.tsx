@@ -66,7 +66,6 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                 <span className="d-lg-block ms-1">Dashboard</span>
                             </Nav.Link>
                         </Nav.Item>
-                        {user && user.rol === 'superAdmin' &&
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle
                                     as={Nav.Link}
@@ -111,7 +110,7 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                         Another notification
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown>}
+                            </Dropdown>
                         <Nav.Item>
                             <Nav.Link
                                 href="/"
@@ -122,8 +121,6 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                 <span className="d-lg-block ms-1">Search</span>
                             </Nav.Link>
                         </Nav.Item>
-                        {/* </Nav>
-                    <Nav className="ml-auto" navbar> */}
                         <Nav.Item>
                             <Nav.Link
                                 as={Link}
@@ -188,7 +185,7 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                     <Nav.Item
                                         className="align-items-center"
                                     >
-                                        <span>Bienvenido {user.name} {user.lastName}</span>
+                                        <span>Bienvenido {user.username}</span>
                                     </Nav.Item>
                                 </Nav>
                                 <Nav className='ms-auto'>
@@ -196,7 +193,7 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                                         <Nav.Link
                                             as={Link}
                                             className="m-0 d-flex align-items-center"
-                                            to="/admin"
+                                            to="/"
                                             onClick={handleLogout}
                                         >
                                             <FaSignOutAlt className='me-2' />

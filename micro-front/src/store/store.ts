@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
 import usersReducer from './slices/userSlice';
+import productsReducer from './slices/productSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     users: usersReducer,
     notifications: notificationReducer,
+    products: productsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

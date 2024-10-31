@@ -3,6 +3,8 @@ import express, { NextFunction, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import supplierRouter from "./routes/suppliers.routes";
+
 type Callback = () => Promise<void>;
 
 export class Server {
@@ -30,6 +32,8 @@ export class Server {
     }
 
     protected routes() {
+        this.app.get('/health-check', (_, res) => res.status(200).send("[SUPPLIERS] Servidor funcionando correctamente"));
+        this.app.use(supplierRouter)
     }
 
     protected addParsers() {
