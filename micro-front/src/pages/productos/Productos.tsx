@@ -46,32 +46,7 @@ const Productos: React.FC = () => {
       {products.length == 0 ? <p>No hay productos registrados</p> : null}
       <Row>
         {products.map((producto) => (
-<<<<<<< HEAD
-          <Col md={4} key={producto._id}>
-            <Card className="mb-4">
-              {producto.images && producto.images.length > 0 ? (
-                <Card.Img
-                  src={resolveImageUrl(producto.images[0]._id)}
-                ></Card.Img>
-              ) : null}
-              <Card.Body>
-                <Card.Title>{producto.name}</Card.Title>
-                <Card.Text>{producto.description}</Card.Text>
-                <Card.Text>${producto.price}</Card.Text>
-                <Card.Text>{producto.brand}</Card.Text>
-                <Card.Text>Tags: {producto.tags.join(", ")}</Card.Text>
-                <Card.Text>Imagenes: {producto.images.length}</Card.Text>
-                <Card.Text>Stock: {producto.stock}</Card.Text>
-                <Card.Text>Id: {producto._id}</Card.Text>
-                <NavLink as={Link} to={`${producto._id}`}>
-                  <Button variant="primary">Ver Producto</Button>
-                </NavLink>
-              </Card.Body>
-            </Card>
-          </Col>
-=======
           <ProductoCard producto={producto} />
->>>>>>> b684e74156e8d37c808dd9a83dbfdde6c8f0feb2
         ))}
       </Row>
     </Container>
