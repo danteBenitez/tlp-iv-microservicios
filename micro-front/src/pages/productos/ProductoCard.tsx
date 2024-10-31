@@ -18,7 +18,9 @@ export function ProductoCard({ producto }: { producto: IProduct }) {
         )}
         <Card.Body className="fs-5">
           <div className="d-flex align-items-center gap-2">
-            <Card.Title className="fw-bold fs-1">{producto.name}</Card.Title>
+            <Card.Title className="fw-bold fs-1">
+              {producto.name.slice(0, 10)}
+            </Card.Title>
             <Card.Text className="fs-3">
               <Badge className="bg-success">${producto.price}</Badge>
             </Card.Text>
