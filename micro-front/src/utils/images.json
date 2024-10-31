@@ -1,0 +1,572 @@
+[
+    {
+      "_id": "image1-product1",
+      "path": "images/product1-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product1"
+    },
+    {
+      "_id": "image2-product1",
+      "path": "images/product1-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product1"
+    },
+    {
+      "_id": "image1-product2",
+      "path": "images/product2-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product2"
+    },
+    {
+      "_id": "image2-product2",
+      "path": "images/product2-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product2"
+    },
+    {
+      "_id": "image1-product3",
+      "path": "images/product3-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product3"
+    },
+    {
+      "_id": "image2-product3",
+      "path": "images/product3-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product3"
+    },
+    {
+      "_id": "image1-product4",
+      "path": "images/product4-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product4"
+    },
+    {
+      "_id": "image2-product4",
+      "path": "images/product4-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product4"
+    },
+    {
+      "_id": "image1-product5",
+      "path": "images/product5-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product5"
+    },
+    {
+      "_id": "image2-product5",
+      "path": "images/product5-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product5"
+    },
+    {
+      "_id": "image1-product6",
+      "path": "images/product6-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product6"
+    },
+    {
+      "_id": "image2-product6",
+      "path": "images/product6-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product6"
+    },
+    {
+      "_id": "image1-product7",
+      "path": "images/product7-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product7"
+    },
+    {
+      "_id": "image2-product7",
+      "path": "images/product7-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product7"
+    },
+    {
+      "_id": "image1-product8",
+      "path": "images/product8-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product8"
+    },
+    {
+      "_id": "image2-product8",
+      "path": "images/product8-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product8"
+    },
+    {
+      "_id": "image1-product9",
+      "path": "images/product9-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product9"
+    },
+    {
+      "_id": "image2-product9",
+      "path": "images/product9-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product9"
+    },
+    {
+      "_id": "image1-product10",
+      "path": "images/product10-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product10"
+    },
+    {
+      "_id": "image2-product10",
+      "path": "images/product10-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product10"
+    },
+    {
+      "_id": "image1-product11",
+      "path": "images/product11-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product11"
+    },
+    {
+      "_id": "image2-product11",
+      "path": "images/product11-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product11"
+    },
+    {
+      "_id": "image1-product12",
+      "path": "images/product12-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product12"
+    },
+    {
+      "_id": "image2-product12",
+      "path": "images/product12-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product12"
+    },
+    {
+      "_id": "image1-product13",
+      "path": "images/product13-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product13"
+    },
+    {
+      "_id": "image2-product13",
+      "path": "images/product13-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product13"
+    },
+    {
+      "_id": "image1-product14",
+      "path": "images/product14-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product14"
+    },
+    {
+      "_id": "image2-product14",
+      "path": "images/product14-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product14"
+    },
+    {
+      "_id": "image1-product15",
+      "path": "images/product15-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product15"
+    },
+    {
+      "_id": "image2-product15",
+      "path": "images/product15-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product15"
+    },
+    {
+      "_id": "image1-product16",
+      "path": "images/product16-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product16"
+    },
+    {
+      "_id": "image2-product16",
+      "path": "images/product16-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product16"
+    },
+    {
+      "_id": "image1-product17",
+      "path": "images/product17-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product17"
+    },
+    {
+      "_id": "image2-product17",
+      "path": "images/product17-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product17"
+    },
+    {
+      "_id": "image1-product18",
+      "path": "images/product18-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product18"
+    },
+    {
+      "_id": "image2-product18",
+      "path": "images/product18-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product18"
+    },
+    {
+      "_id": "image1-product19",
+      "path": "images/product19-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product19"
+    },
+    {
+      "_id": "image2-product19",
+      "path": "images/product19-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product19"
+    },
+    {
+      "_id": "image1-product20",
+      "path": "images/product20-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product20"
+    },
+    {
+      "_id": "image2-product20",
+      "path": "images/product20-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product20"
+    },
+    {
+      "_id": "image1-product21",
+      "path": "images/product21-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product21"
+    },
+    {
+      "_id": "image2-product21",
+      "path": "images/product21-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product21"
+    },
+    {
+      "_id": "image1-product22",
+      "path": "images/product22-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product22"
+    },
+    {
+      "_id": "image2-product22",
+      "path": "images/product22-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product22"
+    },
+    {
+      "_id": "image1-product23",
+      "path": "images/product23-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product23"
+    },
+    {
+      "_id": "image2-product23",
+      "path": "images/product23-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product23"
+    },
+    {
+      "_id": "image1-product24",
+      "path": "images/product24-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product24"
+    },
+    {
+      "_id": "image2-product24",
+      "path": "images/product24-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product24"
+    },
+    {
+      "_id": "image1-product25",
+      "path": "images/product25-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product25"
+    },
+    {
+      "_id": "image2-product25",
+      "path": "images/product25-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product25"
+    },
+    {
+      "_id": "image1-product26",
+      "path": "images/product26-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product26"
+    },
+    {
+      "_id": "image2-product26",
+      "path": "images/product26-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product26"
+    },
+    {
+      "_id": "image1-product27",
+      "path": "images/product27-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product27"
+    },
+    {
+      "_id": "image2-product27",
+      "path": "images/product27-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product27"
+    },
+    {
+      "_id": "image1-product28",
+      "path": "images/product28-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product28"
+    },
+    {
+      "_id": "image2-product28",
+      "path": "images/product28-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product28"
+    },
+    {
+      "_id": "image1-product29",
+      "path": "images/product29-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product29"
+    },
+    {
+      "_id": "image2-product29",
+      "path": "images/product29-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product29"
+    },
+    {
+      "_id": "image1-product30",
+      "path": "images/product30-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product30"
+    },
+    {
+      "_id": "image2-product30",
+      "path": "images/product30-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product30"
+    },
+    {
+      "_id": "image1-product31",
+      "path": "images/product31-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product31"
+    },
+    {
+      "_id": "image2-product31",
+      "path": "images/product31-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product31"
+    },
+    {
+      "_id": "image1-product32",
+      "path": "images/product32-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product32"
+    },
+    {
+      "_id": "image2-product32",
+      "path": "images/product32-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product32"
+    },
+    {
+      "_id": "image1-product33",
+      "path": "images/product33-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product33"
+    },
+    {
+      "_id": "image2-product33",
+      "path": "images/product33-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product33"
+    },
+    {
+      "_id": "image1-product34",
+      "path": "images/product34-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product34"
+    },
+    {
+      "_id": "image2-product34",
+      "path": "images/product34-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product34"
+    },
+    {
+      "_id": "image1-product35",
+      "path": "images/product35-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product35"
+    },
+    {
+      "_id": "image2-product35",
+      "path": "images/product35-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product35"
+    },
+    {
+      "_id": "image1-product36",
+      "path": "images/product36-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product36"
+    },
+    {
+      "_id": "image2-product36",
+      "path": "images/product36-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product36"
+    },
+    {
+      "_id": "image1-product37",
+      "path": "images/product37-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product37"
+    },
+    {
+      "_id": "image2-product37",
+      "path": "images/product37-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product37"
+    },
+    {
+      "_id": "image1-product38",
+      "path": "images/product38-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product38"
+    },
+    {
+      "_id": "image2-product38",
+      "path": "images/product38-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product38"
+    },
+    {
+      "_id": "image1-product39",
+      "path": "images/product39-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product39"
+    },
+    {
+      "_id": "image2-product39",
+      "path": "images/product39-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product39"
+    },
+    {
+      "_id": "image1-product40",
+      "path": "images/product40-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product40"
+    },
+    {
+      "_id": "image2-product40",
+      "path": "images/product40-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product40"
+    },
+    {
+      "_id": "image1-product41",
+      "path": "images/product41-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product41"
+    },
+    {
+      "_id": "image2-product41",
+      "path": "images/product41-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product41"
+    },
+    {
+      "_id": "image1-product42",
+      "path": "images/product42-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product42"
+    },
+    {
+      "_id": "image2-product42",
+      "path": "images/product42-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product42"
+    },
+    {
+      "_id": "image1-product43",
+      "path": "images/product43-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product43"
+    },
+    {
+      "_id": "image2-product43",
+      "path": "images/product43-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product43"
+    },
+    {
+      "_id": "image1-product44",
+      "path": "images/product44-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product44"
+    },
+    {
+      "_id": "image2-product44",
+      "path": "images/product44-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product44"
+    },
+    {
+      "_id": "image1-product45",
+      "path": "images/product45-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product45"
+    },
+    {
+      "_id": "image2-product45",
+      "path": "images/product45-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product45"
+    },
+    {
+      "_id": "image1-product46",
+      "path": "images/product46-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product46"
+    },
+    {
+      "_id": "image2-product46",
+      "path": "images/product46-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product46"
+    },
+    {
+      "_id": "image1-product47",
+      "path": "images/product47-1.jpg",
+      "type": "image/jpeg",
+      "productId": "product47"
+    },
+    {
+      "_id": "image2-product47",
+      "path": "images/product47-2.jpg",
+      "type": "image/jpeg",
+      "productId": "product47"
+    },
+    {
+      "_id": "image1-product48",
+      "path": "images/product48-1.jpg",
+      "type":"image/jpeg",
+      "productId": "product48"
+    }
+]

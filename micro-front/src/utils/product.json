@@ -1,0 +1,1486 @@
+[
+    {
+        "name": "Smartphone Samsung Galaxy S21",
+        "description": "El último modelo de Samsung con tecnología 5G y cámara de alta resolución.",
+        "price": "799.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product1"
+            },
+            {
+                "_id": "image2-product1"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "samsung",
+            "galaxy",
+            "5g"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Laptop Apple MacBook Pro",
+        "description": "Potente laptop con chip M1 y pantalla Retina de 13 pulgadas.",
+        "price": "1299.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product2"
+            },
+            {
+                "_id": "image2-product2"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "apple",
+            "macbook",
+            "m1"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Auriculares Sony WH-1000XM4",
+        "description": "Auriculares inalámbricos con cancelación de ruido líder en la industria.",
+        "price": "349.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product3"
+            },
+            {
+                "_id": "image2-product3"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "sony",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 100
+    },
+    {
+        "name": "Televisor LG OLED55CXPUA",
+        "description": "Televisor OLED de 55 pulgadas con resolución 4K y soporte HDR.",
+        "price": "1499.99",
+        "brand": "LG",
+        "images": [
+            {
+                "_id": "image1-product4"
+            },
+            {
+                "_id": "image2-product4"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "lg",
+            "oled",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Consola PlayStation 5",
+        "description": "La última consola de Sony con gráficos de próxima generación y SSD ultrarrápido.",
+        "price": "499.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product5"
+            },
+            {
+                "_id": "image2-product5"
+            }
+        ],
+        "tags": [
+            "consola",
+            "sony",
+            "playstation",
+            "ps5"
+        ],
+        "stock": 15
+    },
+    {
+        "name": "Tablet Apple iPad Pro",
+        "description": "Tablet de 12.9 pulgadas con chip M1 y pantalla Liquid Retina XDR.",
+        "price": "1099.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product6"
+            },
+            {
+                "_id": "image2-product6"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "apple",
+            "ipad",
+            "m1"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Reloj Inteligente Garmin Fenix 6",
+        "description": "Reloj multideporte con GPS y funciones avanzadas de entrenamiento.",
+        "price": "599.99",
+        "brand": "Garmin",
+        "images": [
+            {
+                "_id": "image1-product7"
+            },
+            {
+                "_id": "image2-product7"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "garmin",
+            "gps",
+            "multideporte"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Cámara Canon EOS R5",
+        "description": "Cámara sin espejo con sensor de 45 MP y grabación de video 8K.",
+        "price": "3899.99",
+        "brand": "Canon",
+        "images": [
+            {
+                "_id": "image1-product8"
+            },
+            {
+                "_id": "image2-product8"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "canon",
+            "eos",
+            "8k"
+        ],
+        "stock": 10
+    },
+    {
+        "name": "Altavoz Inteligente Amazon Echo",
+        "description": "Altavoz inteligente con Alexa y sonido de alta calidad.",
+        "price": "99.99",
+        "brand": "Amazon",
+        "images": [
+            {
+                "_id": "image1-product9"
+            },
+            {
+                "_id": "image2-product9"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "amazon",
+            "echo",
+            "alexa"
+        ],
+        "stock": 200
+    },
+    {
+        "name": "Monitor Dell UltraSharp",
+        "description": "Monitor de 27 pulgadas con resolución 4K y tecnología IPS.",
+        "price": "499.99",
+        "brand": "Dell",
+        "images": [
+            {
+                "_id": "image1-product10"
+            },
+            {
+                "_id": "image2-product10"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "dell",
+            "ultrasharp",
+            "4k"
+        ],
+        "stock": 35
+    },
+    {
+        "name": "Smartphone Google Pixel 6",
+        "description": "Smartphone con Android 12 y cámara de alta resolución.",
+        "price": "699.99",
+        "brand": "Google",
+        "images": [
+            {
+                "_id": "image1-product11"
+            },
+            {
+                "_id": "image2-product11"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "google",
+            "pixel",
+            "android"
+        ],
+        "stock": 45
+    },
+    {
+        "name": "Laptop HP Spectre x360",
+        "description": "Laptop convertible de 13 pulgadas con pantalla táctil y procesador Intel i7.",
+        "price": "1199.99",
+        "brand": "HP",
+        "images": [
+            {
+                "_id": "image1-product12"
+            },
+            {
+                "_id": "image2-product12"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "hp",
+            "spectre",
+            "convertible"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Bose QuietComfort 35 II",
+        "description": "Auriculares inalámbricos con cancelación de ruido y sonido de alta calidad.",
+        "price": "299.99",
+        "brand": "Bose",
+        "images": [
+            {
+                "_id": "image1-product13"
+            },
+            {
+                "_id": "image2-product13"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "bose",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 80
+    },
+    {
+        "name": "Televisor Samsung QLED Q80T",
+        "description": "Televisor QLED de 65 pulgadas con resolución 4K y tecnología Quantum Dot.",
+        "price": "1799.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product14"
+            },
+            {
+                "_id": "image2-product14"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "samsung",
+            "qled",
+            "4k"
+        ],
+        "stock": 18
+    },
+    {
+        "name": "Consola Xbox Series X",
+        "description": "La última consola de Microsoft con gráficos de próxima generación y SSD ultrarrápido.",
+        "price": "499.99",
+        "brand": "Microsoft",
+        "images": [
+            {
+                "_id": "image1-product15"
+            },
+            {
+                "_id": "image2-product15"
+            }
+        ],
+        "tags": [
+            "consola",
+            "microsoft",
+            "xbox",
+            "series x"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Tablet Samsung Galaxy Tab S7",
+        "description": "Tablet de 11 pulgadas con pantalla TFT y procesador Snapdragon 865+.",
+        "price": "649.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product16"
+            },
+            {
+                "_id": "image2-product16"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "samsung",
+            "galaxy",
+            "snapdragon"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Reloj Inteligente Apple Watch Series 6",
+        "description": "Reloj inteligente con GPS y monitor de oxígeno en sangre.",
+        "price": "399.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product17"
+            },
+            {
+                "_id": "image2-product17"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "apple",
+            "watch",
+            "gps"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Cámara Nikon Z6 II",
+        "description": "Cámara sin espejo con sensor de 24.5 MP y grabación de video 4K.",
+        "price": "1999.99",
+        "brand": "Nikon",
+        "images": [
+            {
+                "_id": "image1-product18"
+            },
+            {
+                "_id": "image2-product18"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "nikon",
+            "z6",
+            "4k"
+        ],
+        "stock": 12
+    },
+    {
+        "name": "Altavoz Inteligente Google Nest Audio",
+        "description": "Altavoz inteligente con Google Assistant y sonido de alta calidad.",
+        "price": "99.99",
+        "brand": "Google",
+        "images": [
+            {
+                "_id": "image1-product19"
+            },
+            {
+                "_id": "image2-product19"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "google",
+            "nest",
+            "assistant"
+        ],
+        "stock": 150
+    },
+    {
+        "name": "Monitor ASUS ROG Swift",
+        "description": "Monitor de 27 pulgadas con resolución 4K y tasa de refresco de 144Hz.",
+        "price": "899.99",
+        "brand": "ASUS",
+        "images": [
+            {
+                "_id": "image1-product20"
+            },
+            {
+                "_id": "image2-product20"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "asus",
+            "rog",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Smartphone OnePlus 9 Pro",
+        "description": "Smartphone con pantalla Fluid AMOLED y cámara Hasselblad.",
+        "price": "969.99",
+        "brand": "OnePlus",
+        "images": [
+            {
+                "_id": "image1-product21"
+            },
+            {
+                "_id": "image2-product21"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "oneplus",
+            "hasselblad",
+            "amoled"
+        ],
+        "stock": 35
+    },
+    {
+        "name": "Laptop Lenovo ThinkPad X1 Carbon",
+        "description": "Laptop ultraligera de 14 pulgadas con procesador Intel i7 y 16GB de RAM.",
+        "price": "1499.99",
+        "brand": "Lenovo",
+        "images": [
+            {
+                "_id": "image1-product22"
+            },
+            {
+                "_id": "image2-product22"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "lenovo",
+            "thinkpad",
+            "ultraligera"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Jabra Elite 85h",
+        "description": "Auriculares inalámbricos con cancelación de ruido y batería de larga duración.",
+        "price": "249.99",
+        "brand": "Jabra",
+        "images": [
+            {
+                "_id": "image1-product23"
+            },
+            {
+                "_id": "image2-product23"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "jabra",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 60
+    },
+    {
+        "name": "Televisor Sony Bravia X900H",
+        "description": "Televisor LED de 65 pulgadas con resolución 4K y tecnología HDR.",
+        "price": "1399.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product24"
+            },
+            {
+                "_id": "image2-product24"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "sony",
+            "bravia",
+            "4k"
+        ],
+        "stock": 18
+    },
+    {
+        "name": "Consola Nintendo Switch",
+        "description": "Consola híbrida de Nintendo con Joy-Con desmontables y pantalla táctil.",
+        "price": "299.99",
+        "brand": "Nintendo",
+        "images": [
+            {
+                "_id": "image1-product25"
+            },
+            {
+                "_id": "image2-product25"
+            }
+        ],
+        "tags": [
+            "consola",
+            "nintendo",
+            "switch",
+            "híbrida"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Tablet Microsoft Surface Pro 7",
+        "description": "Tablet de 12.3 pulgadas con procesador Intel i5 y teclado desmontable.",
+        "price": "899.99",
+        "brand": "Microsoft",
+        "images": [
+            {
+                "_id": "image1-product26"
+            },
+            {
+                "_id": "image2-product26"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "microsoft",
+            "surface",
+            "pro"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Reloj Inteligente Fitbit Versa 3",
+        "description": "Reloj inteligente con GPS y monitor de frecuencia cardíaca.",
+        "price": "229.99",
+        "brand": "Fitbit",
+        "images": [
+            {
+                "_id": "image1-product27"
+            },
+            {
+                "_id": "image2-product27"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "fitbit",
+            "versa",
+            "gps"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Cámara Fujifilm X-T4",
+        "description": "Cámara sin espejo con sensor de 26.1 MP y estabilización de imagen en el cuerpo.",
+        "price": "1699.99",
+        "brand": "Fujifilm",
+        "images": [
+            {
+                "_id": "image1-product28"
+            },
+            {
+                "_id": "image2-product28"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "fujifilm",
+            "x-t4",
+            "estabilización"
+        ],
+        "stock": 15
+    },
+    {
+        "name": "Altavoz Inteligente Sonos One",
+        "description": "Altavoz inteligente con Alexa y Google Assistant integrados.",
+        "price": "199.99",
+        "brand": "Sonos",
+        "images": [
+            {
+                "_id": "image1-product29"
+            },
+            {
+                "_id": "image2-product29"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "sonos",
+            "alexa",
+            "google assistant"
+        ],
+        "stock": 100
+    },
+    {
+        "name": "Monitor LG UltraWide",
+        "description": "Monitor de 34 pulgadas con resolución QHD y relación de aspecto 21:9.",
+        "price": "799.99",
+        "brand": "LG",
+        "images": [
+            {
+                "_id": "image1-product30"
+            },
+            {
+                "_id": "image2-product30"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "lg",
+            "ultrawide",
+            "qhd"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Smartphone Xiaomi Mi 11",
+        "description": "Smartphone con pantalla AMOLED y cámara de 108 MP.",
+        "price": "749.99",
+        "brand": "Xiaomi",
+        "images": [
+            {
+                "_id": "image1-product31"
+            },
+            {
+                "_id": "image2-product31"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "xiaomi",
+            "mi 11",
+            "amoled"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Laptop Dell XPS 13",
+        "description": "Laptop ultraligera de 13 pulgadas con procesador Intel i7 y pantalla InfinityEdge.",
+        "price": "1299.99",
+        "brand": "Dell",
+        "images": [
+            {
+                "_id": "image1-product32"
+            },
+            {
+                "_id": "image2-product32"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "dell",
+            "xps",
+            "ultraligera"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Sennheiser Momentum 3",
+        "description": "Auriculares inalámbricos con cancelación de ruido y sonido de alta fidelidad.",
+        "price": "399.99",
+        "brand": "Sennheiser",
+        "images": [
+            {
+                "_id": "image1-product33"
+            },
+            {
+                "_id": "image2-product33"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "sennheiser",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Televisor TCL 6-Series",
+        "description": "Televisor QLED de 55 pulgadas con resolución 4K y tecnología Dolby Vision.",
+        "price": "649.99",
+        "brand": "TCL",
+        "images": [
+            {
+                "_id": "image1-product34"
+            },
+            {
+                "_id": "image2-product34"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "tcl",
+            "qled",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Consola PlayStation 4 Pro",
+        "description": "Consola de Sony con gráficos mejorados y soporte para 4K.",
+        "price": "399.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product35"
+            },
+            {
+                "_id": "image2-product35"
+            }
+        ],
+        "tags": [
+            "consola",
+            "sony",
+            "playstation",
+            "ps4 pro"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Tablet Huawei MatePad Pro",
+        "description": "Tablet de 10.8 pulgadas con pantalla AMOLED y procesador Kirin 990.",
+        "price": "599.99",
+        "brand": "Huawei",
+        "images": [
+            {
+                "_id": "image1-product36"
+            },
+            {
+                "_id": "image2-product36"
+            }
+        ]
+    },
+    {
+        "name": "Smartphone Samsung Galaxy S21",
+        "description": "El último modelo de Samsung con tecnología 5G y cámara de alta resolución.",
+        "price": "799.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product1"
+            },
+            {
+                "_id": "image2-product1"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "samsung",
+            "galaxy",
+            "5g"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Laptop Apple MacBook Pro",
+        "description": "Potente laptop con chip M1 y pantalla Retina de 13 pulgadas.",
+        "price": "1299.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product2"
+            },
+            {
+                "_id": "image2-product2"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "apple",
+            "macbook",
+            "m1"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Auriculares Sony WH-1000XM4",
+        "description": "Auriculares inalámbricos con cancelación de ruido líder en la industria.",
+        "price": "349.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product3"
+            },
+            {
+                "_id": "image2-product3"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "sony",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 100
+    },
+    {
+        "name": "Televisor LG OLED55CXPUA",
+        "description": "Televisor OLED de 55 pulgadas con resolución 4K y soporte HDR.",
+        "price": "1499.99",
+        "brand": "LG",
+        "images": [
+            {
+                "_id": "image1-product4"
+            },
+            {
+                "_id": "image2-product4"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "lg",
+            "oled",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Consola PlayStation 5",
+        "description": "La última consola de Sony con gráficos de próxima generación y SSD ultrarrápido.",
+        "price": "499.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product5"
+            },
+            {
+                "_id": "image2-product5"
+            }
+        ],
+        "tags": [
+            "consola",
+            "sony",
+            "playstation",
+            "ps5"
+        ],
+        "stock": 15
+    },
+    {
+        "name": "Tablet Apple iPad Pro",
+        "description": "Tablet de 12.9 pulgadas con chip M1 y pantalla Liquid Retina XDR.",
+        "price": "1099.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product6"
+            },
+            {
+                "_id": "image2-product6"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "apple",
+            "ipad",
+            "m1"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Reloj Inteligente Garmin Fenix 6",
+        "description": "Reloj multideporte con GPS y funciones avanzadas de entrenamiento.",
+        "price": "599.99",
+        "brand": "Garmin",
+        "images": [
+            {
+                "_id": "image1-product7"
+            },
+            {
+                "_id": "image2-product7"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "garmin",
+            "gps",
+            "multideporte"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Cámara Canon EOS R5",
+        "description": "Cámara sin espejo con sensor de 45 MP y grabación de video 8K.",
+        "price": "3899.99",
+        "brand": "Canon",
+        "images": [
+            {
+                "_id": "image1-product8"
+            },
+            {
+                "_id": "image2-product8"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "canon",
+            "eos",
+            "8k"
+        ],
+        "stock": 10
+    },
+    {
+        "name": "Altavoz Inteligente Amazon Echo",
+        "description": "Altavoz inteligente con Alexa y sonido de alta calidad.",
+        "price": "99.99",
+        "brand": "Amazon",
+        "images": [
+            {
+                "_id": "image1-product9"
+            },
+            {
+                "_id": "image2-product9"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "amazon",
+            "echo",
+            "alexa"
+        ],
+        "stock": 200
+    },
+    {
+        "name": "Monitor Dell UltraSharp",
+        "description": "Monitor de 27 pulgadas con resolución 4K y tecnología IPS.",
+        "price": "499.99",
+        "brand": "Dell",
+        "images": [
+            {
+                "_id": "image1-product10"
+            },
+            {
+                "_id": "image2-product10"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "dell",
+            "ultrasharp",
+            "4k"
+        ],
+        "stock": 35
+    },
+    {
+        "name": "Smartphone Google Pixel 6",
+        "description": "Smartphone con Android 12 y cámara de alta resolución.",
+        "price": "699.99",
+        "brand": "Google",
+        "images": [
+            {
+                "_id": "image1-product11"
+            },
+            {
+                "_id": "image2-product11"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "google",
+            "pixel",
+            "android"
+        ],
+        "stock": 45
+    },
+    {
+        "name": "Laptop HP Spectre x360",
+        "description": "Laptop convertible de 13 pulgadas con pantalla táctil y procesador Intel i7.",
+        "price": "1199.99",
+        "brand": "HP",
+        "images": [
+            {
+                "_id": "image1-product12"
+            },
+            {
+                "_id": "image2-product12"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "hp",
+            "spectre",
+            "convertible"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Bose QuietComfort 35 II",
+        "description": "Auriculares inalámbricos con cancelación de ruido y sonido de alta calidad.",
+        "price": "299.99",
+        "brand": "Bose",
+        "images": [
+            {
+                "_id": "image1-product13"
+            },
+            {
+                "_id": "image2-product13"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "bose",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 80
+    },
+    {
+        "name": "Televisor Samsung QLED Q80T",
+        "description": "Televisor QLED de 65 pulgadas con resolución 4K y tecnología Quantum Dot.",
+        "price": "1799.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product14"
+            },
+            {
+                "_id": "image2-product14"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "samsung",
+            "qled",
+            "4k"
+        ],
+        "stock": 18
+    },
+    {
+        "name": "Consola Xbox Series X",
+        "description": "La última consola de Microsoft con gráficos de próxima generación y SSD ultrarrápido.",
+        "price": "499.99",
+        "brand": "Microsoft",
+        "images": [
+            {
+                "_id": "image1-product15"
+            },
+            {
+                "_id": "image2-product15"
+            }
+        ],
+        "tags": [
+            "consola",
+            "microsoft",
+            "xbox",
+            "series x"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Tablet Samsung Galaxy Tab S7",
+        "description": "Tablet de 11 pulgadas con pantalla TFT y procesador Snapdragon 865+.",
+        "price": "649.99",
+        "brand": "Samsung",
+        "images": [
+            {
+                "_id": "image1-product16"
+            },
+            {
+                "_id": "image2-product16"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "samsung",
+            "galaxy",
+            "snapdragon"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Reloj Inteligente Apple Watch Series 6",
+        "description": "Reloj inteligente con GPS y monitor de oxígeno en sangre.",
+        "price": "399.99",
+        "brand": "Apple",
+        "images": [
+            {
+                "_id": "image1-product17"
+            },
+            {
+                "_id": "image2-product17"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "apple",
+            "watch",
+            "gps"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Cámara Nikon Z6 II",
+        "description": "Cámara sin espejo con sensor de 24.5 MP y grabación de video 4K.",
+        "price": "1999.99",
+        "brand": "Nikon",
+        "images": [
+            {
+                "_id": "image1-product18"
+            },
+            {
+                "_id": "image2-product18"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "nikon",
+            "z6",
+            "4k"
+        ],
+        "stock": 12
+    },
+    {
+        "name": "Altavoz Inteligente Google Nest Audio",
+        "description": "Altavoz inteligente con Google Assistant y sonido de alta calidad.",
+        "price": "99.99",
+        "brand": "Google",
+        "images": [
+            {
+                "_id": "image1-product19"
+            },
+            {
+                "_id": "image2-product19"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "google",
+            "nest",
+            "assistant"
+        ],
+        "stock": 150
+    },
+    {
+        "name": "Monitor ASUS ROG Swift",
+        "description": "Monitor de 27 pulgadas con resolución 4K y tasa de refresco de 144Hz.",
+        "price": "899.99",
+        "brand": "ASUS",
+        "images": [
+            {
+                "_id": "image1-product20"
+            },
+            {
+                "_id": "image2-product20"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "asus",
+            "rog",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Smartphone OnePlus 9 Pro",
+        "description": "Smartphone con pantalla Fluid AMOLED y cámara Hasselblad.",
+        "price": "969.99",
+        "brand": "OnePlus",
+        "images": [
+            {
+                "_id": "image1-product21"
+            },
+            {
+                "_id": "image2-product21"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "oneplus",
+            "hasselblad",
+            "amoled"
+        ],
+        "stock": 35
+    },
+    {
+        "name": "Laptop Lenovo ThinkPad X1 Carbon",
+        "description": "Laptop ultraligera de 14 pulgadas con procesador Intel i7 y 16GB de RAM.",
+        "price": "1499.99",
+        "brand": "Lenovo",
+        "images": [
+            {
+                "_id": "image1-product22"
+            },
+            {
+                "_id": "image2-product22"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "lenovo",
+            "thinkpad",
+            "ultraligera"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Jabra Elite 85h",
+        "description": "Auriculares inalámbricos con cancelación de ruido y batería de larga duración.",
+        "price": "249.99",
+        "brand": "Jabra",
+        "images": [
+            {
+                "_id": "image1-product23"
+            },
+            {
+                "_id": "image2-product23"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "jabra",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 60
+    },
+    {
+        "name": "Televisor Sony Bravia X900H",
+        "description": "Televisor LED de 65 pulgadas con resolución 4K y tecnología HDR.",
+        "price": "1399.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product24"
+            },
+            {
+                "_id": "image2-product24"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "sony",
+            "bravia",
+            "4k"
+        ],
+        "stock": 18
+    },
+    {
+        "name": "Consola Nintendo Switch",
+        "description": "Consola híbrida de Nintendo con Joy-Con desmontables y pantalla táctil.",
+        "price": "299.99",
+        "brand": "Nintendo",
+        "images": [
+            {
+                "_id": "image1-product25"
+            },
+            {
+                "_id": "image2-product25"
+            }
+        ],
+        "tags": [
+            "consola",
+            "nintendo",
+            "switch",
+            "híbrida"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Tablet Microsoft Surface Pro 7",
+        "description": "Tablet de 12.3 pulgadas con procesador Intel i5 y teclado desmontable.",
+        "price": "899.99",
+        "brand": "Microsoft",
+        "images": [
+            {
+                "_id": "image1-product26"
+            },
+            {
+                "_id": "image2-product26"
+            }
+        ],
+        "tags": [
+            "tablet",
+            "microsoft",
+            "surface",
+            "pro"
+        ],
+        "stock": 30
+    },
+    {
+        "name": "Reloj Inteligente Fitbit Versa 3",
+        "description": "Reloj inteligente con GPS y monitor de frecuencia cardíaca.",
+        "price": "229.99",
+        "brand": "Fitbit",
+        "images": [
+            {
+                "_id": "image1-product27"
+            },
+            {
+                "_id": "image2-product27"
+            }
+        ],
+        "tags": [
+            "reloj",
+            "fitbit",
+            "versa",
+            "gps"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Cámara Fujifilm X-T4",
+        "description": "Cámara sin espejo con sensor de 26.1 MP y estabilización de imagen en el cuerpo.",
+        "price": "1699.99",
+        "brand": "Fujifilm",
+        "images": [
+            {
+                "_id": "image1-product28"
+            },
+            {
+                "_id": "image2-product28"
+            }
+        ],
+        "tags": [
+            "cámara",
+            "fujifilm",
+            "x-t4",
+            "estabilización"
+        ],
+        "stock": 15
+    },
+    {
+        "name": "Altavoz Inteligente Sonos One",
+        "description": "Altavoz inteligente con Alexa y Google Assistant integrados.",
+        "price": "199.99",
+        "brand": "Sonos",
+        "images": [
+            {
+                "_id": "image1-product29"
+            },
+            {
+                "_id": "image2-product29"
+            }
+        ],
+        "tags": [
+            "altavoz",
+            "sonos",
+            "alexa",
+            "google assistant"
+        ],
+        "stock": 100
+    },
+    {
+        "name": "Monitor LG UltraWide",
+        "description": "Monitor de 34 pulgadas con resolución QHD y relación de aspecto 21:9.",
+        "price": "799.99",
+        "brand": "LG",
+        "images": [
+            {
+                "_id": "image1-product30"
+            },
+            {
+                "_id": "image2-product30"
+            }
+        ],
+        "tags": [
+            "monitor",
+            "lg",
+            "ultrawide",
+            "qhd"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Smartphone Xiaomi Mi 11",
+        "description": "Smartphone con pantalla AMOLED y cámara de 108 MP.",
+        "price": "749.99",
+        "brand": "Xiaomi",
+        "images": [
+            {
+                "_id": "image1-product31"
+            },
+            {
+                "_id": "image2-product31"
+            }
+        ],
+        "tags": [
+            "smartphone",
+            "xiaomi",
+            "mi 11",
+            "amoled"
+        ],
+        "stock": 40
+    },
+    {
+        "name": "Laptop Dell XPS 13",
+        "description": "Laptop ultraligera de 13 pulgadas con procesador Intel i7 y pantalla InfinityEdge.",
+        "price": "1299.99",
+        "brand": "Dell",
+        "images": [
+            {
+                "_id": "image1-product32"
+            },
+            {
+                "_id": "image2-product32"
+            }
+        ],
+        "tags": [
+            "laptop",
+            "dell",
+            "xps",
+            "ultraligera"
+        ],
+        "stock": 25
+    },
+    {
+        "name": "Auriculares Sennheiser Momentum 3",
+        "description": "Auriculares inalámbricos con cancelación de ruido y sonido de alta fidelidad.",
+        "price": "399.99",
+        "brand": "Sennheiser",
+        "images": [
+            {
+                "_id": "image1-product33"
+            },
+            {
+                "_id": "image2-product33"
+            }
+        ],
+        "tags": [
+            "auriculares",
+            "sennheiser",
+            "cancelación de ruido",
+            "inalámbricos"
+        ],
+        "stock": 50
+    },
+    {
+        "name": "Televisor TCL 6-Series",
+        "description": "Televisor QLED de 55 pulgadas con resolución 4K y tecnología Dolby Vision.",
+        "price": "649.99",
+        "brand": "TCL",
+        "images": [
+            {
+                "_id": "image1-product34"
+            },
+            {
+                "_id": "image2-product34"
+            }
+        ],
+        "tags": [
+            "televisor",
+            "tcl",
+            "qled",
+            "4k"
+        ],
+        "stock": 20
+    },
+    {
+        "name": "Consola PlayStation 4 Pro",
+        "description": "Consola de Sony con gráficos mejorados y soporte para 4K.",
+        "price": "399.99",
+        "brand": "Sony",
+        "images": [
+            {
+                "_id": "image1-product35"
+            },
+            {
+                "_id": "image2-product35"
+            }
+        ],
+        "tags": [
+            "consola",
+            "sony",
+            "playstation",
+            "ps4 pro"
+        ],
+        "stock": 30
+    }
+]
