@@ -35,7 +35,7 @@ services:
     restart: always
     image: mongodb/mongodb-community-server:6.0.1-ubi8
     ports:
-      - "27017:27017"
+      - "27018:27018"
     env_file:
       - ./products/.env.prod
 
