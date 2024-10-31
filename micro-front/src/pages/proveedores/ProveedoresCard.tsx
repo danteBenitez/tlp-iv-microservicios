@@ -12,6 +12,8 @@ export default function ProveedoresCard({
   onEdit,
   supplier,
 }: TProveedoresCard) {
+  void onDelete;
+  void onEdit
   return (
     <Col md={4} key={supplier.supplierId}>
       <Card className="mb-4">
@@ -24,10 +26,11 @@ export default function ProveedoresCard({
               <Badge className="bg-success">${producto.price}</Badge>
             </Card.Text> */}
           </div>
-          <Card.Text>{supplier.address}</Card.Text>
-          <Card.Text>{supplier.cuit}</Card.Text>
+          
+          <Card.Text><span>Dirección:</span> {supplier.address}</Card.Text>
+          <Card.Text><span>Cuit:</span> {supplier.cuit}</Card.Text>
           <Card.Text>
-            <span>Correo electrónico:</span>
+            <span>Correo electrónico: </span>
             <a target="_blank" href={`mailto:supplier.email`}>{supplier.email}</a>
           </Card.Text>
           <Card.Text>
