@@ -81,7 +81,7 @@ const routes: TRoute[] = [
     name: "Mis compras",
     component: Ventas,
     layout: "/admin",
-    isPrivate: false,
+    isPrivate: true,
     icon: FaGlobe,
   },
   {
@@ -89,7 +89,7 @@ const routes: TRoute[] = [
     name: "Mi carrito de compras",
     component: CarritoCompras,
     layout: "/admin",
-    isPrivate: false,
+    isPrivate: true,
     icon: FaShoppingCart,
   },
   {
@@ -98,9 +98,9 @@ const routes: TRoute[] = [
     component: CarritoCompraRealizada,
     layout: "/admin",
     showInSidebar: false,
-    isPrivate: false,
+    isPrivate: true,
     icon: FaShoppingCart,
-  },  
+  },
   {
     path: "/productos/:productoId",
     name: "Producto",

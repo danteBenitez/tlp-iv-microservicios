@@ -37,7 +37,7 @@ export default function ProveedoresCard({
           </Card.Text>
           <Card.Text>
             <span>Correo electrónico: </span>
-            <a target="_blank" href={`mailto:supplier.email`}>
+            <a target="_blank" href={`mailto:${supplier.email}`}>
               {supplier.email}
             </a>
           </Card.Text>

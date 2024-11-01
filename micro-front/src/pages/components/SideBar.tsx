@@ -100,6 +100,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
           >
             {filteredRoutes.map((prop, key) => {
               if (prop.showInSidebar === false) return null;
+              if (prop.isPrivate && !isAuthenticated) return null;
               if (!prop.redirect)
                 return (
                   <li
