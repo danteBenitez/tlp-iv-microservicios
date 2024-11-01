@@ -2,6 +2,7 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
 import productsReducer from './slices/productSlice';
+import saleReducer from "./slices/saleSlice";
 import shoppingCartReducer from "./slices/shippingCartSlice";
 import suppliersReducer from './slices/supplierSlice';
 import usersReducer from './slices/userSlice';
@@ -13,7 +14,8 @@ const store = configureStore({
     notifications: notificationReducer,
     products: productsReducer,
     suppliers: suppliersReducer,
-    shoppingCart: shoppingCartReducer
+    shoppingCart: shoppingCartReducer,
+    sales: saleReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

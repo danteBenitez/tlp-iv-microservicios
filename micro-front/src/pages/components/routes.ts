@@ -9,10 +9,11 @@ import Productos from '../productos/Productos';
 import { ProductosCreate } from '../productos/ProductosCreate';
 import { ProductoUpdate } from '../productos/ProductoUpdate';
 import ProveedoresIndex from '../proveedores/Proveedores';
+import ProveedoresCreate from '../proveedores/ProveedoresCreate';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
-import ProveedoresCreate from '../proveedores/ProveedoresCreate';
+import { Ventas } from '../ventas/Ventas';
 
 export type TRoute = {
   path: string;
@@ -72,6 +73,14 @@ const routes: TRoute[] = [
     layout: "/admin",
     isPrivate: true,
     icon: FaList,
+  },
+  {
+    path: "/sales/",
+    name: "Mis compras",
+    component: Ventas,
+    layout: "/admin",
+    isPrivate: false,
+    icon: FaGlobe,
   },
   {
     path: "/categoria/:categoriaId",

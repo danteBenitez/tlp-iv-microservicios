@@ -7,6 +7,8 @@ import {
   CardImg,
   Col,
   Container,
+  FormControl,
+  FormLabel,
   Row,
 } from "react-bootstrap";
 import {
@@ -20,6 +22,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { fetchProductById } from "../../store/services/productService";
 import { IProduct, removeProduct } from "../../store/slices/productSlice";
+import { addSale } from "../../store/slices/saleSlice";
 import { editShoppingCart } from "../../store/slices/shippingCartSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
@@ -33,14 +36,6 @@ const Producto: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.shoppingCart.cart);
   console.log(cart);
-  const inCart = cart.find((c) => c.productId == productoId);
-  const isLoading = useSelector(
-    (state: RootState) => state.shoppingCart.loading
-  );
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
-  const [quantity, setQuantity] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -116,62 +111,9 @@ const Producto: React.FC = () => {
                   <Badge>{t}</Badge>
                 ))}
               </Card.Text>
-              <div className="w-full d-flex gap-3">
-                <Button
-                  variant="success"
-                  size="lg"
-                  className="d-flex align-items-center gap-2"
-                >
-                  <FaMoneyBill />
-                  Comprar
-                </Button>
-                {isAuthenticated && (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="d-flex align-items-center gap-2"
-                    disabled={!inCart || quantity > 0}
-                    onClick={() => {
-                      if (inCart) {
-                        dispatch(
-                          editShoppingCart([
-                            { productId: productoId, quantity, delete: true },
-                          ])
-                        );
-                      } else {
-                        dispatch(
-                          editShoppingCart([
-                            { productId: productoId, quantity },
-                          ])
-                        );
-                      }
-                    }}
-                  >
-                    <FaShoppingCart />
-                    {!isLoading && (inCart ? "Agregado" : "Agregar al carrito")}
-                    {isLoading && <p>Cargando...</p>}
-                  </Button>
-                )}
-                <ButtonGroup>
-                  <Button
-                    variant="bg-white text-black"
-                    onClick={() => setQuantity(quantity + 1)}
-                  >
-                    +
-                  </Button>
-                  <Button variant="bg-white text-black" disabled={true}>
-                    {quantity}
-                  </Button>
-                  <Button
-                    variant="bg-white text-black"
-                    onClick={() => setQuantity(quantity - 1)}
-                  >
-                    -
-                  </Button>
-                </ButtonGroup>
-              </div>
             </Card.Body>
           </Card>
+          <BuyButtonGroup productId={productoId} />
         </Col>
       </Row>
       {producto.images.length !== 0 ? (
@@ -193,5 +135,120 @@ const Producto: React.FC = () => {
     </Container>
   );
 };
+
+export function BuyButtonGroup({ productId }: { productId: string }) {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  const [quantity, setQuantity] = useState(0);
+  const [address, setAddress] = useState<string | null>(null);
+  const dispatch: AppDispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.shoppingCart.cart);
+  const inCart = cart.find((c) => c.productId == productId);
+  const isLoading = useSelector(
+    (state: RootState) => state.shoppingCart.loading
+  );
+
+  const handleBuy = () => {
+    setAddress("");
+  };
+
+  const handleCompleteSell = async () => {
+    await dispatch(
+      addSale({
+        address: address ?? "",
+        items: [
+          {
+            productId,
+            quantity,
+          },
+        ],
+      })
+    );
+  };
+
+  return (
+    <>
+      <div className="w-full d-flex gap-3">
+        <Button
+          variant="success"
+          size="lg"
+          className="d-flex align-items-center gap-2"
+          disabled={quantity <= 0}
+          onClick={handleBuy}
+        >
+          <FaMoneyBill />
+          Comprar
+        </Button>
+        <Button
+          variant="primary"
+          size="lg"
+          className="d-flex align-items-center gap-2"
+          disabled={!!inCart || quantity <= 0}
+          onClick={() => {
+            if (inCart) {
+              dispatch(
+                editShoppingCart([{ productId, quantity, delete: true }])
+              );
+            } else {
+              dispatch(editShoppingCart([{ productId, quantity }]));
+            }
+          }}
+        >
+          <FaShoppingCart />
+          {!isLoading && (inCart ? "Agregado" : "Agregar al carrito")}
+          {isLoading && <p>Cargando...</p>}
+        </Button>
+
+        {isAuthenticated && (
+          <ButtonGroup className="border border-3">
+            <Button
+              size="lg"
+              variant="light"
+              className="bg-white text-black border border-3"
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              +
+            </Button>
+            <Button
+              variant="light"
+              disabled={true}
+              size="lg"
+              className="border-3"
+            >
+              {quantity}
+            </Button>
+            <Button
+              size="lg"
+              variant="light"
+              className="bg-white text-black border border-3"
+              onClick={() => setQuantity(quantity - 1)}
+            >
+              -
+            </Button>
+          </ButtonGroup>
+        )}
+      </div>
+      {address != null ? (
+        <div className="my-3 d-flex flex-column gap-2 justify-content-start">
+          <FormLabel>Ingrese la dirección de envío</FormLabel>
+          <FormControl
+            type="text"
+            className="fs-4"
+            placeholder="New York, 255"
+          />
+          <Button
+            variant="primary"
+            size="lg"
+            className="w-25"
+            onClick={handleCompleteSell}
+          >
+            Completar
+          </Button>
+        </div>
+      ) : null}
+    </>
+  );
+}
 
 export default Producto;
