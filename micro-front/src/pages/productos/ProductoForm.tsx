@@ -226,7 +226,7 @@ export function ProductoForm({
               name="stock"
               placeholder="Unidades"
               className="fs-4"
-              defaultValue={form.stock}
+              value={form.stock}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 handleChange("stock", e.currentTarget.value)
               }
@@ -260,18 +260,23 @@ export function ProductoForm({
         <div className="max-w-full">
           {form.images.map((i) => {
             return (
-              <div
-                className="position-relative"
-                onClick={() => {
-                  setForm({
-                    ...form,
-                    deletedImages: [...form.deletedImages, i],
-                    images: form.images.filter((img) => img != i),
-                  });
-                }}
-              >
-                <img src={resolveImageUrl(i)} className="object-fit-cover" />
-                <FaTrash className="position-absolute top-0 right-0" />
+              <div className="position-relative">
+                <img
+                  src={resolveImageUrl(i)}
+                  className="object-fit-cover"
+                  style={{ maxHeight: 350 }}
+                />
+                <FaTrash
+                  className="position-absolute m-2 cursor-pointer"
+                  style={{ top: 0, left: 0 }}
+                  onClick={() => {
+                    setForm({
+                      ...form,
+                      deletedImages: [...form.deletedImages, i],
+                      images: form.images.filter((img) => img != i),
+                    });
+                  }}
+                />
               </div>
             );
           })}
@@ -280,7 +285,7 @@ export function ProductoForm({
           type="file"
           name="productImage"
           multiple={true}
-          className="fs-4"
+          className="fs-4 mt-3"
         />
       </Form.Group>
       <Button variant="success" type="submit" className="fs-2 px-3 py-2 mt-3">
