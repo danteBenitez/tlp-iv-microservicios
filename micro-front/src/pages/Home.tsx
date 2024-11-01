@@ -45,7 +45,7 @@ const Home: React.FC = () => {
       </Row>
       <Row className="">
         {filtered.map((producto) => (
-          <ProductoCard producto={producto} />
+          <ProductoCard key={producto._id} producto={producto} />
         ))}
       </Row>
       <Row className="text-center justify-content-center my-5">
