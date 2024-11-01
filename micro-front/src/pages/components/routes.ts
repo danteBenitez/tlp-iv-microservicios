@@ -81,6 +81,7 @@ const routes: TRoute[] = [
     component: Ventas,
     layout: "/admin",
     isPrivate: true,
+    showInSidebar: false,
     icon: FaGlobe,
   },
   {
