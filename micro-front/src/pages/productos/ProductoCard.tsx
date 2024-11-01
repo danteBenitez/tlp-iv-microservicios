@@ -37,7 +37,7 @@ export function ProductoCard({
           <Card.Text>
             Tags:{" "}
             {producto.tags.map((tag) => (
-              <Badge>{tag}</Badge>
+              <Badge key={tag}>{tag}</Badge>
             ))}
           </Card.Text>
           <Card.Text>Stock: {producto.stock}</Card.Text>
