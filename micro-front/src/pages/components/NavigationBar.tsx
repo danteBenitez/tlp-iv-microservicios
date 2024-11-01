@@ -89,7 +89,6 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                     as={Link}
                     className="m-0 d-flex align-items-center"
                     to="/auth/login"
-                    onClick={handleLogout}
                   >
                     <FaSignInAlt className="me-2" />
                     Iniciar Sesión
