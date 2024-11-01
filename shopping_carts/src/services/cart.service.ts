@@ -19,7 +19,14 @@ export class CartService {
     async findAllForUser(userId: string) {
         const found = await this.repository.findAllForUser(userId);
         if (!found) throw new CartNotFoundError("El usuario no tiene productos en su carrito");
-        return found;
+        return Promise.all(found.map(async f => {
+            return {
+                // @ts-ignore
+                // FIXME: 
+                ...f.dataValues,
+                product: await this.productService.findById(f.productId)
+            }
+        }));
     }
 
     async addToCartOf(userId: string, items: CartItem[]): Promise<ICart[]> {
@@ -49,11 +56,11 @@ export class CartService {
         return products;
     }
 
-    async buyAllCart(userId: string) {
+    async buyAllCart(userId: string, address: string) {
         const cart = await this.repository.findAllForUser(userId);
-        const response = await this.saleService.sell(userId, cart);
-        await this.repository.clear(userId);
+        const response = await this.saleService.sell(userId, cart, address);
         if (!response) throw new CouldNotBuyError("No fue posible realizar la compra");
+        await this.repository.clear(userId);
         return response;
     }
 }
