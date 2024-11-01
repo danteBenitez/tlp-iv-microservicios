@@ -59,6 +59,7 @@ export class CartService {
     async buyAllCart(userId: string, address: string) {
         const cart = await this.repository.findAllForUser(userId);
         const response = await this.saleService.sell(userId, cart, address);
+        console.log(response);
         if (!response) throw new CouldNotBuyError("No fue posible realizar la compra");
         await this.repository.clear(userId);
         return response;
