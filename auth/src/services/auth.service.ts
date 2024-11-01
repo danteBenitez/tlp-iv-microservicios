@@ -1,5 +1,6 @@
 import * as jwt from "jsonwebtoken";
 import { config } from "../config/config.service";
+import { ROLES } from "../constants/roles.constant";
 import { IUser } from "../interfaces/user.interface";
 import { CreateUserData, SignInData } from "../validations/user.schema";
 import { EncryptionService, encryptionService as encryptionService_ } from "./encryption.service";
@@ -29,7 +30,7 @@ export class AuthService {
                 username: userData.username,
                 password: userData.password,
                 email: userData.email,
-                roles: []
+                roles: [ROLES.USER]
             },
         );
 
