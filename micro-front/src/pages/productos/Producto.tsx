@@ -105,6 +105,7 @@ const Producto: React.FC = () => {
                 {producto.description}
               </Card.Text>
               <Card.Text>Marca: {producto.brand}</Card.Text>
+              <Card.Text>Stock: {producto.stock}</Card.Text>
               <Card.Text>
                 Tags:{" "}
                 {producto.tags.map((t) => (
@@ -168,7 +169,7 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
   };
 
   return (
-    <>
+    <div className="py-2 px-1">
       <div className="w-full d-flex gap-3">
         <Button
           variant="success"
@@ -252,7 +253,7 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
           </Button>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
 
