@@ -39,5 +39,6 @@ git clone https://github.com/danteBenitez/tlp-iv-microservicios
 3. Inicializar los contenedores
 
 ```bash
+docker-compose build --no-cache # para crear un build ignorando cache.
 docker-compose up -d
 ```
