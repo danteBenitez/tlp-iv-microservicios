@@ -15,6 +15,7 @@ import ProveedoresCreate from '../proveedores/ProveedoresCreate';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
+import { Venta } from '../ventas/Venta';
 import { Ventas } from '../ventas/Ventas';
 
 export type TRoute = {
@@ -88,7 +89,7 @@ const routes: TRoute[] = [
   {
     path: "/sales/:saleId",
     name: "Mis compras",
-    component: Ventas,
+    component: Venta,
     layout: "/admin",
     isPrivate: true,
     showInSidebar: false,

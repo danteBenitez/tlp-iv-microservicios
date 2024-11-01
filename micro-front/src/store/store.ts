@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
 import productsReducer from './slices/productSlice';
 import saleReducer from "./slices/saleSlice";
+import shipmentReducer from './slices/shipmentSlice';
 import shoppingCartReducer from "./slices/shippingCartSlice";
 import suppliersReducer from './slices/supplierSlice';
 import usersReducer from './slices/userSlice';
@@ -15,6 +16,7 @@ const store = configureStore({
     products: productsReducer,
     suppliers: suppliersReducer,
     shoppingCart: shoppingCartReducer,
+    shippings: shipmentReducer,
     sales: saleReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({

@@ -15,7 +15,7 @@ import { showNotification } from "../../store/slices/notificationSlice";
 import { ISale } from "../../store/slices/saleSlice";
 import { AppDispatch } from "../../store/store";
 
-export function Ventas() {
+export function Venta() {
   const { saleId } = useParams<{ saleId: string }>();
   const [sale, setSale] = useState<ISale | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ export function Ventas() {
   }
 
   if (!sale) {
-    return <Navigate to="/admin/ventas" />;
+    return <Navigate to="/admin/sales/" />;
   }
 
   return (
