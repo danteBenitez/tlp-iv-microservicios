@@ -37,7 +37,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
     if (route.name === "Producto") return;
     if (route.path === "/proveedores" && !isAuthenticated) return false;
     if (route.name === "Proveedor") return false;
-    if (route.path === "/login" && isAuthenticated) return false;
+    if (route.path === "/login") return false;
     return true;
   });
 

@@ -1,7 +1,6 @@
 import { ComponentType } from 'react';
 import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
-import Categoria from '../categoria/Categoria';
 import Home from '../Home';
 import Login from '../Login';
 import { CarritoCompraRealizada } from '../productos/carrito/CarritoCompra';
@@ -101,15 +100,7 @@ const routes: TRoute[] = [
     showInSidebar: false,
     isPrivate: false,
     icon: FaShoppingCart,
-  },
-  {
-    path: "/categoria/:categoriaId",
-    name: "Categoria",
-    component: Categoria,
-    layout: "/admin",
-    isPrivate: false,
-    icon: FaGlobe,
-  },
+  },  
   {
     path: "/productos/:productoId",
     name: "Producto",
