@@ -3,6 +3,8 @@ import express, { NextFunction, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import shipmentRouter from "./routes/shipment.routes";
+
 type Callback = () => Promise<void>;
 
 export class Server {
@@ -31,6 +33,7 @@ export class Server {
 
     protected routes() {
         this.app.get('/health-check', (_, res) => res.status(200).send("[SHIPMENTS] Servidor funcionando correctamente"));
+        this.app.use(shipmentRouter);
     }
 
     protected addParsers() {
