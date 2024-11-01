@@ -1,9 +1,11 @@
 import { ComponentType } from 'react';
-import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
+import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
 import Categoria from '../categoria/Categoria';
 import Home from '../Home';
 import Login from '../Login';
+import { CarritoCompraRealizada } from '../productos/carrito/CarritoCompra';
+import { CarritoCompras } from '../productos/carrito/CarritoCompras';
 import Producto from '../productos/Producto';
 import Productos from '../productos/Productos';
 import { ProductosCreate } from '../productos/ProductosCreate';
@@ -81,6 +83,23 @@ const routes: TRoute[] = [
     layout: "/admin",
     isPrivate: false,
     icon: FaGlobe,
+  },
+  {
+    path: "/carrito/",
+    name: "Mi carrito de compras",
+    component: CarritoCompras,
+    layout: "/admin",
+    isPrivate: false,
+    icon: FaShoppingCart,
+  },
+  {
+    path: "/carrito/compra",
+    name: "Compra",
+    component: CarritoCompraRealizada,
+    layout: "/admin",
+    showInSidebar: false,
+    isPrivate: false,
+    icon: FaShoppingCart,
   },
   {
     path: "/categoria/:categoriaId",

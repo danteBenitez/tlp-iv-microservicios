@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem, getShoppingCart, updateShoppingCart } from "../services/shoppingCartService";
+import { buyShoppingCart, CartItem, getShoppingCart, updateShoppingCart } from "../services/shoppingCartService";
 import { AppThunk } from "../store";
 import { showNotification } from "./notificationSlice";
+import { IProduct } from "./productSlice";
 
 
 export interface ICart {
     cartId: string,
     quantity: number,
     productId: string,
+    product: IProduct,
     userId: string
 }
 
@@ -69,7 +71,7 @@ export const {
 
 export const fetchShoppingCart = (): AppThunk => async (dispatch) => {
     try {
-        dispatch(fetchShoppingCart());
+        dispatch(fetchShoppingCartsStart());
         const cart = await getShoppingCart();
         dispatch(fetchShoppingCartsSuccess(cart));
     } catch (error) {
@@ -97,6 +99,31 @@ export const editShoppingCart =
                         type: "success",
                     })
                 );
+            } catch (error) {
+                if (error instanceof Error) {
+                    dispatch(fetchShoppingCartsFailure(error.message));
+                    dispatch(showNotification({ message: error.message, type: "error" }));
+                } else {
+                    dispatch(fetchShoppingCartsFailure("An error occurred"));
+                    dispatch(
+                        showNotification({ message: "An error occurred", type: "error" })
+                    );
+                }
+            }
+        };
+
+export const buyAllFromShoppingCart =
+    (address: string): AppThunk =>
+        async (dispatch) => {
+            try {
+                await buyShoppingCart(address);
+                dispatch(
+                    showNotification({
+                        message: "Compra realizada con éxito",
+                        type: "success",
+                    })
+                );
+                dispatch(fetchShoppingCart());
             } catch (error) {
                 if (error instanceof Error) {
                     dispatch(fetchShoppingCartsFailure(error.message));

@@ -184,11 +184,13 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
           variant="primary"
           size="lg"
           className="d-flex align-items-center gap-2"
-          disabled={!!inCart || quantity <= 0}
+          disabled={quantity <= 0}
           onClick={() => {
             if (inCart) {
               dispatch(
-                editShoppingCart([{ productId, quantity, delete: true }])
+                editShoppingCart([
+                  { cartId: inCart.cartId, productId, quantity, delete: true },
+                ])
               );
             } else {
               dispatch(editShoppingCart([{ productId, quantity }]));
@@ -196,7 +198,10 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
           }}
         >
           <FaShoppingCart />
-          {!isLoading && (inCart ? "Agregado" : "Agregar al carrito")}
+          {!isLoading &&
+            (inCart && inCart.quantity == quantity
+              ? "Agregado"
+              : "Agregar al carrito")}
           {isLoading && <p>Cargando...</p>}
         </Button>
 
