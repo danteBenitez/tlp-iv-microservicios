@@ -32,6 +32,29 @@ export class SaleService {
         return sale;
     }
 
+    async findForUser(userId: string) {
+        const sales = await this.saleRepository.findForUser(userId);
+
+        if (sales.length === 0) {
+            throw new SaleNotFoundError("No existen ventas para este usuario");
+        }
+
+        return Promise.all(sales.map(async sale => {
+            return {
+                // FIXME: 
+                // @ts-expect-error 
+                ...sale.dataValues,
+                details: await Promise.all(sale.details?.map(async d => ({
+                    saleDetailId: d.saleDetailId,
+                    saleId: d.saleId,
+                    quantity: d.quantity,
+                    sellPrice: d.sellPrice,
+                    product: await this.productService.findById(d.productId)
+                })) ?? [])
+            }
+        }))
+    }
+
     async findAll() {
         const sales = await this.saleRepository.findAll();
 

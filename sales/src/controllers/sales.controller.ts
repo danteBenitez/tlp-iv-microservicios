@@ -91,7 +91,8 @@ export class SalesController {
     }
 
     try {
-      const sale = await this.salesService.findById(user.userId.toString());
+      const sale = await this.salesService.findForUser(user.userId.toString());
+      console.log(sale);
       return res.status(200).json(sale);
     } catch (err) {
       if (err instanceof SaleNotFoundError) {

@@ -6,6 +6,7 @@ import Sale from "../models/sale.model";
 export interface ISaleRepository {
     findById(saleId: string): Promise<ISale | null>;
     findAll(): Promise<ISale[] | null>;
+    findForUser(userId: string): Promise<ISale[]>;
     create(sale: Omit<ISale, "saleId">): Promise<ISale>
     createDetails(saleId: string, details: (Omit<ISaleDetail, "saleId" | "saleDetailId">)[]): Promise<ISaleDetail[] | null>
 }
@@ -19,6 +20,13 @@ export class PostgresSaleRepository implements ISaleRepository {
 
     findById(saleId: string): Promise<ISale | null> {
         return this.saleModel.findByPk(saleId, {
+            include: [this.saleDetailModel]
+        });
+    }
+
+    findForUser(userId: string): Promise<ISale[]> {
+        return this.saleModel.findAll({
+            where: { userId },
             include: [this.saleDetailModel]
         });
     }
