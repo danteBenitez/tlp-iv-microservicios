@@ -54,7 +54,7 @@ export function Ventas() {
                           </Link>
                         </td>
                         <td className="fw-medium">{d.quantity}</td>
-                        <td className="fw-medium">{d.saleId}</td>
+                        <td className="fw-medium">${d.sellPrice}</td>
                       </tr>
                     );
                   })}

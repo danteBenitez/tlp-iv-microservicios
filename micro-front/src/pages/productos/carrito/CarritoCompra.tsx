@@ -69,6 +69,7 @@ export function CarritoCompraRealizada() {
             <tr>
               <td className="fw-medium">Producto</td>
               <td className="fw-medium">Cantidad</td>
+              <td className="fw-medium">Precio</td>
             </tr>
             <tbody>
               {cart.map((c) => (
@@ -79,6 +80,7 @@ export function CarritoCompraRealizada() {
                     </Link>
                   </td>
                   <td className="fw-medium">{c.quantity}</td>
+                  <td className="fw-medium">${c.product.price}</td>
                 </tr>
               ))}
             </tbody>
