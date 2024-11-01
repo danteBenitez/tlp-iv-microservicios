@@ -1,5 +1,7 @@
-import { Card, Col } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 import { ISupplier } from "../../store/slices/supplierSlice";
+import { Link } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
 
 type TProveedoresCard = {
   supplier: ISupplier;
@@ -48,6 +50,15 @@ export default function ProveedoresCard({
               {supplier.phoneNumber}
             </a>
           </Card.Text>
+          <Link to={`/admin/proveedores/${supplier.supplierId}/editar`}>
+            <Button
+              variant="primary"
+              className="d-flex justify-content-center align-items-center fs-5 gap-2"
+            >
+              <FaPencilAlt></FaPencilAlt>
+              Editar
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     </Col>
