@@ -17,6 +17,7 @@ import Profile from '../users/profile';
 import Users from '../users/user';
 import { Venta } from '../ventas/Venta';
 import { Ventas } from '../ventas/Ventas';
+import ProveedoresUpdate from '../proveedores/ProveedoresUpdate';
 
 export type TRoute = {
   path: string;
@@ -158,6 +159,15 @@ const routes: TRoute[] = [
     name: "Proveedor",
     showInSidebar: false,
     component: ProveedoresCreate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
+  {
+    path: "/proveedores/:supplierId/editar",
+    name: "Proveedor",
+    showInSidebar: false,
+    component: ProveedoresUpdate,
     layout: "/admin",
     isPrivate: true,
     icon: FaList,

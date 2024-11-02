@@ -10,6 +10,7 @@ import routes, { TRoute } from "../pages/components/routes";
 import ErrorPage from "../pages/ErrorPages";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AdminRoutes from "./AdminRoutes";
 import PrivateRoute from "./PrivateRoutes";
 
 export default function AppRouters() {
@@ -17,7 +18,6 @@ export default function AppRouters() {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/admin/home" />} />
-        <Route path="/" element={<MainLayout />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
         <Route path="/admin/*" element={<MainLayout />}>
@@ -26,6 +26,15 @@ export default function AppRouters() {
               ? route.path.substring(1)
               : route.path;
             if (route.isPrivate) {
+              if (route.layout === "/admin") {
+                return (
+                  <Route
+                    key={index}
+                    path={fullPath}
+                    element={<AdminRoutes component={route.component} />}
+                  />
+                );
+              }
               return (
                 <Route
                   key={index}
@@ -34,6 +43,7 @@ export default function AppRouters() {
                 />
               );
             }
+
             return (
               <Route
                 key={index}
