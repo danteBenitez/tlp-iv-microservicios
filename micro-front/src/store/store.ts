@@ -7,6 +7,7 @@ import shipmentReducer from './slices/shipmentSlice';
 import shoppingCartReducer from "./slices/shippingCartSlice";
 import suppliersReducer from './slices/supplierSlice';
 import usersReducer from './slices/userSlice';
+import purchaseReducer from './slices/purchaseSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     suppliers: suppliersReducer,
     shoppingCart: shoppingCartReducer,
     shippings: shipmentReducer,
-    sales: saleReducer
+    sales: saleReducer,
+    purchases: purchaseReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

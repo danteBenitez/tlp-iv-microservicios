@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
+import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaProductHunt, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
 import { Envios } from '../envios/Envios';
 import Home from '../Home';
@@ -18,6 +18,7 @@ import Users from '../users/user';
 import { Venta } from '../ventas/Venta';
 import { Ventas } from '../ventas/Ventas';
 import ProveedoresUpdate from '../proveedores/ProveedoresUpdate';
+import ComprasIndex from '../compras/Compras';
 
 export type TRoute = {
   path: string;
@@ -171,6 +172,14 @@ const routes: TRoute[] = [
     layout: "/admin",
     isPrivate: true,
     icon: FaList,
+  },
+  {
+    path: "/compras",
+    name: "Compras",
+    component: ComprasIndex,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaProductHunt,
   },
 ];
 

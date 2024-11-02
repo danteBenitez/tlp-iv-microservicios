@@ -16,10 +16,13 @@ export default function AdminRoutes({
     (state: RootState) => state.auth
   );
 
-  if (loadingAuthentication) {
+  if (loadingAuthentication && !isAuthenticated) {
     return null;
   }
-
+  
+  console.log({isAuthenticated, isAdmin, loadingAuthentication});
+  
+  
   return isAuthenticated && isAdmin ? (
     <Component {...rest} />
   ) : (
