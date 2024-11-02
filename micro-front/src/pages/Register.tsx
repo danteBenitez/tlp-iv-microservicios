@@ -96,7 +96,7 @@ export default function Register() {
       dispatch(
         showNotification({ message: "Usuario registrado", type: "success" })
       );
-      navigate("/auth/login");
+      navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {
         dispatch(
