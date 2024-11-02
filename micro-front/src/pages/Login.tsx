@@ -95,14 +95,14 @@ export default function Login() {
                 Login
               </Button>
             </Form>
-            <div className="text-center mt-4">
-              Don't have an account?{" "}
+            <div className="text-center mt-4 flex fs-5">
+              <span>No tienes una cuenta?</span>
               <NavLink
                 as={Link}
                 to="/auth/register"
                 className="text-decoration-underline text-primary"
               >
-                Sign up
+                Regístrate aquí
               </NavLink>
             </div>
           </div>
@@ -151,18 +151,10 @@ function InputPassword({
           value={value}
           onChange={onChange}
         />
-        <Button onClick={()=> setShowPassword(!showPassword)}>
-          {
-            showPassword ? <FaEye /> : <FaEyeSlash />
-          }
+        <Button onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <FaEye /> : <FaEyeSlash />}
         </Button>
       </InputGroup>
-      <NavLink
-        href="/auth/register"
-        className="text-decoration-underline text-primary float-end m-2 fs-6"
-      >
-        Olvidé mi contraseña?
-      </NavLink>
     </Form.Group>
   );
 }
