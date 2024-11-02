@@ -1,19 +1,13 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Container,
-  Table,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { getSaleById } from "../../store/services/saleService";
 import { showNotification } from "../../store/slices/notificationSlice";
 import { ISale } from "../../store/slices/saleSlice";
 import { AppDispatch } from "../../store/store";
+import { VentaCard } from "./VentaCard";
 
 export function Venta() {
   const { saleId } = useParams<{ saleId: string }>();
@@ -54,37 +48,7 @@ export function Venta() {
     <Container>
       <h1 className="mb-3">Detalle de compra</h1>
       <div className="d-flex flex-column gap-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              {new Date(sale.dateSale).toLocaleDateString("es")}
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-            <Table className="fs-4">
-              <tr>
-                <td className="fw-medium">Producto</td>
-                <td className="fw-medium">Cantidad</td>
-                <td className="fw-medium">Precio</td>
-              </tr>
-              <tbody>
-                {sale.details.map((d) => {
-                  return (
-                    <tr>
-                      <td className="fw-medium">
-                        <Link to={`/admin/productos/${d.product?._id}`}>
-                          {d.product?.name}
-                        </Link>
-                      </td>
-                      <td className="fw-medium">{d.quantity}</td>
-                      <td className="fw-medium">${d.sellPrice}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </CardBody>
-        </Card>
+        <VentaCard sale={sale} />
       </div>
     </Container>
   );
