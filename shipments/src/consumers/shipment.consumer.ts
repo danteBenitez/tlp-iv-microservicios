@@ -11,8 +11,9 @@ export class ShipmentConsumer {
     ) { }
 
     setup() {
-        console.log("Preparando consumidores de mensajes");
         this.brokerClient.consume("sold-items", (msg) => {
+            if (msg) this.brokerClient.ackMessage(msg);
+            this.brokerClient
             if (!msg?.content) {
                 throw new Error("Contenido inesperado de mensaje");
             }
@@ -20,6 +21,7 @@ export class ShipmentConsumer {
             this.consumeSoldProducts(data.user, data.sale, data.address);
         });
         this.brokerClient.consume("shipment-started", (msg) => {
+            if (msg) this.brokerClient.ackMessage(msg);
             if (!msg?.content) {
                 throw new Error("Contenido inesperado de mensaje");
             }
@@ -27,6 +29,7 @@ export class ShipmentConsumer {
             this.consumeShipmentStarted(data.shipmentId);
         })
         this.brokerClient.consume("shipment-arrived", (msg) => {
+            if (msg) this.brokerClient.ackMessage(msg);
             if (!msg?.content) {
                 throw new Error("Contenido inesperado de mensaje");
             }
