@@ -82,7 +82,7 @@ export function ShipmentItem({ shipment }: { shipment: IShipment }) {
       <div>
         <Link
           className="estado-envio-subtitulo"
-          to={`/admin/ventas/${shipment.saleId}`}
+          to={`/admin/sales/${shipment.saleId}`}
         >
           Ver venta
         </Link>

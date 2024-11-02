@@ -20,7 +20,7 @@ export const getSales = async () => {
 export const getSaleById = async (saleId: string) => {
     try {
         const response = await axiosInstance.get(`/sales/${saleId}`);
-        return response.data.sale;
+        return response.data;
     } catch (error) {
         console.error('Error fetching sale by ID:', error);
         throw error;
