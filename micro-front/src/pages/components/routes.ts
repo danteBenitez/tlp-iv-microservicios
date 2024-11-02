@@ -12,12 +12,12 @@ import { ProductosCreate } from '../productos/ProductosCreate';
 import { ProductoUpdate } from '../productos/ProductoUpdate';
 import ProveedoresIndex from '../proveedores/Proveedores';
 import ProveedoresCreate from '../proveedores/ProveedoresCreate';
+import ProveedoresUpdate from '../proveedores/ProveedoresUpdate';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
 import { Venta } from '../ventas/Venta';
 import { Ventas } from '../ventas/Ventas';
-import ProveedoresUpdate from '../proveedores/ProveedoresUpdate';
 import ComprasIndex from '../compras/Compras';
 
 export type TRoute = {

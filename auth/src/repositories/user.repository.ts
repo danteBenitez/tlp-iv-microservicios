@@ -63,7 +63,8 @@ export class PostgresRepository implements IUserRepository {
 
     findByUsername(username: string): Promise<IUser | null> {
         return this.userModel.findOne({
-            where: { username }
+            where: { username },
+            include: [this.roleModel]
         });
     }
 

@@ -170,6 +170,7 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
   const isLoading = useSelector(
     (state: RootState) => state.shoppingCart.loading
   );
+  const navigate = useNavigate();
 
   const handleBuy = () => {
     setAddress("");
@@ -187,6 +188,7 @@ export function BuyButtonGroup({ productId }: { productId: string }) {
         ],
       })
     );
+    navigate(0);
   };
 
   return (

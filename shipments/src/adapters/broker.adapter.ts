@@ -15,6 +15,10 @@ export class BrokerAdapter {
         this.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)));
     }
 
+    ackMessage(msg: Message) {
+        return this.channel.ack(msg, true);
+    }
+
 
     consume(queueName: string, onConnectionCallback: MessageHandler) {
         this.channel.assertQueue(queueName, {
@@ -27,6 +31,7 @@ export class BrokerAdapter {
                 this.onConnectionCallbacks[queueName].push(onConnectionCallback);
             }
             this.onConnectionCallbacks[queueName] = [onConnectionCallback];
+            return;
         }
         this.channel.consume(queueName, onConnectionCallback);
     }
@@ -47,6 +52,10 @@ export class BrokerAdapter {
             }
         }
         this.channel = channel;
+        this.channel.on("error", (e) => {
+            console.log("Ocurrió un error con RabbitMQ");
+            console.log(e);
+        })
     }
 }
 
