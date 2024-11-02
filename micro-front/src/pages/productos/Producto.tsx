@@ -20,6 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
+import ConfirmAlert from "../../components/ConfirmAlert";
 import { fetchProductById } from "../../store/services/productService";
 import { IProduct, removeProduct } from "../../store/slices/productSlice";
 import { addSale } from "../../store/slices/saleSlice";
@@ -33,10 +34,8 @@ const Producto: React.FC = () => {
   const isAdmin = useSelector((state: RootState) =>
     state.auth?.user?.roles?.find((r) => r.name == "admin")
   );
-  const dispatch: AppDispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.shoppingCart.cart);
   console.log(cart);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -74,17 +73,6 @@ const Producto: React.FC = () => {
         </Col>
         {isAdmin ? (
           <Col md={3} className="d-flex align-items-center gap-2">
-            <Button
-              variant="danger"
-              className="d-flex justify-content-center align-items-center fs-5 gap-2"
-              onClick={async () => {
-                dispatch(removeProduct(producto._id));
-                navigate("/admin/productos/");
-              }}
-            >
-              <FaTrash></FaTrash>
-              Eliminar
-            </Button>
             <Link to={`/admin/productos/${productoId}/editar`}>
               <Button
                 variant="primary"
@@ -94,6 +82,7 @@ const Producto: React.FC = () => {
                 Editar
               </Button>
             </Link>
+            <DeleteButton productId={productoId} />
           </Col>
         ) : null}
       </Row>
@@ -136,6 +125,38 @@ const Producto: React.FC = () => {
     </Container>
   );
 };
+
+export function DeleteButton({ productId }: { productId: string }) {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
+
+  return (
+    <div>
+      <Button
+        variant="danger"
+        className="d-flex justify-content-center align-items-center fs-5 gap-2"
+        onClick={async () => {
+          setShowAlert(true);
+        }}
+      >
+        <FaTrash></FaTrash>
+        Eliminar
+      </Button>
+      <ConfirmAlert
+        show={showAlert}
+        title="¿Está seguro de que desea eliminar este producto?"
+        message="Esta acción es irreversible"
+        onConfirm={() => {
+          dispatch(removeProduct(productId)).then((v) => {
+            if (v) navigate("/admin/productos/");
+          });
+        }}
+        onHide={() => setShowAlert(false)}
+      />
+    </div>
+  );
+}
 
 export function BuyButtonGroup({ productId }: { productId: string }) {
   const isAuthenticated = useSelector(
