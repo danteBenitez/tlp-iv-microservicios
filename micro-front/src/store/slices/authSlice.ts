@@ -27,9 +27,10 @@ const authSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<{ user: IUser; token: string }>) {
       state.isAuthenticated = true;
-      state.loadingAuthentication = false;     
+      state.loadingAuthentication = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.isAdmin = action.payload.user.roles.some((role) => role.name === 'admin');
       setAuthToken(state.token);
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       localStorage.setItem('token', action.payload.token);
@@ -45,6 +46,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.loadingAuthentication = false;
       state.user = action.payload.user;
+      state.isAdmin = action.payload.user.roles.some((role) => role.name === 'admin');
       state.token = action.payload.token;
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       localStorage.setItem('token', action.payload.token);
