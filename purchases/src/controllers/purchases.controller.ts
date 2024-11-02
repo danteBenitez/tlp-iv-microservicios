@@ -89,9 +89,11 @@ export class PurchasesController {
     }
   }
 
-  async findAll(req: Request, res: Response) {
+  async findAll(_req: Request, res: Response) {
     try {
       const purchases = await this.purchasesService.findAll();
+      console.log({purchases});
+      
       return res.status(200).json({purchases});
     } catch (err) {
       if (err instanceof PurchaseNotFoundError) {
