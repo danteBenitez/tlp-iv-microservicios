@@ -32,7 +32,7 @@ export default function Login() {
       dispatch(
         showNotification({ message: "Login successful", type: "success" })
       );
-      navigate("/admin/home");
+      navigate("/home");
     } catch (error: any) {
       dispatch(
         showNotification({

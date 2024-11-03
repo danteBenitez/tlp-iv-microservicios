@@ -26,7 +26,7 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
         return routes[i].name;
       }
     }
-    return "Brand";
+    return "";
   };
 
   const handleLogout = () => {

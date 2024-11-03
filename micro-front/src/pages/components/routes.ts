@@ -2,7 +2,6 @@ import { ComponentType } from 'react';
 import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingBag, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
 import { Envios } from '../envios/Envios';
-import Home from '../Home';
 import Login from '../Login';
 import { CarritoCompraRealizada } from '../productos/carrito/CarritoCompra';
 import { CarritoCompras } from '../productos/carrito/CarritoCompras';
@@ -45,14 +44,6 @@ const routes: TRoute[] = [
     component: Register,
     layout: "/auth",
     icon: FaHtml5,
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: Home,
-    layout: "/admin",
-    // isPrivate: true,
-    icon: FaKey,
   },
   {
     path: "/productos",
