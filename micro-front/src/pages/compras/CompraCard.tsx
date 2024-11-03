@@ -13,7 +13,7 @@ export default function CompraCard({ purchase }: { purchase: IPurchase }) {
         <Table className="fs-4">
           <thead>
             <tr>
-              <td className="fw-medium">Producto</td>
+              <td className="fw-medium">Productos</td>
               <td className="fw-medium">Cantidad</td>
               <td className="fw-medium">Precio de costo</td>
               <td className="fw-medium">Total</td>
