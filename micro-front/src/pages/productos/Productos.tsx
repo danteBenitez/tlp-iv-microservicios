@@ -51,7 +51,7 @@ const Productos: React.FC = () => {
       {products.length == 0 ? <p>No hay productos registrados</p> : null}
       <Row>
         {products.map((producto) => (
-          <ProductoCard producto={producto} />
+          <ProductoCard key={producto._id} producto={producto} />
         ))}
       </Row>
     </Container>

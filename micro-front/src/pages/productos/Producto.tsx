@@ -98,7 +98,7 @@ const Producto: React.FC = () => {
               <Card.Text>
                 Tags:{" "}
                 {producto.tags.map((t) => (
-                  <Badge>{t}</Badge>
+                  <Badge key={t}>{t}</Badge>
                 ))}
               </Card.Text>
             </Card.Body>
@@ -113,6 +113,7 @@ const Producto: React.FC = () => {
             {producto.images.map((img) => {
               return (
                 <CardImg
+                  key={img._id}
                   style={{ objectFit: "contain" }}
                   src={resolveImageUrl(img._id ?? productImagePlaceholder)}
                   className="img-fluid"
