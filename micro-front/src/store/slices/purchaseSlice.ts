@@ -3,12 +3,14 @@ import { AppThunk } from "../store";
 import { showNotification } from "./notificationSlice";
 import { IProduct } from "./productSlice";
 import { getPurchases, makePurchase } from "../services/purchaseService";
+import { ISupplier } from "./supplierSlice";
 
 
 export interface IPurchase {
     purchaseId?: string,
     datePurchase: Date,
     supplierId: string
+    supplier?: ISupplier
     details: IPurchaseDetail[]
 }
 

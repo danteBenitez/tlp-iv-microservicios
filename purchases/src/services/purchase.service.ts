@@ -54,6 +54,7 @@ export class PurchaseService {
         return {
           //@ts-expect-error
           ...purchase.dataValues,
+          supplier: await this.supplierService.findById(purchase.supplierId),
           details: await Promise.all(
             purchase.details?.map(async (d) => ({
               purchaseDetailId: d.purchaseDetailId,
