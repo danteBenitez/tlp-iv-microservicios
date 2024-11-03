@@ -21,10 +21,13 @@ export const getPurchases = async (): Promise<IPurchase[]> => {
 export const makePurchase = async (details: IPurchase): Promise<IPurchase> => {
     try {
         const response = await axiosInstance.post('/purchases/', details);
+        console.log('Purchase created:', response.data);
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {
             if (error.response?.data) {
+                console.log(error.response.data);
+                
                 throw error.response.data
             }
         }

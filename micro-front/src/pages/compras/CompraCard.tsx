@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, CardTitle, Table } from "react-bootstrap";
+import { Card, CardBody, CardFooter, CardHeader, CardTitle, Table } from "react-bootstrap";
 import { IPurchase } from "../../store/slices/purchaseSlice";
 import { Link } from "react-router-dom";
 
@@ -29,8 +29,8 @@ export default function CompraCard({ purchase }: { purchase: IPurchase }) {
             </tr>
           </thead>
           <tbody>
-            {purchase.details.map((d) => (
-              <tr key={d.purchaseId}>
+            {purchase.details?.map((d) => (
+              <tr key={d.product?._id}>
                 <td className="fw-medium">
                   <Link to={`/admin/productos/${d.product?._id}`}>
                     {d.product?.name}
@@ -46,6 +46,9 @@ export default function CompraCard({ purchase }: { purchase: IPurchase }) {
           </tbody>
         </Table>
       </CardBody>
+      <CardFooter>
+        Total de la compra: ${purchase.details?.reduce((acc, d) => acc + (d.costPrice ?? 0) * d.quantity, 0)}
+      </CardFooter>
     </Card>
   );
 }
