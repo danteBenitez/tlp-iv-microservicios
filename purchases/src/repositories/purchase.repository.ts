@@ -28,6 +28,7 @@ export class PostgresPurchaseRepository implements IPurchaseRepository {
   findAll(): Promise<IPurchase[] | null> {
     return this.purchaseModel.findAll({
       include: [this.purchaseDetailModel],
+      order: [["datePurchase", "DESC"]],
     });
   }
 

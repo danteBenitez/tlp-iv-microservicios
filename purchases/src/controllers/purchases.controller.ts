@@ -29,7 +29,10 @@ export class PurchasesController {
 
       const sale = await this.purchasesService.buy(
         data.details,
-        data.supplierId
+        {
+          datePurchase: new Date(data.datePurchase),
+          supplierId: data.supplierId,
+        }
       );
 
       return res.status(200).json(sale);

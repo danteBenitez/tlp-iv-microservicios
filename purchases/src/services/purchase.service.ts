@@ -72,7 +72,7 @@ export class PurchaseService {
 
   async buy(
     items: PurchaseDetailItem[],
-    supplierId: string
+    dataPurchase: Omit<IPurchase, "purchaseId" | "details">,
   ): Promise<{ purchase: IPurchase; total: number }> {
     const details = await Promise.all(
       items.map(async (purchaseItem) => {
@@ -104,14 +104,14 @@ export class PurchaseService {
       }
     }
 
-    const found = await this.supplierService.findById(supplierId);
+    const found = await this.supplierService.findById(dataPurchase.supplierId);
 
     if (!found) {
       throw new SupplierNotFoundError("Proveedor no encontrado");
     }
 
     const data = {
-      datePurchase: new Date(),
+      datePurchase: new Date(dataPurchase.datePurchase),
       supplierId: found.supplierId,
       details,
     } as Omit<IPurchase, "purchaseId">;
