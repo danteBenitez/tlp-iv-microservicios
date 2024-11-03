@@ -20,9 +20,6 @@ export default function AdminRoutes({
     return null;
   }
   
-  console.log({isAuthenticated, isAdmin, loadingAuthentication});
-  
-  
   return isAuthenticated && isAdmin ? (
     <Component {...rest} />
   ) : (
