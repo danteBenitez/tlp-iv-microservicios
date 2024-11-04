@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { validateRequest } from "../utils/validate-schema";
+import { validateRequest, validateRequestBody } from "../utils/validate-schema";
 import {
   ConflictingSupplierError,
   InvalidDataError,
@@ -92,7 +92,7 @@ export class SupplierController {
   }
 
   async create(req: Request, res: Response) {
-    const { data, success, error } = await validateRequest(
+    const { data, success, error } = await validateRequestBody(
       req,
       createSupplierSchema
     );

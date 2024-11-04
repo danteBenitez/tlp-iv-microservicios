@@ -29,7 +29,10 @@ export class PurchasesController {
 
       const sale = await this.purchasesService.buy(
         data.details,
-        data.supplierId
+        {
+          datePurchase: new Date(data.datePurchase),
+          supplierId: data.supplierId,
+        }
       );
 
       return res.status(200).json(sale);
@@ -89,9 +92,11 @@ export class PurchasesController {
     }
   }
 
-  async findAll(req: Request, res: Response) {
+  async findAll(_req: Request, res: Response) {
     try {
       const purchases = await this.purchasesService.findAll();
+      console.log({purchases});
+      
       return res.status(200).json({purchases});
     } catch (err) {
       if (err instanceof PurchaseNotFoundError) {

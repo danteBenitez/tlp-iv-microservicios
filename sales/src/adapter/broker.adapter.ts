@@ -15,6 +15,10 @@ export class BrokerAdapter {
         this.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)));
     }
 
+    ackMessage(msg: Message) {
+        return this.channel.ack(msg, true);
+    }
+
     consume(queueName: string, onConnectionCallback: MessageHandler) {
         this.channel.assertQueue(queueName, {
             durable: false
@@ -26,6 +30,7 @@ export class BrokerAdapter {
                 this.onConnectionCallbacks[queueName].push(onConnectionCallback);
             }
             this.onConnectionCallbacks[queueName] = [onConnectionCallback];
+            return;
         }
         this.channel.consume(queueName, onConnectionCallback);
     }

@@ -68,12 +68,14 @@ export const createProductSchema = z.object({
     description: z.string({
         message: "Un producto debe tener una descripción"
     }),
-    images: z.object({
-        id: z.string().refine(data => isObjectIdOrHexString(data), {
-            message: "ID de imagen inválido"
-        }),
-        delete: z.boolean()
-    }).array().optional(),
+    images: z.string().refine(data => isObjectIdOrHexString(data), {
+        message: "ID de imagen inválido"
+    }).array().optional().or(z.string()).transform(data => {
+        if (typeof data == "string") {
+            return [data];
+        }
+        return data;
+    }),
     stock: z.number({
         message: "Un producto debe tener un stock",
         coerce: true

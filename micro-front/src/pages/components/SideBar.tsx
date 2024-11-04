@@ -26,17 +26,20 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
   const activeRoute = (routeName: string) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+  const { isAuthenticated, isAdmin } = useSelector(
+    (state: RootState) => state.auth
   );
   // const { user } = useSelector((state: RootState) => state.auth);
 
   const filteredRoutes = routes.filter((route) => {
     if (route.path === "/register") return false;
-    if (route.path === "/proveedores" && !isAuthenticated) return false;
-    if (route.path === "/users" && !isAuthenticated) return false;
+    if (route.path === "/users" && (!isAuthenticated || !isAdmin)) return false;
     if (route.name === "Producto") return;
-    if (route.path === "/login" && isAuthenticated) return false;
+    if (route.path === "/proveedores" && (!isAuthenticated || !isAdmin))
+      return false;
+    if (route.name === "Proveedor" && (!isAuthenticated || !isAdmin))
+      return false;
+    if (route.path === "/login") return false;
     return true;
   });
 
@@ -49,14 +52,16 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>
-          <Navbar.Brand href="/admin" className="d-flex align-items-center">
-            <Image
-              src={logo}
-              roundedCircle
-              className="me-2"
-              style={{ width: "auto", height: "40px" }}
-            />
-            <span>TeLoCompro</span>
+          <Navbar.Brand className="d-flex align-items-center">
+            <NavLink onClick={handleClose} to="/home" className="nav-link">
+              <Image
+                src={logo}
+                roundedCircle
+                className="me-2"
+                style={{ width: "auto", height: "40px" }}
+              />
+              <span className="link-underline-opacity-0">TeLoCompro</span>
+            </NavLink>
           </Navbar.Brand>
         </Offcanvas.Title>
       </Offcanvas.Header>
@@ -99,6 +104,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
           >
             {filteredRoutes.map((prop, key) => {
               if (prop.showInSidebar === false) return null;
+              if (prop.isPrivate && !isAuthenticated) return null;
               if (!prop.redirect)
                 return (
                   <li
@@ -122,6 +128,7 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
                       <NavLink
                         to={prop.layout + prop.path}
                         className="nav-link"
+                        onClick={handleClose}
                       >
                         <div className="nav-item-content">
                           {prop.icon && <prop.icon />}

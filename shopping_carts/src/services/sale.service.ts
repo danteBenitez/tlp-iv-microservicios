@@ -5,7 +5,7 @@ import { CartItem } from "./cart.service";
 export class SaleService {
 
 
-    async sell(userId: string, cartItems: CartItem[]): Promise<IProduct | null> {
+    async sell(userId: string, cartItems: CartItem[], address: string): Promise<IProduct | null> {
         const fullUrl = new URL(config.getSaleServiceUrl());
         const response = await fetch(fullUrl, {
             method: "POST",
@@ -13,7 +13,7 @@ export class SaleService {
                 "Content-Type": "application/json",
                 "X-Authentication-Id": userId
             },
-            body: JSON.stringify(cartItems)
+            body: JSON.stringify({ address, items: cartItems })
         });
         if (response.status == 404 || response.status == 401) {
             console.warn("Respuesta al intentar vender: ", await response.text());

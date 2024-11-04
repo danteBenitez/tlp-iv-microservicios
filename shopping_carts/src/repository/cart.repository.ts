@@ -7,7 +7,7 @@ export interface ICartRepository {
     findById(cartId: string): Promise<ICart | null>
     findAllForUser(userId: string): Promise<ICart[]>
     create(userId: string, item: CartItem): Promise<ICart>
-    clear(userId: string): void;
+    clear(userId: string): Promise<void>;
     update(userId: string, data: Partial<ICart>): Promise<ICart | null>
     delete(userId: string, cartId: string): Promise<ICart | null>
 }
@@ -45,7 +45,7 @@ export class PostgresCartRepository implements ICartRepository {
     }
 
     async clear(userId: string) {
-        return this.cartModel.destroy({
+        return void this.cartModel.destroy({
             where: { userId }
         });
     }

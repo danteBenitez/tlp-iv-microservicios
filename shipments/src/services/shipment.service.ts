@@ -20,6 +20,12 @@ export class ShipmentService {
         return found;
     }
 
+    async findForUser(shipmentId: string) {
+        const found = await this.repository.findAllForUser(shipmentId);
+        if (!found) throw new ShipmentNotFoundError("El usuario no tiene envíos");
+        return found;
+    }
+
     async createInStock(data: Omit<IShipment, "shipmentId" | "status">) {
         const created = await this.repository.create({
             ...data,

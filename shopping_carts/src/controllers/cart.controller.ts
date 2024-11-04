@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CartNotFoundError, CartService, cartService as cartService_, CouldNotBuyError, ProductNotFoundError } from "../services/cart.service";
 import { validateRequestBody } from "../utils/validate-schema";
-import { cartItemsSchema } from "../validations/cart.schema";
+import { buyCartSchema, cartItemsSchema } from "../validations/cart.schema";
 
 export class CartController {
 
@@ -60,9 +60,10 @@ export class CartController {
                 message: "No estás autenticado"
             });
         }
+        const { data } = await validateRequestBody(req, buyCartSchema);
 
         try {
-            const carts = await this.cartService.buyAllCart(req.user.userId.toString());
+            const carts = await this.cartService.buyAllCart(req.user.userId.toString(), data.address);
 
             return res.status(200).json(carts);
 
