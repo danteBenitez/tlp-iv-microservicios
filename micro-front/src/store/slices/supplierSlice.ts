@@ -140,7 +140,7 @@ export const addSupplier =
   };
 
 export const editSupplier =
-  (supplierId: string, supplierData: ISupplier): AppThunk =>
+  (supplierId: string, supplierData: Omit<ISupplier, 'supplierId'>): AppThunk<Promise<boolean>> =>
   async (dispatch) => {
     try {
       const supplier = await updateSupplier(supplierId, supplierData);
@@ -151,6 +151,7 @@ export const editSupplier =
           type: "success",
         })
       );
+      return true;
     } catch (error) {
       if (error instanceof Error) {
         dispatch(fetchSuppliersFailure(error.message));
@@ -161,6 +162,7 @@ export const editSupplier =
           showNotification({ message: "An error occurred", type: "error" })
         );
       }
+      return false;
     }
   };
 

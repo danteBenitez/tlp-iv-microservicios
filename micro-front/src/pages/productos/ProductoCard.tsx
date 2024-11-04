@@ -1,10 +1,17 @@
+import { ReactNode } from "react";
 import { Badge, Button, Card, Col, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import productImagePlaceholder from "../../assets/img/product-placeholder.jpg";
 import { IProduct } from "../../store/slices/productSlice";
 import { resolveImageUrl } from "../../utils/resolve-image-url";
 
-export function ProductoCard({ producto }: { producto: IProduct }) {
+export function ProductoCard({
+  producto,
+  bottomRight,
+}: {
+  producto: IProduct;
+  bottomRight?: ReactNode;
+}) {
   return (
     <Col md={4} key={producto._id}>
       <Card className="mb-4">
@@ -30,16 +37,23 @@ export function ProductoCard({ producto }: { producto: IProduct }) {
           <Card.Text>
             Tags:{" "}
             {producto.tags.map((tag) => (
-              <Badge>{tag}</Badge>
+              <Badge key={tag}>{tag}</Badge>
             ))}
           </Card.Text>
           <Card.Text>Stock: {producto.stock}</Card.Text>
           <Card.Text>Id: {producto._id}</Card.Text>
-          <NavLink as={Link} to={`${producto._id}`} className="w-full">
-            <Button variant="primary" className="w-full">
-              Ver Producto
-            </Button>
-          </NavLink>
+          <div className="d-flex justify-content-between align-items-center">
+            <NavLink
+              as={Link}
+              to={`/admin/productos/${producto._id}`}
+              className="w-full"
+            >
+              <Button variant="primary" className="w-full">
+                Ver Producto
+              </Button>
+            </NavLink>
+            {bottomRight}
+          </div>
         </Card.Body>
       </Card>
     </Col>

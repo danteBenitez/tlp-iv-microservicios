@@ -63,7 +63,8 @@ export class PostgresRepository implements IUserRepository {
 
     findByUsername(username: string): Promise<IUser | null> {
         return this.userModel.findOne({
-            where: { username }
+            where: { username },
+            include: [this.roleModel]
         });
     }
 
@@ -146,7 +147,7 @@ export class PostgresRepository implements IUserRepository {
         return found;
     }
 
-    async update(userId: number, user: Partial<IUser>): Promise<IUser | null> {        
+    async update(userId: number, user: Partial<IUser>): Promise<IUser | null> {
         const found = await this.userModel.findByPk(userId, {
             include: [this.roleModel]
         });
@@ -154,7 +155,7 @@ export class PostgresRepository implements IUserRepository {
 
         if (user.roles) {
             const roles = await this.roleModel.findAll({
-                where: { name: { [Op.or]: user.roles.map(role => role.name )}},
+                where: { name: { [Op.or]: user.roles.map(role => role.name) } },
             });
             await found.$set('roles', roles);
         }

@@ -37,6 +37,9 @@ export const purchaseSchema = z.object({
     supplierId: z.string({
         message: "El ID de proveedor es requerido"
     }).uuid(),
+    datePurchase: z.string({
+        message: "La fecha de compra es requerida"
+    }),
     details: purchaseDetailSchema
 })
 

@@ -7,6 +7,7 @@ import { IUser } from './userSlice';
 export interface AuthState {
   isAuthenticated: boolean;
   loadingAuthentication: boolean;
+  isAdmin: boolean;
   user: IUser | null;
   token: string | null;
   error?: string | null;
@@ -14,6 +15,7 @@ export interface AuthState {
 const initialState: AuthState = {
   loadingAuthentication: true,
   isAuthenticated: false,
+  isAdmin: false,
   user: null,
   token: null,
   error: null,
@@ -28,6 +30,7 @@ const authSlice = createSlice({
       state.loadingAuthentication = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.isAdmin = action.payload.user.roles.some((role) => role.name === 'admin');
       setAuthToken(state.token);
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       localStorage.setItem('token', action.payload.token);
@@ -43,6 +46,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.loadingAuthentication = false;
       state.user = action.payload.user;
+      state.isAdmin = action.payload.user.roles.some((role) => role.name === 'admin');
       state.token = action.payload.token;
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       localStorage.setItem('token', action.payload.token);
@@ -57,13 +61,21 @@ const authSlice = createSlice({
     },
     setProfile(state, action: PayloadAction<IUser>) {
       state.user = action.payload;
+      state.isAdmin = action.payload.roles.some((role) => role.name === 'admin');
     },
   },
 });
 
 export const { login, logout, registerSuccess, registerFailure, setProfile } = authSlice.actions;
 
-export const register = (formData: any) => async (dispatch: Dispatch) => {
+
+type TNewUser = {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export const register = (formData: TNewUser) => async (dispatch: Dispatch) => {
   try {
     const response = await axiosInstance.post('/auth/register', formData);
     dispatch(registerSuccess({ user: response.data.user, token: response.data.token }));

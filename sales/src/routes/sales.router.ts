@@ -12,6 +12,8 @@ router.use([authMiddleware]);
 
 router.get('/', [...roleMiddleware(ROLES.ADMIN)], (req: Request, res: Response) => controller.findAll(req, res));
 
+router.get('/mine', (req: Request, res: Response) => controller.findMine(req, res));
+
 router.get('/:saleId', (req, res) => controller.findById(req, res));
 
 router.post('/', (req, res) => controller.sell(req, res))

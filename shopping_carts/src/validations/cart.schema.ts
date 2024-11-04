@@ -16,3 +16,9 @@ export const cartItemsSchema = z.object({
 }).array().refine(data => data.length >= 1, {
     message: "Debe agregar al menos un producto"
 });
+
+export const buyCartSchema = z.object({
+    address: z.string({
+        message: "Necesita una dirección de entrega para los productos"
+    })
+});

@@ -1,5 +1,13 @@
 import { FormEvent, useState } from "react";
-import { Button, Col, Container, Form, NavLink, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  NavLink,
+  Row,
+} from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import loginBackground from "../assets/img/login-bg.jpg";
@@ -7,6 +15,7 @@ import axiosInstance from "../store/actionAxios";
 import { login } from "../store/slices/authSlice";
 import { showNotification } from "../store/slices/notificationSlice";
 import LoadingOverlay from "./components/LoadingOverlay";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -23,7 +32,7 @@ export default function Login() {
       dispatch(
         showNotification({ message: "Login successful", type: "success" })
       );
-      navigate("/admin/home");
+      navigate("/home");
     } catch (error: any) {
       dispatch(
         showNotification({
@@ -53,13 +62,6 @@ export default function Login() {
       }}
     >
       <Row className="w-100">
-        <h2 className="text-center mb-4 text-white fw-bold fs-1">
-          Iniciar Sesión
-        </h2>
-        <p className="text-center mb-4 text-white fs-4">
-          Bienvenido de nuevo, por favor ingrese sus credenciales
-        </p>
-
         <Col
           lg={6}
           className="d-flex align-items-center justify-content-center py-5"
@@ -69,53 +71,38 @@ export default function Login() {
             style={{ maxWidth: "500px", color: "black" }}
           >
             <div className="text-center mb-4">
-              <h1 className="h3 mb-3 font-weight-normal fw-bold">Login</h1>
+              <h1 className="text-center mb-4 fw-bold fs-1">Iniciar Sesión</h1>
               <p className="text-muted">
-                Enter your username below to login to your account
+                Bienvenido de nuevo, por favor ingrese sus credenciales
               </p>
             </div>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="username" className="mb-3">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>Usuario</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="username"
+                  placeholder="Ingresa tu nombre de usuario"
                   required
                   value={formData.username}
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="password" className="mb-3">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <NavLink
-                  href="/auth/register"
-                  className="text-decoration-underline text-primary float-end m-2"
-                >
-                  Forgot your password?
-                </NavLink>
-              </Form.Group>
+              <InputPassword
+                value={formData.password}
+                onChange={handleChange}
+              />
               <Button type="submit" className="w-100 mb-2">
                 Login
               </Button>
-              <Button variant="outline-primary" className="w-100">
-                Login with Google
-              </Button>
             </Form>
-            <div className="text-center mt-4">
-              Don't have an account?{" "}
+            <div className="text-center mt-4 flex fs-5">
+              <span>No tienes una cuenta?</span>
               <NavLink
                 as={Link}
                 to="/auth/register"
                 className="text-decoration-underline text-primary"
               >
-                Sign up
+                Regístrate aquí
               </NavLink>
             </div>
           </div>
@@ -141,5 +128,33 @@ export default function Login() {
         </Col>
       </Row>
     </Container>
+  );
+}
+
+function InputPassword({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <Form.Group controlId="password" className="mb-3">
+      <Form.Label>Contraseña</Form.Label>
+      <InputGroup>
+        <Form.Control
+          type={showPassword ? "text" : "password"}
+          placeholder="Ingresa tu contraseña"
+          required
+          value={value}
+          onChange={onChange}
+        />
+        <Button onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <FaEye /> : <FaEyeSlash />}
+        </Button>
+      </InputGroup>
+    </Form.Group>
   );
 }

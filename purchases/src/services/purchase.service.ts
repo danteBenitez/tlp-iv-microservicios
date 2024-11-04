@@ -45,12 +45,34 @@ export class PurchaseService {
   async findAll() {
     const purchases = await this.purchaseRepository.findAll();
 
-    return purchases;
+    if (!purchases) {
+      return [];
+    }
+
+    return Promise.all(
+      purchases.map(async (purchase) => {
+        return {
+          //@ts-expect-error
+          ...purchase.dataValues,
+          supplier: await this.supplierService.findById(purchase.supplierId),
+          details: await Promise.all(
+            purchase.details?.map(async (d) => ({
+              purchaseDetailId: d.purchaseDetailId,
+              quantity: d.quantity,
+              costPrice: d.costPrice,
+              purchaseId: d.purchaseId,
+              productId: d.productId,
+              product: await this.productService.findById(d.productId),
+            })) ?? []
+          ),
+        };
+      })
+    );
   }
 
   async buy(
     items: PurchaseDetailItem[],
-    supplierId: string
+    dataPurchase: Omit<IPurchase, "purchaseId" | "details">,
   ): Promise<{ purchase: IPurchase; total: number }> {
     const details = await Promise.all(
       items.map(async (purchaseItem) => {
@@ -82,22 +104,19 @@ export class PurchaseService {
       }
     }
 
-    const found = await this.supplierService.findById(supplierId);
+    const found = await this.supplierService.findById(dataPurchase.supplierId);
 
     if (!found) {
       throw new SupplierNotFoundError("Proveedor no encontrado");
     }
 
-    console.log({ found });
-    
+    const data = {
+      datePurchase: new Date(dataPurchase.datePurchase),
+      supplierId: found.supplierId,
+      details,
+    } as Omit<IPurchase, "purchaseId">;
 
-    const purchase = await this.create(
-      {
-        datePurchase: new Date(),
-        supplierId: found.supplierId,
-      },
-      details
-    );
+    const purchase = await this.create(data);
 
     const total = details.reduce((acc, d) => acc + d.costPrice * d.quantity, 0);
 
@@ -105,14 +124,13 @@ export class PurchaseService {
   }
 
   private async create(
-    purchaseData: Omit<IPurchase, "purchaseId">,
-    detailsData: Omit<IPurchaseDetail, "purchaseDetailId" | "purchaseId">[]
+    purchaseData: Omit<IPurchase, "purchaseId">
   ): Promise<IPurchase> {
     const purchase = await this.purchaseRepository.create(purchaseData);
 
     await this.purchaseRepository.createDetails(
       purchase.purchaseId,
-      detailsData
+      purchaseData.details
     );
 
     return this.findById(purchase.purchaseId);

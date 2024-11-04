@@ -114,7 +114,7 @@ export const editProduct = (productId: string, productData: FormData): AppThunk<
     }
 };
 
-export const removeProduct = (productId: string): AppThunk => async dispatch => {
+export const removeProduct = (productId: string): AppThunk<Promise<boolean>> => async dispatch => {
     try {
         await deleteProduct(productId);
         dispatch(deleteProductSuccess(productId));
@@ -123,6 +123,7 @@ export const removeProduct = (productId: string): AppThunk => async dispatch => 
     } catch (error: any) {
         dispatch(fetchProductsFailure(error.message));
         dispatch(showNotification({ message: error.message, type: 'error' }));
+        return false;
     }
 };
 

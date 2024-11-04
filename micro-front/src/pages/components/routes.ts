@@ -1,18 +1,24 @@
 import { ComponentType } from 'react';
-import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaUser, FaUserCircle } from 'react-icons/fa';
+import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingBag, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
-import Categoria from '../categoria/Categoria';
-import Home from '../Home';
+import { Envios } from '../envios/Envios';
 import Login from '../Login';
+import { CarritoCompraRealizada } from '../productos/carrito/CarritoCompra';
+import { CarritoCompras } from '../productos/carrito/CarritoCompras';
 import Producto from '../productos/Producto';
 import Productos from '../productos/Productos';
 import { ProductosCreate } from '../productos/ProductosCreate';
 import { ProductoUpdate } from '../productos/ProductoUpdate';
 import ProveedoresIndex from '../proveedores/Proveedores';
+import ProveedoresCreate from '../proveedores/ProveedoresCreate';
+import ProveedoresUpdate from '../proveedores/ProveedoresUpdate';
 import Register from '../Register';
 import Profile from '../users/profile';
 import Users from '../users/user';
-import ProveedoresCreate from '../proveedores/ProveedoresCreate';
+import { Venta } from '../ventas/Venta';
+import { Ventas } from '../ventas/Ventas';
+import ComprasIndex from '../compras/Compras';
+import ComprasCreate from '../compras/CompraCreate';
 
 export type TRoute = {
   path: string;
@@ -38,14 +44,6 @@ const routes: TRoute[] = [
     component: Register,
     layout: "/auth",
     icon: FaHtml5,
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: Home,
-    layout: "/admin",
-    // isPrivate: true,
-    icon: FaKey,
   },
   {
     path: "/productos",
@@ -74,12 +72,48 @@ const routes: TRoute[] = [
     icon: FaList,
   },
   {
-    path: "/categoria/:categoriaId",
-    name: "Categoria",
-    component: Categoria,
+    path: "/sales/",
+    name: "Mis compras",
+    component: Ventas,
     layout: "/admin",
-    isPrivate: false,
+    isPrivate: true,
+    showInSidebar: false,
     icon: FaGlobe,
+  },
+  {
+    path: "/sales/:saleId",
+    name: "Mis compras",
+    component: Venta,
+    layout: "/admin",
+    isPrivate: true,
+    showInSidebar: false,
+    icon: FaGlobe,
+  },
+  {
+    path: "/envios/",
+    name: "Mis envíos",
+    component: Envios,
+    layout: "/admin",
+    isPrivate: true,
+    showInSidebar: true,
+    icon: FaGlobe,
+  },
+  {
+    path: "/carrito/",
+    name: "Mi carrito de compras",
+    component: CarritoCompras,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaShoppingCart,
+  },
+  {
+    path: "/carrito/compra",
+    name: "Compra",
+    component: CarritoCompraRealizada,
+    layout: "/admin",
+    showInSidebar: false,
+    isPrivate: true,
+    icon: FaShoppingCart,
   },
   {
     path: "/productos/:productoId",
@@ -118,6 +152,32 @@ const routes: TRoute[] = [
     name: "Proveedor",
     showInSidebar: false,
     component: ProveedoresCreate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
+  {
+    path: "/proveedores/:supplierId/editar",
+    name: "Proveedor",
+    showInSidebar: false,
+    component: ProveedoresUpdate,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaList,
+  },
+  {
+    path: "/compras",
+    name: "Compras",
+    component: ComprasIndex,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaShoppingBag,
+  },
+  {
+    path: "/compras/crear",
+    name: "Compras",
+    showInSidebar: false,
+    component: ComprasCreate,
     layout: "/admin",
     isPrivate: true,
     icon: FaList,

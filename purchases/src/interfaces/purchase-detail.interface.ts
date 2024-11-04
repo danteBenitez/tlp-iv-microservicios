@@ -1,7 +1,7 @@
 export interface IPurchaseDetail {
-    purchaseDetailId: string,
+    purchaseDetailId?: string,
     quantity: number,
     costPrice: number,
-    purchaseId: string,
+    purchaseId?: string,
     productId: string
 }
