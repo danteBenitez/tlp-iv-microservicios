@@ -88,6 +88,14 @@ const routes: TRoute[] = [
     icon: FaUser,
   },
   {
+    path: "/envio",
+    name: "Envios",
+    component: estadoEnvio,
+    layout: "/admin",
+    isPrivate: true,
+    icon: FaUserCircle,
+  },
+  {
     path: "/profile",
     name: "Profile",
     component: Profile,
