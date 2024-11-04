@@ -1,6 +1,8 @@
 import { ComponentType } from 'react';
 import { FaEdit, FaGlobe, FaHtml5, FaKey, FaList, FaShoppingBag, FaShoppingCart, FaUser, FaUserCircle } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
+import ComprasCreate from '../compras/CompraCreate';
+import ComprasIndex from '../compras/Compras';
 import { Envios } from '../envios/Envios';
 import Login from '../Login';
 import { CarritoCompraRealizada } from '../productos/carrito/CarritoCompra';
@@ -17,14 +19,13 @@ import Profile from '../users/profile';
 import Users from '../users/user';
 import { Venta } from '../ventas/Venta';
 import { Ventas } from '../ventas/Ventas';
-import ComprasIndex from '../compras/Compras';
-import ComprasCreate from '../compras/CompraCreate';
 
 export type TRoute = {
   path: string;
   name: string;
   component: ComponentType;
   layout: string;
+  isAdminRoute?: boolean;
   showInSidebar?: boolean;
   isPrivate?: boolean;
   icon: IconType;
@@ -59,6 +60,7 @@ const routes: TRoute[] = [
     showInSidebar: false,
     component: ProductosCreate,
     layout: "/admin",
+    isAdminRoute: true,
     isPrivate: true,
     icon: FaList,
   },
@@ -66,6 +68,7 @@ const routes: TRoute[] = [
     path: "/productos/:productoId/editar",
     name: "Productos",
     showInSidebar: false,
+    isAdminRoute: true,
     component: ProductoUpdate,
     layout: "/admin",
     isPrivate: true,
@@ -73,16 +76,17 @@ const routes: TRoute[] = [
   },
   {
     path: "/sales/",
-    name: "Mis compras",
+    name: "Ventas",
     component: Ventas,
+    isAdminRoute: true,
     layout: "/admin",
     isPrivate: true,
-    showInSidebar: false,
+    showInSidebar: true,
     icon: FaGlobe,
   },
   {
     path: "/sales/:saleId",
-    name: "Mis compras",
+    name: "Compra",
     component: Venta,
     layout: "/admin",
     isPrivate: true,
@@ -127,6 +131,7 @@ const routes: TRoute[] = [
     path: "/users",
     name: "Users",
     component: Users,
+    isAdminRoute: true,
     layout: "/admin",
     isPrivate: true,
     icon: FaUser,
@@ -143,6 +148,7 @@ const routes: TRoute[] = [
     path: "/proveedores",
     name: "Proveedores",
     component: ProveedoresIndex,
+    isAdminRoute: true,
     layout: "/admin",
     isPrivate: true,
     icon: FaUserCircle,
@@ -151,6 +157,7 @@ const routes: TRoute[] = [
     path: "/proveedores/crear",
     name: "Proveedor",
     showInSidebar: false,
+    isAdminRoute: true,
     component: ProveedoresCreate,
     layout: "/admin",
     isPrivate: true,
@@ -160,6 +167,7 @@ const routes: TRoute[] = [
     path: "/proveedores/:supplierId/editar",
     name: "Proveedor",
     showInSidebar: false,
+    isAdminRoute: true,
     component: ProveedoresUpdate,
     layout: "/admin",
     isPrivate: true,
@@ -170,6 +178,7 @@ const routes: TRoute[] = [
     name: "Compras",
     component: ComprasIndex,
     layout: "/admin",
+    isAdminRoute: true,
     isPrivate: true,
     icon: FaShoppingBag,
   },
@@ -179,6 +188,7 @@ const routes: TRoute[] = [
     showInSidebar: false,
     component: ComprasCreate,
     layout: "/admin",
+    isAdminRoute: true,
     isPrivate: true,
     icon: FaList,
   },

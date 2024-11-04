@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getSales, makeSell } from "../services/saleService";
+import { getSales, getSalesForUser, makeSell } from "../services/saleService";
 import { AppThunk } from "../store";
 import { showNotification } from "./notificationSlice";
 import { IProduct } from "./productSlice";
@@ -67,6 +67,24 @@ export const fetchSales = (): AppThunk => async (dispatch) => {
     try {
         dispatch(fetchSalesStart());
         const sales = await getSales();
+        dispatch(fetchSalesSuccess(sales));
+    } catch (error) {
+        if (error instanceof Error) {
+            dispatch(fetchSalesFailure(error.message));
+            dispatch(showNotification({ message: error.message, type: "error" }));
+        } else {
+            dispatch(fetchSalesFailure("An error occurred"));
+            dispatch(
+                showNotification({ message: "An error occurred", type: "error" })
+            );
+        }
+    }
+};
+
+export const fetchSalesForUser = (): AppThunk => async (dispatch) => {
+    try {
+        dispatch(fetchSalesStart());
+        const sales = await getSalesForUser();
         dispatch(fetchSalesSuccess(sales));
     } catch (error) {
         if (error instanceof Error) {

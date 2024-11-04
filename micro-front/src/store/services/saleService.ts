@@ -4,6 +4,21 @@ import { ISaleDetail } from '../slices/saleSlice';
 
 export const getSales = async () => {
     try {
+        const response = await axiosInstance.get('/sales/');
+        return response.data;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.status == 404) {
+                return [];
+            }
+        }
+        console.error('Error fetching sales:', error);
+        throw error;
+    }
+};
+
+export const getSalesForUser = async () => {
+    try {
         const response = await axiosInstance.get('/sales/mine');
         return response.data;
     } catch (error) {

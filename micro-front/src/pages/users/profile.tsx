@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../store/slices/authSlice";
 import { showNotification } from "../../store/slices/notificationSlice";
 import { AppDispatch, RootState } from "../../store/store";
-import { Ventas } from "../ventas/Ventas";
+import { MisVentas } from "../ventas/MisVentas";
 
 const Profile: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -79,7 +79,7 @@ const Profile: React.FC = () => {
         </Col>
       </Row>
       <div className="mt-4">
-        <Ventas />
+        <MisVentas />
       </div>
     </Container>
   );
