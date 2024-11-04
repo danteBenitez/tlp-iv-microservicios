@@ -69,11 +69,24 @@ export class SaleService {
     async findAll() {
         const sales = await this.saleRepository.findAll();
 
-        if (sales?.length === 0) {
+        if (!sales || sales?.length === 0) {
             throw new SaleNotFoundError("No hay ventas");
         }
 
-        return sales;
+        return Promise.all(sales.map(async sale => {
+            return {
+                // FIXME: 
+                // @ts-expect-error 
+                ...sale.dataValues,
+                details: await Promise.all(sale.details?.map(async d => ({
+                    saleDetailId: d.saleDetailId,
+                    saleId: d.saleId,
+                    quantity: d.quantity,
+                    sellPrice: d.sellPrice,
+                    product: await this.productService.findById(d.productId)
+                })) ?? [])
+            }
+        }))
     }
 
     async sell(items: SaleDetailItem[], user: IUser, address: string): Promise<{ sale: ISale, total: number }> {
