@@ -1,4 +1,11 @@
-import { Card, CardBody, CardHeader, CardTitle, Table } from "react-bootstrap";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Table,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ISale } from "../../store/slices/saleSlice";
 
@@ -38,6 +45,13 @@ export function VentaCard({ sale }: { sale: ISale }) {
           </tbody>
         </Table>
       </CardBody>
+      <CardFooter>
+        Total: $
+        {sale.details.reduce(
+          (acc, d) => acc + (d.sellPrice ?? 0) * d.quantity,
+          0
+        )}
+      </CardFooter>
     </Card>
   );
 }

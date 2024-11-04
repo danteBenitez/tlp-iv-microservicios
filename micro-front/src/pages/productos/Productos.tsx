@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAllProducts } from "../../store/slices/productSlice";
 import { AppDispatch, RootState } from "../../store/store";
+import { Mantenimiento } from "../components/Mantenimiento";
 import { ProductoCard } from "./ProductoCard";
 
 const Productos: React.FC = () => {
@@ -25,7 +26,7 @@ const Productos: React.FC = () => {
   }
 
   if (error) {
-    return <p>Hubo un error al cargar los productos</p>;
+    return <Mantenimiento />;
   }
 
   return (

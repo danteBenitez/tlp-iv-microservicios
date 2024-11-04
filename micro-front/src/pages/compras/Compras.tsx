@@ -6,6 +6,7 @@ import CompraCard from "./CompraCard";
 import { fetchPurchases } from "../../store/slices/purchaseSlice";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { Mantenimiento } from "../components/Mantenimiento";
 
 export default function ComprasIndex() {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -26,11 +27,7 @@ export default function ComprasIndex() {
   }
 
   if (error) {
-    return (
-      <p className="text-danger">
-        Error en el servidor de compras, intente nuevamente más tarde.
-      </p>
-    );
+    return <Mantenimiento />
   }
 
   return (

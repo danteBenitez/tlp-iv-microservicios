@@ -32,7 +32,9 @@ export class PostgresSaleRepository implements ISaleRepository {
     }
 
     findAll(): Promise<ISale[] | null> {
-        return this.saleModel.findAll();
+        return this.saleModel.findAll({
+            include: [this.saleDetailModel]
+        });
     }
 
     create(sale: Omit<ISale, "saleId">): Promise<ISale> {

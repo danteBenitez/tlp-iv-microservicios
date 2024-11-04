@@ -8,11 +8,13 @@ import {
   fetchShoppingCart,
 } from "../../../store/slices/shippingCartSlice";
 import { AppDispatch, RootState } from "../../../store/store";
+import { Mantenimiento } from "../../components/Mantenimiento";
 import { ProductoCard } from "../ProductoCard";
 
 export function CarritoCompras() {
   const token = useSelector((state: RootState) => state.auth.token);
   const cart = useSelector((state: RootState) => state.shoppingCart.cart);
+  const error = useSelector((state: RootState) => state.shoppingCart.error);
   const dispatch: AppDispatch = useDispatch();
 
   const onDelete = async (cartId: string, productId: string) => {
@@ -25,6 +27,10 @@ export function CarritoCompras() {
   useEffect(() => {
     dispatch(fetchShoppingCart());
   }, [dispatch, token]);
+
+  if (error) {
+    return <Mantenimiento />;
+  }
 
   return (
     <Container>

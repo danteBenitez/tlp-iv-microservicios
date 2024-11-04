@@ -1,4 +1,4 @@
-import { AlertTriangle, Package, Truck } from "lucide-react"; // Asegúrate de importar los íconos necesarios
+import { AlertTriangle, Package, Truck } from "lucide-react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import {
   SHIPMENT_STATUS,
 } from "../store/slices/shipmentSlice";
 import { AppDispatch, RootState } from "../store/store";
+import { Mantenimiento } from "./components/Mantenimiento";
 import "./estadoEnvio.css";
 
 const EstadoEnvio: React.FC = () => {
@@ -26,14 +27,12 @@ const EstadoEnvio: React.FC = () => {
   }
 
   if (error) {
-    return <p>Algo salío mal: {error}</p>;
+    return <Mantenimiento />;
   }
 
   if (shipments.length === 0) {
     return <p>No tienes envíos activos.</p>;
   }
-
-  console.log(shipments);
 
   return (
     <div className="estado-envio-container">

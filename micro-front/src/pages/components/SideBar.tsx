@@ -34,6 +34,10 @@ function Sidebar({ color, image, routes, show, handleClose }: SidebarProps) {
   const filteredRoutes = routes.filter((route) => {
     if (route.path === "/register") return false;
     if (route.path === "/users" && (!isAuthenticated || !isAdmin)) return false;
+    if (route.path === "/sales/" && (!isAuthenticated || !isAdmin))
+      return false;
+    if (route.path === "/compras" && (!isAuthenticated || !isAdmin))
+      return false;
     if (route.name === "Producto") return;
     if (route.path === "/proveedores" && (!isAuthenticated || !isAdmin))
       return false;

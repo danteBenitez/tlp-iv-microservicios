@@ -1,13 +1,13 @@
 import React from "react";
-import { Navbar, Container, Button, Nav } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import routes from "./routes";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { logout } from "../../store/slices/authSlice";
-import { IUser } from "../../store/slices/userSlice";
-import { showNotification } from "../../store/slices/notificationSlice";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { FaBars, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { logout } from "../../store/slices/authSlice";
+import { showNotification } from "../../store/slices/notificationSlice";
+import { IUser } from "../../store/slices/userSlice";
+import { RootState } from "../../store/store";
+import routes from "./routes";
 
 interface NavigationBarProps {
   mobileSidebarToggle: () => void;
@@ -72,7 +72,7 @@ const Header: React.FC<NavigationBarProps> = ({ mobileSidebarToggle }) => {
                     <Nav.Link
                       as={Link}
                       className="m-0 d-flex align-items-center"
-                      to="/"
+                      to="/home"
                       onClick={handleLogout}
                     >
                       <FaSignOutAlt className="me-2" />

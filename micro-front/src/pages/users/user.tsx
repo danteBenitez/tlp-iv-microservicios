@@ -5,6 +5,7 @@ import axiosInstance from "../../store/actionAxios";
 import { showNotification } from "../../store/slices/notificationSlice";
 import { fetchUsers, IUser } from "../../store/slices/userSlice";
 import { AppDispatch, RootState } from "../../store/store";
+import { Mantenimiento } from "../components/Mantenimiento";
 
 const Users = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -104,7 +105,7 @@ const Users = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <Mantenimiento />;
   }
 
   return (
