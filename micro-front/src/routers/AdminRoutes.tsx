@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 import { ComponentType } from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { RootState } from "../store/store";
 
 interface TAdminRouteProps {
   component: ComponentType<any>;
@@ -19,10 +19,10 @@ export default function AdminRoutes({
   if (loadingAuthentication && !isAuthenticated) {
     return null;
   }
-  
+
   return isAuthenticated && isAdmin ? (
     <Component {...rest} />
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/home" />
   );
 }

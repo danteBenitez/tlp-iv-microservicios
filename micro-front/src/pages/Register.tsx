@@ -1,19 +1,12 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store/store";
-import { register } from "../store/slices/authSlice";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  NavLink,
-  Row,
-} from "react-bootstrap";
-import { showNotification } from "../store/slices/notificationSlice";
-import { z } from "zod";
 import { AxiosError } from "axios";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { Button, Col, Container, Form, NavLink, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { register } from "../store/slices/authSlice";
+import { showNotification } from "../store/slices/notificationSlice";
+import { AppDispatch } from "../store/store";
 
 const createUserSchema = z
   .object({
@@ -96,7 +89,7 @@ export default function Register() {
       dispatch(
         showNotification({ message: "Usuario registrado", type: "success" })
       );
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       if (error instanceof AxiosError) {
         dispatch(
