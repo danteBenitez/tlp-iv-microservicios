@@ -11,9 +11,7 @@ const Users = () => {
     const dispatch: AppDispatch = useDispatch();
     const { users, loading, error } = useSelector((state: RootState) => state.users);
     const currentUser = useSelector((state: RootState) => state.auth.user);
-    console.log('currentUser', currentUser);
     const currentUserAutorizete = currentUser?.roles && currentUser?.roles.some((role: { name: string }) => role.name === 'admin');
-    console.log('currentUserAutorizete', currentUserAutorizete);
     const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -28,7 +26,7 @@ const Users = () => {
         try {
             const userData = {
                 ...user,
-                roles: user.roles ? user.roles.split(',').map((role: string) => role.trim()) : []
+                roles: user.roles ? user.roles.map((role: { name: string }) => role.name.trim()) : []
             };
             if (isEditing && user.userId) {
                 await axiosInstance.patch(`/auth/users/${user.userId}`, userData);
