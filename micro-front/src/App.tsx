@@ -8,6 +8,7 @@ import "./global.css";
 import Notification from "./pages/components/Notification";
 import AppRouters from "./routers/AppRouters";
 import { getProfile, login } from "./store/slices/authSlice";
+import { connect } from "./store/slices/socketSlice";
 import { AppDispatch, RootState } from "./store/store";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         const parsedUser = JSON.parse(user);
         dispatch(login({ user: parsedUser, token: token }));
         dispatch(getProfile());
+        dispatch(connect());
       } catch (error) {
         console.error("Error parsing user from localStorage", error);
       }

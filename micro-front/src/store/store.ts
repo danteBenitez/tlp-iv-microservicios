@@ -2,12 +2,13 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import notificationReducer from './slices/notificationSlice';
 import productsReducer from './slices/productSlice';
+import purchaseReducer from './slices/purchaseSlice';
 import saleReducer from "./slices/saleSlice";
 import shipmentReducer from './slices/shipmentSlice';
 import shoppingCartReducer from "./slices/shippingCartSlice";
+import socketReducer from "./slices/socketSlice";
 import suppliersReducer from './slices/supplierSlice';
 import usersReducer from './slices/userSlice';
-import purchaseReducer from './slices/purchaseSlice';
 
 const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
     shoppingCart: shoppingCartReducer,
     shippings: shipmentReducer,
     sales: saleReducer,
-    purchases: purchaseReducer
+    purchases: purchaseReducer,
+    socket: socketReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

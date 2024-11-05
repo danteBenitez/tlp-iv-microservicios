@@ -11,16 +11,35 @@ import { AppDispatch, RootState } from "../store/store";
 import { Mantenimiento } from "./components/Mantenimiento";
 import "./estadoEnvio.css";
 
+const text = {
+  [SHIPMENT_STATUS.DELIVERED]: "Entregado",
+  [SHIPMENT_STATUS.IN_STOCK]: "Pendiente",
+  [SHIPMENT_STATUS.TRAVELING]: "En tránsito",
+};
+
 const EstadoEnvio: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
+  const user = useSelector((state: RootState) => state.auth.user);
   const { shipments, loading, error } = useSelector(
     (state: RootState) => state.shippings
   );
+  const socket = useSelector((state: RootState) => state.socket.socket);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchShipments());
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (!socket) return;
+    console.log("Seteando manejador de evento");
+    socket?.on("shipment-status-changed", (shipment: IShipment) => {
+      console.log("Estado de envío cambiado");
+      if (shipment.userId == user?.userId) {
+        dispatch(fetchShipments());
+      }
+    });
+  });
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -66,12 +85,6 @@ export function ShipmentItem({ shipment }: { shipment: IShipment }) {
       default:
         return null;
     }
-  };
-
-  const text = {
-    [SHIPMENT_STATUS.DELIVERED]: "Entregado",
-    [SHIPMENT_STATUS.IN_STOCK]: "Pendiente",
-    [SHIPMENT_STATUS.TRAVELING]: "En tránsito",
   };
 
   return (

@@ -99,11 +99,15 @@ export const fetchSalesForUser = (): AppThunk => async (dispatch) => {
     }
 };
 
-export const addSale = (details: { address: string, items: ISaleDetail[] }): AppThunk<Promise<ISale | null>> => async (dispatch) => {
+export const addSale = (details: { address: string, items: ISaleDetail[] }): AppThunk<Promise<ISale | null>> => async (dispatch, getState) => {
     try {
         const sale = await makeSell(details);
         dispatch(createSale(sale));
         dispatch(showNotification({ message: "Compra realizada con éxito", type: "success" }));
+        const socket = getState().socket.socket;
+        if (socket) {
+            socket.emit('subscribe-sale', sale.saleId);
+        }
         return sale;
     } catch (error) {
         if (error instanceof Error) {

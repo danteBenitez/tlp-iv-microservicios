@@ -48,7 +48,7 @@ export class ShipmentConsumer {
             this.brokerClient.sendToQueue("shipment-started", {
                 shipmentId: shipment?.shipmentId
             });
-        }, 100_000);
+        }, 10_000);
     }
 
     async consumeShipmentStarted(shipmentId: string) {
